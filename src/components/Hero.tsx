@@ -5,7 +5,7 @@ import { ImagesSlider } from "@/components/ui/images-slider";
 
 const Hero = () => {
   const handleWhatsAppContact = () => {
-    window.open("https://wa.me/527223145340?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20Limon.io", "_blank");
+    window.open("https://wa.me/527223145340?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20Limonio Creators", "_blank");
   };
 
   const images = [
