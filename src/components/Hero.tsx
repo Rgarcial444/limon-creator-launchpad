@@ -9,9 +9,10 @@ const Hero = () => {
   };
 
   const images = [
-    "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/20250822_1221_Escritorio%20Moderno%20y%20Activo_simple_compose_01k39g4ff8f4zsks0k6grbzvr4%20(1).png",
-    "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/20250823_1609_Inteligencias%20Artificiales%20Futuristas_simple_compose_01k3cfjf9vf1k8cxec9sastz67%20(1).png",
-    "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/20250823_1609_Inteligencias%20Artificiales%20Futuristas_simple_compose_01k3cfjf9vf1k8cxec9sastz67.png",
+    "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/imagen4.png",
+    "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/imagen3.png",
+    "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/imagen2.png",
+    "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/imagen1.png",
   ];
 
   return (
