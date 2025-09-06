@@ -1,4 +1,6 @@
+
 import { Button } from "@/components/ui/button";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { ImagesSlider } from "@/components/ui/images-slider";
@@ -49,15 +51,13 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 mb-8"
         >
-          <Button 
-            size="lg" 
-            variant="hero"
-            onClick={handleWhatsAppContact}
-            className="bg-white/10 border border-white/20 text-white hover:bg-white/20 backdrop-blur-sm"
-          >
-            <MessageCircle className="mr-2 h-5 w-5" />
-            Contáctame por WhatsApp
-          </Button>
+          <RainbowButton 
+  size="lg" 
+  onClick={handleWhatsAppContact}
+>
+  <MessageCircle className="mr-2 h-5 w-5" />
+  Contáctame por WhatsApp
+</RainbowButton>
           <Button 
             variant="outline" 
             size="lg" 
