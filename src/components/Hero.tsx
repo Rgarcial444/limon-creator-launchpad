@@ -34,7 +34,7 @@ const Hero = () => {
         <motion.h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4 leading-tight">
           Limon.io Creators
           <br />
-          <span className="text-2xl md:text-4xl lg:text-5xl">Potencia tu presencia digital</span>
+          <span className="text-2xl md:text-4xl lg:text-5xl">Dale Vida a Tu Marca</span>
         </motion.h1>
         
         <motion.p 
