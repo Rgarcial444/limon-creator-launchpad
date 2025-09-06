@@ -1,6 +1,4 @@
-
 import { Button } from "@/components/ui/button";
-import { RainbowButton } from "@/components/ui/rainbow-button";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { ImagesSlider } from "@/components/ui/images-slider";
