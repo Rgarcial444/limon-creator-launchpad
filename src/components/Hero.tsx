@@ -49,13 +49,15 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 mb-8"
         >
-          <RainbowButton 
-  size="lg" 
-  onClick={handleWhatsAppContact}
->
-  <MessageCircle className="mr-2 h-5 w-5" />
-  Contáctame por WhatsApp
-</RainbowButton>
+          <Button 
+            size="lg" 
+            variant="hero"
+            onClick={handleWhatsAppContact}
+            className="bg-white/10 border border-white/20 text-white hover:bg-white/20 backdrop-blur-sm"
+          >
+            <MessageCircle className="mr-2 h-5 w-5" />
+            Contáctame por WhatsApp
+          </Button>
           <Button 
             variant="outline" 
             size="lg" 
@@ -91,4 +93,3 @@ const Hero = () => {
   );
 };
 export default Hero;
-
