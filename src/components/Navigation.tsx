@@ -6,9 +6,9 @@ import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
   { name: 'Inicio', href: '/' },
-  { name: 'Servicios', href: '/catalogo' },
-  { name: 'Galería', href: '/galeria' },
-  { name: 'Nosotros', href: '/nosotros' }
+  { name: 'Servicios', href: '/Catálogo' },
+  { name: 'Galería', href: '/Galería' },
+  { name: 'Nosotros', href: '/Acerca de mí' }
 ];
 
 const Navigation = () => {
@@ -40,7 +40,7 @@ const Navigation = () => {
               </Link>
             ))}
             <Button
-              onClick={() => window.open('https://wa.me/5215512345678?text=Hola! Me gustaría conocer más sobre sus servicios', '_blank')}
+              onClick={() => window.open('https://wa.me/5217223145340?text=Hola! Me gustaría conocer más sobre sus servicios', '_blank')}
               size="sm"
               className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
@@ -86,7 +86,7 @@ const Navigation = () => {
                 <div className="pt-4 border-t">
                   <Button
                     onClick={() => {
-                      window.open('https://wa.me/5215512345678?text=Hola! Me gustaría conocer más sobre sus servicios', '_blank');
+                      window.open('https://wa.me/5217223145340?text=Hola! Me gustaría conocer más sobre sus servicios', '_blank');
                       setIsOpen(false);
                     }}
                     className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
