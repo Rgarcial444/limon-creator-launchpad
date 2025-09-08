@@ -5,11 +5,11 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const handleWhatsAppContact = () => {
-    window.open("https://wa.me/528116825524?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20Limon.io", "_blank");
+    window.open("https://wa.me/527223145340?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20Limon.io", "_blank");
   };
 
   const handleEmailContact = () => {
-    window.open("mailto:ricardo@limon.io?subject=Consulta%20sobre%20servicios%20web", "_blank");
+    window.open("mailto:limon_50@hotmail.com?subject=Consulta%20sobre%20servicios%20web", "_blank");
   };
 
   return (
@@ -23,7 +23,6 @@ const Footer = () => {
               <span className="text-2xl font-bold">Limon.io</span>
             </div>
             <p className="text-primary-foreground/80 max-w-md">
-              Desarrollo sitios web y landing pages que convierten visitantes en clientes. 
               Soluciones digitales modernas para hacer crecer tu negocio.
             </p>
             <div className="flex space-x-4">
@@ -37,7 +36,7 @@ const Footer = () => {
               <RainbowButton 
                 onClick={handleEmailContact}
                 size="sm"
-                className="w-10 h-10 rounded-full"
+                className="w-11 h-11 rounded-full"
               >
                 <Mail className="h-5 w-5" />
               </RainbowButton>
@@ -48,7 +47,7 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Servicios</h3>
             <ul className="space-y-2 text-primary-foreground/80">
-              <li>Páginas Web Básicas</li>
+              <li>Páginas Web </li>
               <li>Herramientas de Citas</li>
               <li>E-commerce Completo</li>
               <li>Proyectos con IA</li>
@@ -61,15 +60,15 @@ const Footer = () => {
             <div className="space-y-3 text-primary-foreground/80">
               <div className="flex items-center space-x-2">
                 <MessageCircle className="h-4 w-4 flex-shrink-0" />
-                <span className="text-sm">WhatsApp: +52 81 1682 5524</span>
+                <span className="text-sm">WhatsApp: +7223145340 </span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 flex-shrink-0" />
-                <span className="text-sm">ricardo@limon.io</span>
+                <span className="text-sm">limon_50@hotmail.com </span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 flex-shrink-0" />
-                <span className="text-sm">Monterrey, México</span>
+                <span className="text-sm">Toluca, México</span>
               </div>
             </div>
           </div>
@@ -81,7 +80,7 @@ const Footer = () => {
             © {currentYear} Limon.io Creators. Todos los derechos reservados.
           </p>
           <p className="text-primary-foreground/60 text-sm flex items-center">
-            Hecho con <Heart className="h-4 w-4 mx-1 text-red-400" fill="currentColor" /> por Ricardo García Limón
+            Hecho con <Heart className="h-4 w-4 mx-1 text-red-400" fill="currentColor" /> por Ricardo García
           </p>
         </div>
       </div>
