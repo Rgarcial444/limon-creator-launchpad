@@ -8,7 +8,7 @@ const Contact = () => {
   };
 
   const handleEmailContact = () => {
-    window.open("mailto:ricardo@limon.io?subject=Consulta%20sobre%20servicios%20web", "_blank");
+    window.open("mailto:limon_50@hotmail.com?subject=Consulta%20sobre%20servicios%20web", "_blank");
   };
 
   return (
