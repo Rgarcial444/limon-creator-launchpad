@@ -1,4 +1,5 @@
 import { Heart, Code, MessageCircle, Mail, MapPin } from "lucide-react";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -26,18 +27,20 @@ const Footer = () => {
               Soluciones digitales modernas para hacer crecer tu negocio.
             </p>
             <div className="flex space-x-4">
-              <button 
+              <RainbowButton 
                 onClick={handleWhatsAppContact}
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-smooth"
+                size="sm"
+                className="w-10 h-10 rounded-full"
               >
                 <MessageCircle className="h-5 w-5" />
-              </button>
-              <button 
+              </RainbowButton>
+              <RainbowButton 
                 onClick={handleEmailContact}
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-smooth"
+                size="sm"
+                className="w-10 h-10 rounded-full"
               >
                 <Mail className="h-5 w-5" />
-              </button>
+              </RainbowButton>
             </div>
           </div>
 

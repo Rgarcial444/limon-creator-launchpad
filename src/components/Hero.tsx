@@ -48,7 +48,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col sm:flex-row gap-4 mb-8"
+          className="flex justify-center mb-8"
         >
           <RainbowButton 
             size="lg" 
@@ -56,15 +56,6 @@ const Hero = () => {
           >
             <MessageCircle className="mr-2 h-5 w-5" />
             Contáctame por WhatsApp
-          </RainbowButton>
-          
-          <RainbowButton 
-            variant="outline" 
-            size="lg" 
-            className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm"
-          >
-            Ver proyectos
-            <ArrowRight className="ml-2 h-5 w-5" />
           </RainbowButton>
         </motion.div>
 
