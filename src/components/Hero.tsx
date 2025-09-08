@@ -51,12 +51,13 @@ const Hero = () => {
           className="flex justify-center mb-8"
         >
           <RainbowButton 
-            size="lg" 
-            onClick={handleWhatsAppContact}
-          >
-            <MessageCircle className="mr-2 h-5 w-5" />
-            Contáctame por WhatsApp
-          </RainbowButton>
+  size="lg" 
+  onClick={handleWhatsAppContact}
+  className="!bg-white/90 !text-gray-900 hover:!bg-white !backdrop-blur-sm"
+>
+  <MessageCircle className="mr-2 h-5 w-5" />
+  Contáctame por WhatsApp
+</RainbowButton>
         </motion.div>
 
         {/* Stats */}
