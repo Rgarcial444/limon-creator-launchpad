@@ -1,6 +1,5 @@
 import { Badge } from "@/components/ui/badge";
 import { Building2, TrendingUp, Users, Award } from "lucide-react";
-import ricardoPortrait from "@/assets/ricardo-portrait.jpg";
 
 const companies = [
   { name: "Clau.com", role: "Gestión de Cuentas Clave" },
@@ -77,7 +76,7 @@ const About = () => {
           <div className="relative">
             <div className="relative">
               <img 
-                src={ricardoPortrait} 
+                src="https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/myphoto.png" 
                 alt="Ricardo A. García Limón, Fundador de Limon.io Creators"
                 className="w-full max-w-md mx-auto rounded-2xl shadow-large hover-scale"
               />
