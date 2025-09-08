@@ -33,9 +33,11 @@ const Navigation = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className={`text-xl font-bold transition-colors duration-300 ${
-            isScrolled ? 'text-primary' : 'text-white'
-          }`}>
+          <Link to="/" className={`text-2xl font-black transition-colors duration-300 ${
+  isScrolled 
+    ? 'text-primary' 
+    : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] [text-shadow:2px_2px_0px_rgba(0,0,0,0.3)]'
+}`}>
             Limon.io 
           </Link>
           
