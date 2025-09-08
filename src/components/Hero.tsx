@@ -53,7 +53,7 @@ const Hero = () => {
           <RainbowButton 
   size="lg" 
   onClick={handleWhatsAppContact}
-  className="!bg-white/90 !text-gray-900 hover:!bg-white !backdrop-blur-sm"
+  className="!bg-white !text-black"
 >
   <MessageCircle className="mr-2 h-5 w-5" />
   Contáctame por WhatsApp
