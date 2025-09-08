@@ -20,16 +20,16 @@ const About = () => {
                 Sobre el Fundador
               </Badge>
               <h2 className="text-4xl font-bold leading-tight">
-                Ricardo A. García Limón
+                Ricardo García
                 <span className="block text-2xl font-normal text-muted-foreground mt-2">
-                  Fundador de Limon.io Creators
+                  Creador de Limon.io Creators
                 </span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Con experiencia sólida en gestión de cuentas clave, desarrollo de negocios 
                 y experiencia del cliente en empresas líderes del mercado, Ricardo combina 
                 estrategia empresarial con desarrollo web para crear soluciones digitales 
-                que realmente convierten.
+                que realmente convierten y llaman la atención.
               </p>
             </div>
             
