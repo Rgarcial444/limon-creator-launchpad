@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, X } from 'lucide-react';
@@ -13,27 +13,42 @@ const navItems = [
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-white/10">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-lime-300/25 backdrop-blur-lg border-b border-lime-100/30'
+        : 'bg-transparent backdrop-blur-sm'
+    }`}>
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="text-xl font-bold text-primary">
+          <Link to="/" className={`text-xl font-bold transition-colors duration-300 ${
+            isScrolled ? 'text-primary' : 'text-white'
+          }`}>
             Limon.io 
           </Link>
-
+          
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-sm font-medium transition-colors duration-300 hover:text-lime-400 ${
                   location.pathname === item.href 
-                    ? 'text-primary' 
-                    : 'text-muted-foreground'
+                    ? (isScrolled ? 'text-primary' : 'text-lime-300')
+                    : (isScrolled ? 'text-muted-foreground' : 'text-white/90')
                 }`}
               >
                 {item.name}
@@ -42,16 +57,22 @@ const Navigation = () => {
             <Button
               onClick={() => window.open('https://wa.me/5217223145340?text=Hola! Me gustaría conocer más sobre sus servicios', '_blank')}
               size="sm"
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              className={`transition-all duration-300 ${
+                isScrolled 
+                  ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                  : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm border border-white/30'
+              }`}
             >
               Contactar
             </Button>
           </div>
-
+          
           {/* Mobile Navigation */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className={`transition-colors duration-300 ${
+                isScrolled ? 'text-primary hover:bg-accent' : 'text-white hover:bg-white/20'
+              }`}>
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
