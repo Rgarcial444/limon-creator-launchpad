@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, X } from 'lucide-react';
@@ -13,36 +13,14 @@ const navItems = [
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-
-  // Mostrar navbar con fondo en todas las páginas excepto en el hero de inicio
-  const showBackground = location.pathname !== '/' || isScrolled;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (location.pathname === '/') {
-        setIsScrolled(window.scrollY > 50);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [location.pathname]);
-
+  
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      showBackground 
-        ? 'bg-lime-300/25 backdrop-blur-lg border-b border-lime-100/30'
-        : 'bg-transparent backdrop-blur-sm'
-    }`}>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className={`text-2xl font-black transition-colors duration-300 ${
-            showBackground 
-              ? 'text-primary' 
-              : 'bg-gradient-to-r from-lime-300 to-yellow-300 bg-clip-text text-transparent drop-shadow-lg'
-          }`}>
+          <Link to="/" className="text-xl font-bold text-primary">
             Limon.io 
           </Link>
           
@@ -52,10 +30,10 @@ const Navigation = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-sm font-medium transition-colors duration-300 hover:text-lime-400 ${
+                className={`text-sm font-medium transition-colors hover:text-primary ${
                   location.pathname === item.href 
-                    ? (showBackground ? 'text-primary' : 'text-lime-300')
-                    : (showBackground ? 'text-muted-foreground' : 'text-white/90')
+                    ? 'text-primary' 
+                    : 'text-muted-foreground'
                 }`}
               >
                 {item.name}
@@ -64,11 +42,7 @@ const Navigation = () => {
             <Button
               onClick={() => window.open('https://wa.me/5217223145340?text=Hola! Me gustaría conocer más sobre sus servicios', '_blank')}
               size="sm"
-              className={`transition-all duration-300 ${
-                showBackground 
-                  ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                  : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm border border-white/30'
-              }`}
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
               Contactar
             </Button>
@@ -77,9 +51,7 @@ const Navigation = () => {
           {/* Mobile Navigation */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" className={`transition-colors duration-300 ${
-                showBackground ? 'text-primary hover:bg-accent' : 'text-white hover:bg-white/20'
-              }`}>
+              <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
