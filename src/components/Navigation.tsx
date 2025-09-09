@@ -6,9 +6,9 @@ import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
   { name: 'Inicio', href: '/' },
-  { name: 'Servicios', href: '/Catálogo' },
-  { name: 'Galería', href: '/Galería' },
-  { name: 'Nosotros', href: '/Acerca de mí' }
+  { name: 'Servicios', href: '#' },
+  { name: 'Galería', href: '#' },
+  { name: 'Nosotros', href: '#' }
 ];
 
 const Navigation = () => {
