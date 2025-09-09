@@ -16,17 +16,22 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
+  // Mostrar navbar con fondo en todas las páginas excepto en el hero de inicio
+  const showBackground = location.pathname !== '/' || isScrolled;
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (location.pathname === '/') {
+        setIsScrolled(window.scrollY > 50);
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
+      showBackground 
         ? 'bg-lime-300/25 backdrop-blur-lg border-b border-lime-100/30'
         : 'bg-transparent backdrop-blur-sm'
     }`}>
@@ -34,10 +39,10 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className={`text-2xl font-black transition-colors duration-300 ${
-  isScrolled 
-    ? 'text-primary' 
-    : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] [text-shadow:2px_2px_0px_rgba(0,0,0,0.3)]'
-}`}>
+            showBackground 
+              ? 'text-primary' 
+              : 'bg-gradient-to-r from-lime-300 to-yellow-300 bg-clip-text text-transparent drop-shadow-lg'
+          }`}>
             Limon.io 
           </Link>
           
@@ -49,8 +54,8 @@ const Navigation = () => {
                 to={item.href}
                 className={`text-sm font-medium transition-colors duration-300 hover:text-lime-400 ${
                   location.pathname === item.href 
-                    ? (isScrolled ? 'text-primary' : 'text-lime-300')
-                    : (isScrolled ? 'text-muted-foreground' : 'text-white/90')
+                    ? (showBackground ? 'text-primary' : 'text-lime-300')
+                    : (showBackground ? 'text-muted-foreground' : 'text-white/90')
                 }`}
               >
                 {item.name}
@@ -60,7 +65,7 @@ const Navigation = () => {
               onClick={() => window.open('https://wa.me/5217223145340?text=Hola! Me gustaría conocer más sobre sus servicios', '_blank')}
               size="sm"
               className={`transition-all duration-300 ${
-                isScrolled 
+                showBackground 
                   ? 'bg-primary text-primary-foreground hover:bg-primary/90'
                   : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm border border-white/30'
               }`}
@@ -73,7 +78,7 @@ const Navigation = () => {
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="icon" className={`transition-colors duration-300 ${
-                isScrolled ? 'text-primary hover:bg-accent' : 'text-white hover:bg-white/20'
+                showBackground ? 'text-primary hover:bg-accent' : 'text-white hover:bg-white/20'
               }`}>
                 <Menu className="h-6 w-6" />
               </Button>
