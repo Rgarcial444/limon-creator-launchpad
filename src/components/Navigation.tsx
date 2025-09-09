@@ -20,8 +20,7 @@ const Navigation = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="text-xl font-bold text-primary">
-            Limon.io
+          <Link to="/" className="text-xl font-bold text-primary"> Limon.io
           </Link>
           
           {/* Desktop Navigation */}
