@@ -5,7 +5,7 @@ const services = [
   {
     icon: Globe,
     title: "Páginas Web Básicas",
-    description: "Sitios web que muestran tus servicios, productos y costos con animaciones modernas y actualizaciones ilimitadas.",
+    description: "Sitios web que muestran tus servicios, productos y costos con animaciones modernas",
     features: ["Diseño responsivo", "Animaciones CSS", "Contenido actualizable", "CTA integrado con WhatsApp"]
   },
   {
@@ -24,7 +24,7 @@ const services = [
     icon: Sparkles,
     title: "Proyectos con IA",
     description: "Desarrollos experimentales con Inteligencia Artificial, juegos digitales y páginas con estilo futurista.",
-    features: ["Landings generadas por IA", "Juegos sin datos", "Diseños futuristas", "Animaciones avanzadas"]
+    features: ["Landings generadas por IA", "Juegos sin datos", "Diseños futuristas", "Animaciones"]
   }
 ];
 
