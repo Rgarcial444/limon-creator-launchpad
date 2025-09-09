@@ -20,8 +20,12 @@ const Navigation = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="text-xl font-bold text-primary">
-            Limon.io 
+          <Link to={item.href}
+  className={`text-white hover:text-primary transition-colors ${
+    location.pathname === item.href ? 'font-semibold' : ''
+  }`}
+>
+  {item.name}
           </Link>
           
           {/* Desktop Navigation */}
