@@ -1,6 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Target, Users, Lightbulb, Award, TrendingUp, Heart, Code, Globe } from 'lucide-react';
+import Navigation from '@/components/Navigation';
 
 const values = [
   {
@@ -63,6 +64,7 @@ const stats = [
 const AboutUs = () => {
   return (
     <div className="min-h-screen">
+      <Navigation />
       {/* Hero Section */}
       <section className="py-24 px-6 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
         <div className="container mx-auto max-w-4xl text-center">

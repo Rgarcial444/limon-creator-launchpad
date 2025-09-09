@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, Filter, Globe, Smartphone, Code, Zap, Star } from 'lucide-react';
 import { RainbowButton } from '@/components/ui/rainbow-button';
+import Navigation from '@/components/Navigation';
 
 const services = [
   {
@@ -108,6 +109,7 @@ const Catalog = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/5">
+      <Navigation />
       {/* Hero Section */}
       <section className="py-16 px-6 text-center">
         <div className="container mx-auto max-w-4xl">

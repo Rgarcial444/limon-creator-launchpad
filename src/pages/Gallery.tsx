@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Search, Filter, Grid, List, ExternalLink, Calendar, Tag } from 'lucide-react';
+import Navigation from '@/components/Navigation';
 
 const projects = [
   {
@@ -172,6 +173,7 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/5">
+      <Navigation />
       {/* Hero */}
       <section className="py-16 px-6 text-center">
         <div className="container mx-auto max-w-4xl">
