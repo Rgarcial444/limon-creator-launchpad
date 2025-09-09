@@ -2,9 +2,9 @@ import { Badge } from "@/components/ui/badge";
 import { Building2, TrendingUp, Users, Award } from "lucide-react";
 
 const companies = [
-  { name: "Clau.com", role: "Gestión de Cuentas Clave" },
-  { name: "Kavak.com", role: "Desarrollo de Negocios" },
-  { name: "Rappi.com", role: "Experiencia del Cliente" },
+  { name: "Clau", role: "Gestión de Cuentas Clave" },
+  { name: "Kavak", role: "Desarrollo de Negocios" },
+  { name: "Rappi", role: "Experiencia del Cliente" },
   { name: "Grupo Financiero Inbursa", role: "Gestión Estratégica" }
 ];
 
@@ -22,7 +22,7 @@ const About = () => {
               <h2 className="text-4xl font-bold leading-tight">
                 Ricardo García
                 <span className="block text-2xl font-normal text-muted-foreground mt-2">
-                  Creador de Limon.io Creators
+                  Creador de Limon.website
                 </span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
