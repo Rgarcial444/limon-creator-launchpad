@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search, Filter, Globe, Smartphone, Code, Zap, Star } from 'lucide-react';
+import { Globe, Smartphone, Code, Zap, Star, Filter } from 'lucide-react';
 import { RainbowButton } from '@/components/ui/rainbow-button';
 import Navigation from '@/components/Navigation';
+import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 
 const services = [
   {
@@ -85,21 +85,10 @@ const categories = [
 ];
 
 const Catalog = () => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [sortBy, setSortBy] = useState('name');
 
   const filteredServices = services
-    .filter(service => 
-      service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      service.description.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .filter(service => selectedCategory === 'all' || service.category === selectedCategory)
-    .sort((a, b) => {
-      if (sortBy === 'price') return parseInt(a.price.replace(/\D/g, '')) - parseInt(b.price.replace(/\D/g, ''));
-      if (sortBy === 'rating') return b.rating - a.rating;
-      return a.title.localeCompare(b.title);
-    });
+    .filter(service => selectedCategory === 'all' || service.category === selectedCategory);
 
   const handleContact = (serviceName: string) => {
     const message = `Hola! Me interesa el servicio: ${serviceName}. ¿Podrías darme más información?`;
@@ -126,52 +115,45 @@ const Catalog = () => {
         </div>
       </section>
 
-      {/* Filters */}
+      {/* Marquee Effect */}
+      <section className="px-6 mb-12 overflow-hidden">
+        <div className="space-y-4">
+          <MarqueeAnimation
+            direction="left"
+            baseVelocity={-2}
+            className="text-primary/20 text-3xl md:text-4xl lg:text-5xl py-2"
+          >
+            DESARROLLO WEB • E-COMMERCE • APPS MÓVILES • SOFTWARE • INNOVACIÓN
+          </MarqueeAnimation>
+          <MarqueeAnimation
+            direction="right"
+            baseVelocity={-1.5}
+            className="text-secondary/30 text-2xl md:text-3xl lg:text-4xl py-2"
+          >
+            TECNOLOGÍA • DISEÑO • SOLUCIONES • CREATIVIDAD • RESULTADOS
+          </MarqueeAnimation>
+        </div>
+      </section>
+
+      {/* Category Filter */}
       <section className="px-6 mb-12">
         <div className="container mx-auto max-w-6xl">
-          <div className="bg-card rounded-2xl p-6 shadow-soft border">
-            <div className="grid md:grid-cols-3 gap-4 items-center">
-              {/* Search */}
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                <Input
-                  placeholder="Buscar servicios..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-9"
-                />
-              </div>
-
-              {/* Category Filter */}
-              <div className="flex flex-wrap gap-2">
-                {categories.map((category) => {
-                  const Icon = category.icon;
-                  return (
-                    <Button
-                      key={category.id}
-                      variant={selectedCategory === category.id ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setSelectedCategory(category.id)}
-                      className="text-xs"
-                    >
-                      <Icon className="h-3 w-3 mr-1" />
-                      {category.name}
-                    </Button>
-                  );
-                })}
-              </div>
-
-              {/* Sort */}
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="px-3 py-2 rounded-md border border-input bg-background text-sm"
-              >
-                <option value="name">Ordenar por nombre</option>
-                <option value="price">Ordenar por precio</option>
-                <option value="rating">Ordenar por calificación</option>
-              </select>
-            </div>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {categories.map((category) => {
+              const Icon = category.icon;
+              return (
+                <Button
+                  key={category.id}
+                  variant={selectedCategory === category.id ? 'default' : 'outline'}
+                  size="lg"
+                  onClick={() => setSelectedCategory(category.id)}
+                  className="text-sm hover-scale"
+                >
+                  <Icon className="h-4 w-4 mr-2" />
+                  {category.name}
+                </Button>
+              );
+            })}
           </div>
         </div>
       </section>
