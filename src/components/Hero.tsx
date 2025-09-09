@@ -30,9 +30,9 @@ const Hero = () => {
         className="z-50 flex flex-col justify-center items-center text-center px-6"
       >
         <motion.h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4 leading-tight">
-          Limon.io Creators
+          Dale Vida a Tu Marca
           <br />
-          <span className="text-2xl md:text-4xl lg:text-5xl">Dale Vida a Tu Marca</span>
+          <span className="text-2xl md:text-4xl lg:text-5xl">  </span>
         </motion.h1>
 
         <motion.p 
