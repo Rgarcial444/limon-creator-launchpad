@@ -48,8 +48,8 @@ const Footer = () => {
             <h3 className="text-lg font-semibold">Servicios</h3>
             <ul className="space-y-2 text-primary-foreground/80">
               <li>Páginas Web </li>
-              <li>Herramientas de Citas</li>
               <li>E-commerce Completo</li>
+              <li>Herramientas de citas</li>
               <li>Proyectos con IA</li>
             </ul>
           </div>
@@ -60,7 +60,7 @@ const Footer = () => {
             <div className="space-y-3 text-primary-foreground/80">
               <div className="flex items-center space-x-2">
                 <MessageCircle className="h-4 w-4 flex-shrink-0" />
-                <span className="text-sm">WhatsApp: +7223145340 </span>
+                <span className="text-sm">WhatsApp: 722 314 5340 </span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 flex-shrink-0" />
@@ -68,7 +68,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 flex-shrink-0" />
-                <span className="text-sm">Toluca, México</span>
+                <span className="text-sm">Toluca, México & Remoto </span>
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="border-t border-primary-foreground/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-primary-foreground/60 text-sm">
-            © {currentYear} Limon.io Creators. Todos los derechos reservados.
+            © {currentYear} Todos los derechos reservados.
           </p>
           <p className="text-primary-foreground/60 text-sm flex items-center">
             Hecho con <Heart className="h-4 w-4 mx-1 text-red-400" fill="currentColor" /> por Ricardo García
