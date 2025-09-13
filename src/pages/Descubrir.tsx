@@ -151,11 +151,11 @@ const Descubrir = () => {
           <div className="container mx-auto max-w-4xl text-center relative">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4 animate-fade-in">
               <Sparkles className="w-4 h-4" />
-              Laboratorio de Innovación
+              Lo nuevo
             </div>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 bg-gradient-to-r from-foreground via-primary to-foreground/80 bg-clip-text text-transparent animate-fade-in">
-              Descubrir
+              Laboratorio de Innovación
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed animate-fade-in">
