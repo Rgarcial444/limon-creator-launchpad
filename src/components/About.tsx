@@ -96,7 +96,7 @@ const About = () => {
         <div className="bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 rounded-2xl p-8 text-center">
           <h3 className="text-2xl font-bold mb-4">¿Listo para destacar de la competencia?</h3>
           <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Únete a más de 100+ empresas que ya han transformado su presencia digital con nosotros
+            Únete a más de 10+ empresas que ya han transformado su presencia digital con nosotros
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="default">
