@@ -20,7 +20,7 @@ const Navigation = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="text-white font-bold text-xl hover:text-primary transition-colors">
+          <Link to="/" className="text-white font-bold text-3xl hover:text-primary transition-colors">
             Limon.io
           </Link>
           
