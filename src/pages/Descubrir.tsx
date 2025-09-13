@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Navigation from "@/components/Navigation";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -74,15 +74,15 @@ const Descubrir = () => {
         }
 
         // Transform Supabase data to BlogPost format
-        const transformedPosts: BlogPost[] = data?.map((post: any) => ({
+        const transformedPosts: BlogPost[] = data?.map((post: any, index: number) => ({
           id: post.id,
           title: post.title || 'Contenido Innovador',
           category: post.etiquetas?.toLowerCase().split(',')[0] || post.type?.toLowerCase() || 'general',
           imageUrl: post.url || '/placeholder.svg',
           href: post.type === 'external' && post.content ? post.content : '#',
-          views: Math.floor(Math.random() * 2000) + 150,
-          readTime: Math.floor(Math.random() * 8) + 2,
-          rating: 4 + Math.random(),
+          views: 150 + (post.id * 47) % 2000, // Deterministic views based on post id
+          readTime: 2 + (post.id * 13) % 8, // Deterministic read time
+          rating: 4 + ((post.id * 23) % 100) / 100, // Deterministic rating
           type: post.type || 'internal',
           description: post.descripción || 'Descubre nuevas funcionalidades y experimentos que estamos desarrollando.',
           etiquetas: post.etiquetas,
@@ -110,11 +110,21 @@ const Descubrir = () => {
     }
   };
 
-  const filteredPosts = posts.filter(post => 
-    activeFilter === 'all' || post.category === activeFilter
+  const filteredPosts = useMemo(() => 
+    posts.filter(post => 
+      activeFilter === 'all' || post.category === activeFilter
+    ), [posts, activeFilter]
   );
 
-  const categories = ['all', ...Array.from(new Set(posts.map(post => post.category)))];
+  const categories = useMemo(() => 
+    ['all', ...Array.from(new Set(posts.map(post => post.category)))], 
+    [posts]
+  );
+
+  const totalViews = useMemo(() => 
+    posts.reduce((acc, post) => acc + post.views, 0), 
+    [posts]
+  );
 
   if (loading) {
     return (
@@ -155,7 +165,7 @@ const Descubrir = () => {
             <div className="flex flex-wrap gap-3 justify-center items-center mb-12 animate-fade-in">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Eye className="w-4 h-4" />
-                +{posts.reduce((acc, post) => acc + post.views, 0).toLocaleString()} vistas
+                +{totalViews.toLocaleString()} vistas
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Clock className="w-4 h-4" />
@@ -258,7 +268,7 @@ const Descubrir = () => {
                     <Card 
                       key={post.id}
                       className={cn(
-                        "group cursor-pointer overflow-hidden border-0 bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/10",
+                        "group cursor-pointer overflow-hidden border-0 bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-200 hover:scale-[1.01] hover:shadow-lg",
                         viewMode === 'list' && "flex-row",
                         index === 0 && viewMode === 'grid' && filteredPosts.length > 1 && "md:col-span-2 lg:col-span-2"
                       )}
