@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageCircle, Mail, ArrowRight, Clock, Shield, Zap, Phone } from "lucide-react";
+import { MessageCircle, Mail, ArrowRight, Clock, Shield, Zap } from "lucide-react";
 
 const Contact = () => {
   const handleWhatsAppContact = () => {
@@ -9,10 +9,6 @@ const Contact = () => {
 
   const handleEmailContact = () => {
     window.open("mailto:limon_50@hotmail.com?subject=Consulta%20sobre%20servicios%20web", "_blank");
-  };
-
-  const handlePhoneContact = () => {
-    window.open("tel:+528116825524", "_self");
   };
 
   return (
@@ -36,8 +32,8 @@ const Contact = () => {
             </p>
           </div>
 
-          {/* Contact options mejoradas */}
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
+          {/* Contact options mejoradas - Solo 2 columnas */}
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
             {/* WhatsApp - Opción principal */}
             <Card className="relative overflow-hidden card-gradient border-2 border-primary/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group" 
                   onClick={handleWhatsAppContact}>
@@ -65,34 +61,16 @@ const Contact = () => {
             <Card className="card-gradient border shadow-soft hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer group" 
                   onClick={handleEmailContact}>
               <CardContent className="p-8 text-center">
-                <div className="w-18 h-18 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Mail className="h-9 w-9 text-primary" />
+                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Mail className="h-10 w-10 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Email Profesional</h3>
-                <p className="text-muted-foreground mb-6">
+                <h3 className="text-2xl font-bold mb-3">Email Profesional</h3>
+                <p className="text-muted-foreground mb-6 text-base">
                   Para proyectos <span className="font-semibold">detallados</span> y propuestas comerciales formales
                 </p>
-                <Button variant="outline" className="hover-lift w-full py-5 group-hover:border-primary transition-colors">
+                <Button variant="outline" className="hover-lift w-full text-lg py-6 group-hover:border-primary transition-colors">
                   Enviar email
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Teléfono */}
-            <Card className="card-gradient border shadow-soft hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer group" 
-                  onClick={handlePhoneContact}>
-              <CardContent className="p-8 text-center">
-                <div className="w-18 h-18 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Phone className="h-9 w-9 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Llamada Directa</h3>
-                <p className="text-muted-foreground mb-6">
-                  Para <span className="font-semibold">emergencias</span> o consultas urgentes que requieren atención inmediata
-                </p>
-                <Button variant="outline" className="hover-lift w-full py-5 group-hover:border-primary transition-colors">
-                  Llamar ahora
-                  <Phone className="ml-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </CardContent>
             </Card>
@@ -109,7 +87,7 @@ const Contact = () => {
                   </div>
                   <div className="text-3xl font-bold text-primary mb-3">Consulta Gratuita</div>
                   <p className="text-muted-foreground leading-relaxed">
-                    Analizamos tu negocio y objetivos <span className="font-semibold">sin ningún costo</span> ni compromiso
+                    Analizamos tu negocio y objetivos <span className="font-semibold">sin ningún costo</span>
                   </p>
                 </div>
                 <div className="text-center group">
@@ -125,7 +103,7 @@ const Contact = () => {
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                     <Clock className="h-8 w-8 text-purple-600" />
                   </div>
-                  <div className="text-3xl font-bold text-primary mb-3">Soporte 24/7</div>
+                  <div className="text-3xl font-bold text-primary mb-3">Respuesta en menos de cinco minutos</div>
                   <p className="text-muted-foreground leading-relaxed">
                     Actualizaciones, mantenimiento y <span className="font-semibold">soporte continuo</span> para tu tranquilidad
                   </p>
@@ -133,22 +111,6 @@ const Contact = () => {
               </div>
             </CardContent>
           </Card>
-
-          {/* Call to action adicional */}
-          <div className="text-center mt-16">
-            <p className="text-lg text-muted-foreground mb-6">
-              <span className="font-semibold text-foreground">+50 proyectos exitosos</span> respaldan nuestra experiencia
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button onClick={handleWhatsAppContact} variant="hero" size="lg" className="px-8 py-4 text-lg">
-                Comenzar mi proyecto
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <p className="text-sm text-muted-foreground">
-                Primera consulta gratuita • Sin compromiso
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
