@@ -3,84 +3,104 @@ import { RainbowButton } from "@/components/ui/rainbow-button";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { ImagesSlider } from "@/components/ui/images-slider";
+
 const Hero = () => {
   const handleWhatsAppContact = () => {
     window.open("https://wa.me/527223145340?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20Limonio Creators", "_blank");
   };
+
   const images = [
     "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/imagen4.png",
     "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/imagen3.png",
     "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/imagen2.png",
     "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/imagen1.png",
   ];
+
   return (
-    <ImagesSlider className="h-screen" images={images}>
-      <motion.div
-        initial={{
-          opacity: 0,
-          y: -80,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 0.6,
-        }}
-        className="h-screen brightness-125 saturate-150 contrast-110"
+    <div className="relative h-screen overflow-hidden">
+      {/* Contenedor de imágenes con filtros coloridos */}
+      <ImagesSlider 
+        className="h-screen brightness-125 saturate-150 contrast-110" 
+        images={images}
       >
-        <motion.h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4 leading-tight">
-          Dale Vida a Tu Marca
-          <br />
-          <span className="text-2xl md:text-4xl lg:text-5xl">  </span>
-        </motion.h1>
+        {/* Overlay colorido en lugar de oscuro */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-green-900/30 backdrop-blur-[0.5px]" />
+        
+        {/* Overlay adicional para mejorar legibilidad sin perder color */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
 
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto mb-8 leading-relaxed"
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: -80,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.6,
+          }}
+          className="z-50 flex flex-col justify-center items-center text-center px-6 relative"
         >
-          Soluciones digitales modernas para hacer crecer tu negocio.
-        </motion.p>
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-          className="flex justify-center mb-8"
-        >
-          <RainbowButton 
-  size="lg" 
-  onClick={handleWhatsAppContact}
-  className="!bg-white !text-black"
->
-  <MessageCircle className="mr-2 h-5 w-5" />
-  Contáctame por WhatsApp
-</RainbowButton>
-        </motion.div>
+          <motion.h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-center bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 py-4 leading-tight drop-shadow-2xl">
+            Dale Vida a Tu Marca
+            <br />
+            <span className="text-2xl md:text-4xl lg:text-5xl bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+              Con Color y Energía
+            </span>
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg md:text-xl text-white font-semibold max-w-3xl mx-auto mb-8 leading-relaxed drop-shadow-xl"
+            style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}
+          >
+            Soluciones digitales modernas para hacer crecer tu negocio.
+          </motion.p>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="flex justify-center mb-8"
+          >
+            <RainbowButton 
+              size="lg" 
+              onClick={handleWhatsAppContact}
+              className="!bg-gradient-to-r !from-green-400 !to-blue-500 !text-white shadow-2xl hover:shadow-green-500/25 transition-all duration-300"
+            >
+              <MessageCircle className="mr-2 h-5 w-5" />
+              Contáctame por WhatsApp
+            </RainbowButton>
+          </motion.div>
 
-        {/* Stats */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="grid grid-cols-3 gap-8 pt-8 border-t border-white/20 backdrop-blur-sm"
-        >
-          <div>
-            <div className="text-2xl font-bold text-white">50+</div>
-            <div className="text-sm text-neutral-300">Proyectos</div>
-          </div>
-          <div>
-            <div className="text-2xl font-bold text-white">100%</div>
-            <div className="text-sm text-neutral-300">Responsivo</div>
-          </div>
-          <div>
-            <div className="text-2xl font-bold text-white">24/7</div>
-            <div className="text-sm text-neutral-300">Soporte</div>
-          </div>
+          {/* Stats con fondo colorido */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="grid grid-cols-3 gap-8 pt-8 border-t border-white/40 backdrop-blur-md bg-white/10 rounded-xl px-8 py-4"
+          >
+            <div className="text-center">
+              <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">50+</div>
+              <div className="text-sm text-white font-medium">Proyectos</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">100%</div>
+              <div className="text-sm text-white font-medium">Responsivo</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">24/7</div>
+              <div className="text-sm text-white font-medium">Soporte</div>
+            </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </ImagesSlider>
+      </ImagesSlider>
+    </div>
   );
 };
+
 export default Hero;
