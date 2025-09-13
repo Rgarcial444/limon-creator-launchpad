@@ -85,7 +85,7 @@ const Hero = () => {
             className="grid grid-cols-3 gap-8 pt-8 border-t border-white/40 backdrop-blur-md bg-white/10 rounded-xl px-8 py-4"
           >
             <div className="text-center">
-              <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">50+</div>
+              <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">10+</div>
               <div className="text-sm text-white font-medium">Proyectos</div>
             </div>
             <div className="text-center">
