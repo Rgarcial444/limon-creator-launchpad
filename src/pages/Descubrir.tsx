@@ -71,20 +71,32 @@ const Descubrir = () => {
           return;
         }
 
-        const transformedPosts: BlogPost[] = data?.map((post: any) => ({
-          id: post.id,
-          title: post.title || 'Contenido Innovador',
-          category: post.etiquetas?.toLowerCase().split(',')[0] || post.type?.toLowerCase() || 'general',
-          imageUrl: post.url || '/placeholder.svg',
-          href: post.url || post.content || '', // 👈 usa url o content, si no queda vacío
-          views: 150 + (post.id * 47) % 2000,
-          readTime: 2 + (post.id * 13) % 8,
-          rating: 4 + ((post.id * 23) % 100) / 100,
-          type: post.type || 'internal',
-          description: post.descripción || 'Descubre nuevas funcionalidades y experimentos que estamos desarrollando.',
-          etiquetas: post.etiquetas,
-          created_at: post.created_at
-        })) || [];
+        const transformedPosts: BlogPost[] = data?.map((post: any) => {
+  // Generar URL pública si la imagen viene de Supabase Storage
+  let imageUrl = '/placeholder.svg';
+  if (post.imagen) {
+    const { publicUrl } = supabase
+      .storage
+      .from('imagenes limoniocreators') // 👈 reemplaza 'imagenes' con el nombre de tu bucket
+      .getPublicUrl(post.imagen); // post.imagen = path dentro del bucket
+    imageUrl = publicUrl || '/placeholder.svg';
+  }
+
+  return {
+    id: post.id,
+    title: post.title || 'Contenido Innovador',
+    category: post.etiquetas?.toLowerCase().split(',')[0] || post.type?.toLowerCase() || 'general',
+    imageUrl: imageUrl,            // 👈 usa la URL pública
+    href: post.url || post.content || '',
+    views: 150 + (post.id * 47) % 2000,
+    readTime: 2 + (post.id * 13) % 8,
+    rating: 4 + ((post.id * 23) % 100) / 100,
+    type: post.type || 'internal',
+    description: post.descripción || 'Descubre nuevas funcionalidades y experimentos que estamos desarrollando.',
+    etiquetas: post.etiquetas,
+    created_at: post.created_at
+  };
+}) || [];
 
         setPosts(transformedPosts);
       } catch (error) {
