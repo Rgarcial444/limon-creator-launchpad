@@ -16,11 +16,12 @@ const Navigation = () => {
   const location = useLocation();
   
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/10 backdrop-blur-lg border-b border-white/20">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/25 backdrop-blur-sm border-b border-white/10">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="bg-black/25 backdrop-blur-sm border-b border-white/10"> Limon.io
+          <Link to="/" className="text-white font-bold text-xl hover:text-primary transition-colors">
+            Limon.io
           </Link>
           
           {/* Desktop Navigation */}
@@ -32,7 +33,7 @@ const Navigation = () => {
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   location.pathname === item.href 
                     ? 'text-primary' 
-                    : 'text-muted-foreground'
+                    : 'text-white/90 hover:text-white'
                 }`}
               >
                 {item.name}
@@ -50,7 +51,7 @@ const Navigation = () => {
           {/* Mobile Navigation */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="text-white hover:text-primary">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
