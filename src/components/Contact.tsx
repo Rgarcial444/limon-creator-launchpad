@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageCircle, Mail, ArrowRight, Clock, Shield, Zap } from "lucide-react";
+import { MessageCircle, Mail, ArrowRight, Clock, Shield, Zap, Phone } from "lucide-react";
 
 const Contact = () => {
   const handleWhatsAppContact = () => {
