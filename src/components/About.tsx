@@ -34,15 +34,6 @@ const benefits = [
   }
 ];
 
-const features = [
-  "Optimización SEO avanzada",
-  "Responsive en todos los dispositivos", 
-  "Velocidad de carga ultrarrápida",
-  "Integración con redes sociales",
-  "Panel de administración intuitivo",
-  "Soporte técnico permanente"
-];
-
 const About = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -57,9 +48,6 @@ const About = () => {
     <section className="py-24 subtle-gradient overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <Badge className="bg-primary/10 text-primary border-primary/20 mb-4">
-            ¿Por qué elegirnos?
-          </Badge>
           <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
             Transformamos Ideas en
             <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -71,73 +59,37 @@ const About = () => {
           </p>
         </div>
 
-        {/* Interactive Benefits Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          <div className="space-y-6">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              const isActive = index === activeIndex;
-              
-              return (
-                <div
-                  key={index}
-                  className={`group cursor-pointer p-6 rounded-2xl border transition-all duration-500 hover-lift ${
-                    isActive 
-                      ? 'bg-primary/5 border-primary/30 shadow-large' 
-                      : 'bg-card border-border hover:border-primary/20'
-                  }`}
-                  onMouseEnter={() => setActiveIndex(index)}
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center transition-all duration-300 ${isActive ? 'scale-110' : ''}`}>
-                      <Icon className={`h-6 w-6 ${benefit.color} transition-all duration-300 ${isActive ? 'scale-110' : ''}`} />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-xl font-semibold">{benefit.title}</h3>
-                        <Badge variant="secondary" className={`${isActive ? 'animate-pulse' : ''}`}>
-                          {benefit.stat}
-                        </Badge>
-                      </div>
-                      <p className="text-muted-foreground leading-relaxed">{benefit.description}</p>
-                    </div>
+        {/* Benefits Grid - Full Width */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {benefits.map((benefit, index) => {
+            const Icon = benefit.icon;
+            const isActive = index === activeIndex;
+            
+            return (
+              <div
+                key={index}
+                className={`group cursor-pointer p-6 rounded-2xl border transition-all duration-500 hover-lift ${
+                  isActive 
+                    ? 'bg-primary/5 border-primary/30 shadow-large' 
+                    : 'bg-card border-border hover:border-primary/20'
+                }`}
+                onMouseEnter={() => setActiveIndex(index)}
+              >
+                <div className="text-center space-y-4">
+                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center mx-auto transition-all duration-300 ${isActive ? 'scale-110' : ''}`}>
+                    <Icon className={`h-8 w-8 ${benefit.color} transition-all duration-300 ${isActive ? 'scale-110' : ''}`} />
+                  </div>
+                  <div>
+                    <Badge variant="secondary" className={`mb-2 ${isActive ? 'animate-pulse' : ''}`}>
+                      {benefit.stat}
+                    </Badge>
+                    <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed text-sm">{benefit.description}</p>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-
-          {/* Features Showcase */}
-          <div className="relative">
-            <div className="bg-gradient-to-br from-primary/10 via-secondary/10 to-background p-8 rounded-3xl border">
-              <h3 className="text-2xl font-bold mb-6 text-center">Lo que incluye tu proyecto</h3>
-              <div className="space-y-4">
-                {features.map((feature, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-center space-x-3 p-3 rounded-lg bg-background/50 backdrop-blur-sm hover-lift"
-                    style={{ 
-                      animationDelay: `${index * 0.1}s` 
-                    }}
-                  >
-                    <CheckCircle className="h-5 w-5 text-green-400 flex-shrink-0" />
-                    <span className="text-foreground font-medium">{feature}</span>
-                  </div>
-                ))}
               </div>
-              
-              <div className="mt-8 text-center">
-                <Button size="lg" className="group">
-                  Comenzar mi proyecto
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </div>
-            </div>
-
-            {/* Decorative elements */}
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-secondary/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-          </div>
+            );
+          })}
         </div>
 
         {/* Call to Action Strip */}
