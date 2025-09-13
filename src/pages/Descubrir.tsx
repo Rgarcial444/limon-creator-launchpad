@@ -101,15 +101,10 @@ const Descubrir = () => {
   }, []);
 
   const handlePostClick = (post: BlogPost) => {
-    if (post.href && post.href !== '#') {
-      window.open(post.href, '_blank');
-    } else {
-      const message = `Hola! Me interesa saber más sobre: ${post.title}`;
-      const whatsappUrl = `https://wa.me/5217223145340?text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, '_blank');
-    }
-  };
-
+  if (post.href) {
+    window.open(post.href, '_blank');
+  }
+};
   const filteredPosts = useMemo(() => 
     posts.filter(post => 
       activeFilter === 'all' || post.category === activeFilter
