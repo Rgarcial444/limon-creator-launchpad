@@ -14,6 +14,9 @@ import {
   ExternalLink,
   Clock,
   Eye,
+  Filter,
+  Grid3X3,
+  List,
   Star,
   MessageCircle
 } from "lucide-react";
@@ -53,6 +56,8 @@ const categoryColors: Record<string, string> = {
 const Descubrir = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState<string>('all');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
     const fetchBlogPosts = async () => {
@@ -105,6 +110,17 @@ const Descubrir = () => {
     }
   };
 
+  const filteredPosts = useMemo(() => 
+    posts.filter(post => 
+      activeFilter === 'all' || post.category === activeFilter
+    ), [posts, activeFilter]
+  );
+
+  const categories = useMemo(() => 
+    ['all', ...Array.from(new Set(posts.map(post => post.category)))], 
+    [posts]
+  );
+
   const totalViews = useMemo(() => 
     posts.reduce((acc, post) => acc + post.views, 0), 
     [posts]
@@ -128,8 +144,8 @@ const Descubrir = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       <Navigation />
       <main className="pt-16">
-        {/* Hero Section Optimizado */}
-        <section className="relative py-16 px-4 overflow-hidden">
+        {/* Hero Section - Reducido padding */}
+        <section className="relative py-12 px-4 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-50" />
           
           <div className="container mx-auto max-w-4xl text-center relative">
@@ -142,33 +158,142 @@ const Descubrir = () => {
               Descubrir
             </h1>
             
-            <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed animate-fade-in">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed animate-fade-in">
               Explora nuestros últimos experimentos, funcionalidades revolucionarias y contenido que empuja los límites de la innovación.
             </p>
             
-            <div className="flex flex-wrap gap-4 justify-center items-center mb-8 animate-fade-in">
-              <div className="flex items-center gap-2 text-sm bg-background/50 backdrop-blur-sm rounded-full px-3 py-1.5 border">
-                <Eye className="w-4 h-4 text-primary" />
-                <span className="font-medium">+{totalViews.toLocaleString()}</span>
-                <span className="text-muted-foreground">vistas</span>
+            <div className="flex flex-wrap gap-3 justify-center items-center mb-8 animate-fade-in">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Eye className="w-4 h-4" />
+                +{totalViews.toLocaleString()} vistas
               </div>
-              <div className="flex items-center gap-2 text-sm bg-background/50 backdrop-blur-sm rounded-full px-3 py-1.5 border">
-                <Clock className="w-4 h-4 text-primary" />
-                <span className="font-medium">Actualizado</span>
-                <span className="text-muted-foreground">semanalmente</span>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Clock className="w-4 h-4" />
+                Actualizado semanalmente
               </div>
-              <div className="flex items-center gap-2 text-sm bg-background/50 backdrop-blur-sm rounded-full px-3 py-1.5 border">
-                <Star className="w-4 h-4 text-primary" />
-                <span className="font-medium">Contenido</span>
-                <span className="text-muted-foreground">premium</span>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Star className="w-4 h-4" />
+                Contenido premium
               </div>
             </div>
           </div>
         </section>
 
-        {/* Content Grid - Directamente después del hero */}
+        {/* Content Grid - Sin sección de filtros */}
         <section className="px-4 pb-20">
           <div className="container mx-auto max-w-6xl">
-            {posts.length === 0 ? (
+            {filteredPosts.length === 0 ? (
               <div className="text-center py-20">
                 <div className="max-w-md mx-auto">
+                  <Beaker className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+                  <h2 className="text-2xl font-semibold mb-4 text-foreground">
+                    {activeFilter === 'all' ? 'Laboratorio en construcción' : `No hay contenido en ${activeFilter}`}
+                  </h2>
+                  <p className="text-muted-foreground mb-6">
+                    {activeFilter === 'all' 
+                      ? 'Estamos cocinando experimentos increíbles. ¡Pronto tendrás acceso a innovaciones que cambiarán todo!'
+                      : `Pronto agregaremos contenido fascinante sobre ${activeFilter}.`
+                    }
+                  </p>
+                  <Button 
+                    onClick={() => {
+                      const message = "Hola! Me gustaría saber más sobre los próximos experimentos y features";
+                      window.open(`https://wa.me/5217223145340?text=${encodeURIComponent(message)}`, '_blank');
+                    }}
+                    className="bg-primary hover:bg-primary/90"
+                  >
+                    <MessageCircle className="w-4 h-4 mr-2" />
+                    Mantenerme informado
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div className={cn(
+                "grid gap-6",
+                viewMode === 'grid' 
+                  ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" 
+                  : "grid-cols-1 max-w-4xl mx-auto"
+              )}>
+                {filteredPosts.map((post, index) => {
+                  const IconComponent = categoryIcons[post.category] || Sparkles;
+                  const categoryStyle = categoryColors[post.category] || categoryColors.general;
+                  
+                  return (
+                    <Card 
+                      key={post.id}
+                      className={cn(
+                        "group cursor-pointer overflow-hidden border-0 bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-200 hover:scale-[1.01] hover:shadow-lg",
+                        viewMode === 'list' && "flex-row",
+                        index === 0 && viewMode === 'grid' && filteredPosts.length > 1 && "md:col-span-2 lg:col-span-2"
+                      )}
+                      onClick={() => handlePostClick(post)}
+                    >
+                      <div className={cn(
+                        "relative overflow-hidden",
+                        viewMode === 'list' ? "w-1/3 h-48" : index === 0 && viewMode === 'grid' ? "h-64" : "h-48"
+                      )}>
+                        <img 
+                          src={post.imageUrl} 
+                          alt={post.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          onError={(e) => {
+                            e.currentTarget.src = '/placeholder.svg';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        <div className="absolute top-4 left-4">
+                          <Badge className={cn("border", categoryStyle)}>
+                            <IconComponent className="w-3 h-3 mr-1" />
+                            {post.category}
+                          </Badge>
+                        </div>
+                        {post.type === 'external' && (
+                          <div className="absolute top-4 right-4">
+                            <div className="bg-black/50 backdrop-blur-sm rounded-full p-2">
+                              <ExternalLink className="w-4 h-4 text-white" />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      
+                      <CardContent className={cn(
+                        "p-6",
+                        viewMode === 'list' && "flex-1"
+                      )}>
+                        <h3 className="text-xl font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                          {post.title}
+                        </h3>
+                        <p className="text-muted-foreground mb-4 line-clamp-2 text-sm leading-relaxed">
+                          {post.description}
+                        </p>
+                        
+                        <div className="flex items-center justify-between text-sm text-muted-foreground">
+                          <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-1">
+                              <Eye className="w-4 h-4" />
+                              {post.views.toLocaleString()}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-4 h-4" />
+                              {post.readTime}min
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                            <span>{post.rating.toFixed(1)}</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+};
+
+export default Descubrir;
