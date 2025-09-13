@@ -46,7 +46,7 @@ const Hero = () => {
           <motion.h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-center text-white py-4 leading-tight drop-shadow-2xl">
             Dale Vida a Tu Marca
             <br />
-            <span className="text-2xl md:text-4xl lg:text-5xl bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="-font-bold text-4xl md:text-6xl lg:text-7xl text-center bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-200 to-white py-4 leading-tight drop-shadow-2xl text-shadow-lg">
               Creatividad sin Límites
             </span>
           </motion.h1>
