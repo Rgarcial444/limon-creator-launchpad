@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageCircle, Mail, Phone, ArrowRight, Clock, Shield, Zap } from "lucide-react";
+import { MessageCircle, Mail, ArrowRight, Clock, Shield, Zap } from "lucide-react";
 
 const Contact = () => {
   const handleWhatsAppContact = () => {
-    window.open("https://wa.me/527223145340?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20Limon.io", "_blank");
+    window.open("https://wa.me/528116825524?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20Limon.io", "_blank");
   };
 
   const handleEmailContact = () => {
@@ -12,7 +12,7 @@ const Contact = () => {
   };
 
   const handlePhoneContact = () => {
-    window.open("tel:+527223145340", "_self");
+    window.open("tel:+528116825524", "_self");
   };
 
   return (
@@ -125,7 +125,7 @@ const Contact = () => {
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                     <Clock className="h-8 w-8 text-purple-600" />
                   </div>
-                  <div className="text-3xl font-bold text-primary mb-3">Respuesta en menos de cinco minutos</div>
+                  <div className="text-3xl font-bold text-primary mb-3">Soporte 24/7</div>
                   <p className="text-muted-foreground leading-relaxed">
                     Actualizaciones, mantenimiento y <span className="font-semibold">soporte continuo</span> para tu tranquilidad
                   </p>
@@ -137,12 +137,16 @@ const Contact = () => {
           {/* Call to action adicional */}
           <div className="text-center mt-16">
             <p className="text-lg text-muted-foreground mb-6">
-              <span className="font-semibold text-foreground">+8 proyectos exitosos</span> respaldan nuestra experiencia
+              <span className="font-semibold text-foreground">+50 proyectos exitosos</span> respaldan nuestra experiencia
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button onClick={handleWhatsAppContact} variant="hero" size="lg" className="px-8 py-4 text-lg">
                 Comenzar mi proyecto
                 <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <p className="text-sm text-muted-foreground">
+                Primera consulta gratuita • Sin compromiso
+              </p>
             </div>
           </div>
         </div>
