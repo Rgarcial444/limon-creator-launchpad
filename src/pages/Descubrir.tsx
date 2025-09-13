@@ -151,11 +151,11 @@ const Descubrir = () => {
           <div className="container mx-auto max-w-4xl text-center relative">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4 animate-fade-in">
               <Sparkles className="w-4 h-4" />
-              Lo nuevo
+              Laboratorio de Innovación
             </div>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 bg-gradient-to-r from-foreground via-primary to-foreground/80 bg-clip-text text-transparent animate-fade-in">
-              Laboratorio de Innovación
+              Descubrir
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed animate-fade-in">
@@ -260,14 +260,14 @@ const Descubrir = () => {
                         "p-6",
                         viewMode === 'list' && "flex-1"
                       )}>
-                        <h3 className="text-xl font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                        <h3 className="text-xl font-semibold mb-2 line-clamp-2 text-slate-100 group-hover:text-cyan-300 transition-colors">
                           {post.title}
                         </h3>
-                        <p className="text-muted-foreground mb-4 line-clamp-2 text-sm leading-relaxed">
+                        <p className="text-slate-400 mb-4 line-clamp-2 text-sm leading-relaxed">
                           {post.description}
                         </p>
                         
-                        <div className="flex items-center justify-between text-sm text-muted-foreground">
+                        <div className="flex items-center justify-between text-sm text-slate-500">
                           <div className="flex items-center gap-4">
                             <div className="flex items-center gap-1">
                               <Eye className="w-4 h-4" />
@@ -280,7 +280,7 @@ const Descubrir = () => {
                           </div>
                           <div className="flex items-center gap-1">
                             <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                            <span>{post.rating.toFixed(1)}</span>
+                            <span className="text-slate-400">{post.rating.toFixed(1)}</span>
                           </div>
                         </div>
                       </CardContent>
