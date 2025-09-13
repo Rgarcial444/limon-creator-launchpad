@@ -47,8 +47,8 @@ const Hero = () => {
             Dale Vida a Tu Marca
             <br />
             <span className="text-xl md:text-3xl lg:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400">
-  Creatividad
-</span>
+          Creatividad
+            </span>
           </motion.h1>
           
           <motion.p 
