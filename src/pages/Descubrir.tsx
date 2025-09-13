@@ -14,9 +14,6 @@ import {
   ExternalLink,
   Clock,
   Eye,
-  Filter,
-  Grid3X3,
-  List,
   Star,
   MessageCircle
 } from "lucide-react";
@@ -58,6 +55,7 @@ const Descubrir = () => {
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null); // 👈 nuevo estado
 
   useEffect(() => {
     const fetchBlogPosts = async () => {
@@ -73,21 +71,20 @@ const Descubrir = () => {
           return;
         }
 
-        // Transform Supabase data to BlogPost format
         const transformedPosts: BlogPost[] = data?.map((post: any) => ({
-  id: post.id,
-  title: post.title || 'Contenido Innovador',
-  category: post.etiquetas?.toLowerCase().split(',')[0] || post.type?.toLowerCase() || 'general',
-  imageUrl: post.url || '/placeholder.svg',
-  href: post.url || post.content || '#',   // 👈 aquí ya siempre toma la URL de la tabla
-  views: 150 + (post.id * 47) % 2000,
-  readTime: 2 + (post.id * 13) % 8,
-  rating: 4 + ((post.id * 23) % 100) / 100,
-  type: post.type || 'internal',
-  description: post.descripción || 'Descubre nuevas funcionalidades y experimentos que estamos desarrollando.',
-  etiquetas: post.etiquetas,
-  created_at: post.created_at
-})) || []
+          id: post.id,
+          title: post.title || 'Contenido Innovador',
+          category: post.etiquetas?.toLowerCase().split(',')[0] || post.type?.toLowerCase() || 'general',
+          imageUrl: post.url || '/placeholder.svg',
+          href: post.url || post.content || '', // 👈 usa url o content, si no queda vacío
+          views: 150 + (post.id * 47) % 2000,
+          readTime: 2 + (post.id * 13) % 8,
+          rating: 4 + ((post.id * 23) % 100) / 100,
+          type: post.type || 'internal',
+          description: post.descripción || 'Descubre nuevas funcionalidades y experimentos que estamos desarrollando.',
+          etiquetas: post.etiquetas,
+          created_at: post.created_at
+        })) || [];
 
         setPosts(transformedPosts);
       } catch (error) {
@@ -101,10 +98,13 @@ const Descubrir = () => {
   }, []);
 
   const handlePostClick = (post: BlogPost) => {
-  if (post.href) {
-    window.open(post.href, '_blank');
-  }
-};
+    if (post.href && post.href.trim() !== '') {
+      window.open(post.href, '_blank'); // abre URL si existe
+    } else {
+      setSelectedPost(post); // abre popup con descripción
+    }
+  };
+
   const filteredPosts = useMemo(() => 
     posts.filter(post => 
       activeFilter === 'all' || post.category === activeFilter
@@ -139,24 +139,20 @@ const Descubrir = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       <Navigation />
       <main className="pt-16">
-        {/* Hero Section - Reducido padding */}
+        {/* Hero */}
         <section className="relative py-12 px-4 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-50" />
-          
           <div className="container mx-auto max-w-4xl text-center relative">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4 animate-fade-in">
               <Sparkles className="w-4 h-4" />
               Lo nuevo
             </div>
-            
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 bg-gradient-to-r from-foreground via-primary to-foreground/80 bg-clip-text text-transparent animate-fade-in">
               Laboratorio de Innovación
             </h1>
-            
             <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed animate-fade-in">
               Explora nuestros últimos experimentos, funcionalidades revolucionarias y contenido que empuja los límites de la innovación.
             </p>
-            
             <div className="flex flex-wrap gap-3 justify-center items-center mb-8 animate-fade-in">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Eye className="w-4 h-4" />
@@ -174,7 +170,7 @@ const Descubrir = () => {
           </div>
         </section>
 
-        {/* Content Grid - Sin sección de filtros */}
+        {/* Grid */}
         <section className="px-4 pb-20">
           <div className="container mx-auto max-w-6xl">
             {filteredPosts.length === 0 ? (
@@ -287,6 +283,24 @@ const Descubrir = () => {
           </div>
         </section>
       </main>
+
+      {/* Modal de descripción */}
+      {selectedPost && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 p-4">
+          <div className="bg-card rounded-2xl shadow-xl max-w-2xl w-full p-6 relative">
+            <button
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+              onClick={() => setSelectedPost(null)}
+            >
+              ✕
+            </button>
+            <h2 className="text-2xl font-semibold mb-4">{selectedPost.title}</h2>
+            <p className="text-muted-foreground whitespace-pre-line">
+              {selectedPost.description}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
