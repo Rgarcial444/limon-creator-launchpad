@@ -74,20 +74,20 @@ const Descubrir = () => {
         }
 
         // Transform Supabase data to BlogPost format
-        const transformedPosts: BlogPost[] = data?.map((post: any, index: number) => ({
-          id: post.id,
-          title: post.title || 'Contenido Innovador',
-          category: post.etiquetas?.toLowerCase().split(',')[0] || post.type?.toLowerCase() || 'general',
-          imageUrl: post.url || '/placeholder.svg',
-          href: post.type === 'external' && post.content ? post.content : '#',
-          views: 150 + (post.id * 47) % 2000, // Deterministic views based on post id
-          readTime: 2 + (post.id * 13) % 8, // Deterministic read time
-          rating: 4 + ((post.id * 23) % 100) / 100, // Deterministic rating
-          type: post.type || 'internal',
-          description: post.descripción || 'Descubre nuevas funcionalidades y experimentos que estamos desarrollando.',
-          etiquetas: post.etiquetas,
-          created_at: post.created_at
-        })) || [];
+        const transformedPosts: BlogPost[] = data?.map((post: any) => ({
+  id: post.id,
+  title: post.title || 'Contenido Innovador',
+  category: post.etiquetas?.toLowerCase().split(',')[0] || post.type?.toLowerCase() || 'general',
+  imageUrl: post.url || '/placeholder.svg',
+  href: post.url || post.content || '#',   // 👈 aquí ya siempre toma la URL de la tabla
+  views: 150 + (post.id * 47) % 2000,
+  readTime: 2 + (post.id * 13) % 8,
+  rating: 4 + ((post.id * 23) % 100) / 100,
+  type: post.type || 'internal',
+  description: post.descripción || 'Descubre nuevas funcionalidades y experimentos que estamos desarrollando.',
+  etiquetas: post.etiquetas,
+  created_at: post.created_at
+})) || []
 
         setPosts(transformedPosts);
       } catch (error) {
