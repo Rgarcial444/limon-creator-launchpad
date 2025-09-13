@@ -27,7 +27,7 @@ const Hero = () => {
         transition={{
           duration: 0.6,
         }}
-        className="h-screen brightness-125 saturate-150 contrast-110"
+        className="h-screen brightness-155 saturate-190 contrast-130"
       >
         <motion.h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4 leading-tight">
           Dale Vida a Tu Marca
