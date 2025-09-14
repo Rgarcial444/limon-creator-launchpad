@@ -1,154 +1,141 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
   Loader2, 
-  Sparkles, 
-  Zap, 
-  Beaker, 
-  Lightbulb, 
-  TrendingUp,
+  Calendar,
+  User,
   ExternalLink,
   Clock,
   Eye,
-  Star,
-  MessageCircle
+  BookOpen,
+  X,
+  Hash,
+  ArrowRight
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface BlogPost {
   id: number;
   title: string;
-  category: string;
+  content: string;
+  description: string;
   imageUrl: string;
-  href: string;
-  views: number;
-  readTime?: number;
-  rating?: number;
+  url?: string;
   type: string;
-  description?: string;
-  etiquetas?: string;
+  etiquetas: string;
   created_at: string;
+  is_published: boolean;
+  author_id?: string;
 }
-
-const categoryIcons: Record<string, any> = {
-  'experimentos': Beaker,
-  'features': Zap,
-  'tutoriales': Lightbulb,
-  'tendencias': TrendingUp,
-  'general': Sparkles
-};
-
-const categoryColors: Record<string, string> = {
-  'experimentos': 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-  'features': 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-  'tutoriales': 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-  'tendencias': 'bg-green-500/20 text-green-400 border-green-500/30',
-  'general': 'bg-gray-500/20 text-gray-400 border-gray-500/30'
-};
 
 const Descubrir = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeFilter, setActiveFilter] = useState<string>('all');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null); // 👈 nuevo estado
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   useEffect(() => {
-  const fetchBlogPosts = async () => {
-    try {
-      const { data, error } = await (supabase as any)
-        .from('Blog')
-        .select('*')
-        .eq('is_published', true)
-        .order('created_at', { ascending: false });
+    const fetchBlogPosts = async () => {
+      try {
+        const { data, error } = await (supabase as any)
+          .from('Blog')
+          .select('*')
+          .eq('is_published', true)
+          .order('created_at', { ascending: false });
 
-      if (error) {
-        console.error('Error fetching blog posts:', error);
-        return;
-      }
-
-      const transformedPosts: BlogPost[] = data?.map((post: any) => {
-        // Crear URL de imagen desde Supabase Storage si existe
-        let imageUrl = '/placeholder.svg';
-        if (post.imagen) {
-          // Si la imagen ya es una URL completa, usarla directamente
-          if (post.imagen.startsWith('http')) {
-            imageUrl = post.imagen;
-          } else {
-            // Si es un path, construir la URL de Supabase Storage
-            const { data: { publicUrl } } = supabase
-              .storage
-              .from('imagenes limoniocreators')
-              .getPublicUrl(post.imagen);
-            imageUrl = publicUrl || '/placeholder.svg';
-          }
+        if (error) {
+          console.error('Error fetching blog posts:', error);
+          return;
         }
 
-        return {
-          id: post.id,
-          title: post.title || 'Contenido Innovador',
-          category: post.etiquetas?.toLowerCase().split(',')[0] || post.type?.toLowerCase() || 'general',
-          imageUrl: imageUrl, // ✅ imagen desde la base de datos
-          href: post.url || '', // ✅ solo URL externa, no content
-          views: 150 + (post.id * 47) % 2000,
-          readTime: 2 + (post.id * 13) % 8,
-          rating: 4 + ((post.id * 23) % 100) / 100,
-          type: post.type || 'internal',
-          description: post.descripción || post.content || 'Descubre nuevas funcionalidades y experimentos que estamos desarrollando.',
-          etiquetas: post.etiquetas,
-          created_at: post.created_at
-        };
-      }) || [];
+        const transformedPosts: BlogPost[] = data?.map((post: any) => {
+          // Crear URL de imagen desde Supabase Storage si existe
+          let imageUrl = '/placeholder.svg';
+          if (post.imagenes) {
+            // Si la imagen ya es una URL completa, usarla directamente
+            if (post.imagenes.startsWith('http')) {
+              imageUrl = post.imagenes;
+            } else {
+              // Si es un path, construir la URL de Supabase Storage
+              const { data: { publicUrl } } = supabase
+                .storage
+                .from('imagenes limoniocreators')
+                .getPublicUrl(post.imagenes);
+              imageUrl = publicUrl || '/placeholder.svg';
+            }
+          }
 
-      setPosts(transformedPosts);
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+          return {
+            id: post.id,
+            title: post.title || 'Sin título',
+            content: post.content || '',
+            description: post.descripción || 'Sin descripción disponible',
+            imageUrl: imageUrl,
+            url: post.url || '',
+            type: post.type || 'article',
+            etiquetas: post.etiquetas || '',
+            created_at: post.created_at,
+            is_published: post.is_published,
+            author_id: post.author_id
+          };
+        }) || [];
 
-  fetchBlogPosts();
-}, []);
+        setPosts(transformedPosts);
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogPosts();
+  }, []);
 
   const handlePostClick = (post: BlogPost) => {
     // Si tiene URL externa, abrirla en nueva pestaña
-    if (post.href && post.href.trim() !== '') {
-      window.open(post.href, '_blank');
+    if (post.url && post.url.trim() !== '') {
+      window.open(post.url, '_blank');
     } else {
-      // Si no tiene URL externa, mostrar popup con el contenido/descripción
+      // Si no tiene URL externa, mostrar popup con el contenido
       setSelectedPost(post);
     }
   };
 
-  const filteredPosts = useMemo(() => 
-    posts.filter(post => 
-      activeFilter === 'all' || post.category === activeFilter
-    ), [posts, activeFilter]
-  );
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
 
-  const categories = useMemo(() => 
-    ['all', ...Array.from(new Set(posts.map(post => post.category)))], 
-    [posts]
-  );
+  const getReadingTime = (content: string) => {
+    const wordsPerMinute = 200;
+    const words = content.split(' ').length;
+    return Math.ceil(words / wordsPerMinute);
+  };
 
-  const totalViews = useMemo(() => 
-    posts.reduce((acc, post) => acc + post.views, 0), 
-    [posts]
-  );
+  const getTags = (etiquetas: string) => {
+    return etiquetas ? etiquetas.split(',').map(tag => tag.trim()).filter(tag => tag) : [];
+  };
+
+  const categories = [...new Set(posts.flatMap(post => getTags(post.etiquetas)))];
+  const filteredPosts = selectedCategory === 'all' 
+    ? posts 
+    : posts.filter(post => getTags(post.etiquetas).includes(selectedCategory));
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+      <div className="min-h-screen bg-background">
         <Navigation />
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center space-y-4">
             <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto" />
-            <p className="text-muted-foreground animate-pulse">Cargando innovaciones...</p>
+            <p className="text-muted-foreground">Cargando artículos...</p>
           </div>
         </div>
       </div>
@@ -156,109 +143,99 @@ const Descubrir = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+    <div className="min-h-screen bg-background">
       <Navigation />
       <main className="pt-16">
-        {/* Hero */}
-        <section className="relative py-12 px-4 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-50" />
-          <div className="container mx-auto max-w-4xl text-center relative">
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4 animate-fade-in">
-              <Sparkles className="w-4 h-4" />
-              Lo nuevo
+        {/* Hero Section */}
+        <section className="py-16 px-4 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+          <div className="container mx-auto max-w-4xl text-center">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <BookOpen className="w-4 h-4" />
+              Blog
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 bg-gradient-to-r from-foreground via-primary to-foreground/80 bg-clip-text text-transparent animate-fade-in">
-              Laboratorio de Innovación
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+              Descubrir
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed animate-fade-in">
-              Explora nuestros últimos experimentos, funcionalidades revolucionarias y contenido que empuja los límites de la innovación.
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Explora nuestros últimos artículos, experimentos y reflexiones sobre tecnología e innovación.
             </p>
-            <div className="flex flex-wrap gap-3 justify-center items-center mb-8 animate-fade-in">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Eye className="w-4 h-4" />
-                +{totalViews.toLocaleString()} vistas
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Clock className="w-4 h-4" />
-                Actualizado semanalmente
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Star className="w-4 h-4" />
-                Contenido premium
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* Grid */}
-        <section className="px-4 pb-20">
-          <div className="container mx-auto max-w-6xl">
+        {/* Category Filter */}
+        {categories.length > 0 && (
+          <section className="py-8 px-4 border-b">
+            <div className="container mx-auto max-w-4xl">
+              <div className="flex flex-wrap gap-2 justify-center">
+                <Button
+                  variant={selectedCategory === 'all' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setSelectedCategory('all')}
+                  className="rounded-full"
+                >
+                  Todos
+                </Button>
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setSelectedCategory(category)}
+                    className="rounded-full"
+                  >
+                    <Hash className="w-3 h-3 mr-1" />
+                    {category}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Blog Posts */}
+        <section className="py-12 px-4">
+          <div className="container mx-auto max-w-4xl">
             {filteredPosts.length === 0 ? (
               <div className="text-center py-20">
-                <div className="max-w-md mx-auto">
-                  <Beaker className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-                  <h2 className="text-2xl font-semibold mb-4 text-foreground">
-                    {activeFilter === 'all' ? 'Laboratorio en construcción' : `No hay contenido en ${activeFilter}`}
-                  </h2>
-                  <p className="text-muted-foreground mb-6">
-                    {activeFilter === 'all' 
-                      ? 'Estamos cocinando experimentos increíbles. ¡Pronto tendrás acceso a innovaciones que cambiarán todo!'
-                      : `Pronto agregaremos contenido fascinante sobre ${activeFilter}.`
-                    }
-                  </p>
-                  <Button 
-                    onClick={() => {
-                      const message = "Hola! Me gustaría saber más sobre los próximos experimentos y features";
-                      window.open(`https://wa.me/5217223145340?text=${encodeURIComponent(message)}`, '_blank');
-                    }}
-                    className="bg-primary hover:bg-primary/90"
-                  >
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    Mantenerme informado
-                  </Button>
-                </div>
+                <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+                <h2 className="text-2xl font-semibold mb-4">No hay artículos disponibles</h2>
+                <p className="text-muted-foreground">
+                  {selectedCategory === 'all' 
+                    ? 'Pronto publicaremos contenido interesante.' 
+                    : `No hay artículos en la categoría "${selectedCategory}".`
+                  }
+                </p>
               </div>
             ) : (
-              <div className={cn(
-                "grid gap-6",
-                viewMode === 'grid' 
-                  ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" 
-                  : "grid-cols-1 max-w-4xl mx-auto"
-              )}>
-                {filteredPosts.map((post, index) => {
-                  const IconComponent = categoryIcons[post.category] || Sparkles;
-                  const categoryStyle = categoryColors[post.category] || categoryColors.general;
-                  
-                  return (
-                    <Card 
-                      key={post.id}
-                      className={cn(
-                        "group cursor-pointer overflow-hidden border-0 bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-200 hover:scale-[1.01] hover:shadow-lg",
-                        viewMode === 'list' && "flex-row",
-                        index === 0 && viewMode === 'grid' && filteredPosts.length > 1 && "md:col-span-2 lg:col-span-2"
-                      )}
-                      onClick={() => handlePostClick(post)}
-                    >
+              <div className="space-y-8">
+                {filteredPosts.map((post, index) => (
+                  <Card 
+                    key={post.id}
+                    className={cn(
+                      "group cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-lg border-0 bg-card/50 backdrop-blur-sm",
+                      index === 0 && "md:bg-gradient-to-r md:from-primary/5 md:to-secondary/5"
+                    )}
+                    onClick={() => handlePostClick(post)}
+                  >
+                    <div className={cn(
+                      "grid gap-6",
+                      index === 0 ? "md:grid-cols-2" : "md:grid-cols-3"
+                    )}>
+                      {/* Image */}
                       <div className={cn(
                         "relative overflow-hidden",
-                        viewMode === 'list' ? "w-1/3 h-48" : index === 0 && viewMode === 'grid' ? "h-64" : "h-48"
+                        index === 0 ? "h-64 md:h-80" : "h-48 md:h-full"
                       )}>
-                        <img 
-                          src={post.imageUrl} 
+                        <img
+                          src={post.imageUrl}
                           alt={post.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           onError={(e) => {
                             e.currentTarget.src = '/placeholder.svg';
                           }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                        <div className="absolute top-4 left-4">
-                          <Badge className={cn("border", categoryStyle)}>
-                            <IconComponent className="w-3 h-3 mr-1" />
-                            {post.category}
-                          </Badge>
-                        </div>
-                        {post.type === 'external' && (
+                        {post.url && (
                           <div className="absolute top-4 right-4">
                             <div className="bg-black/50 backdrop-blur-sm rounded-full p-2">
                               <ExternalLink className="w-4 h-4 text-white" />
@@ -266,58 +243,136 @@ const Descubrir = () => {
                           </div>
                         )}
                       </div>
-                      
-                      <CardContent className={cn(
-                        "p-6",
-                        viewMode === 'list' && "flex-1"
+
+                      {/* Content */}
+                      <div className={cn(
+                        "p-6 flex flex-col justify-between",
+                        index === 0 ? "md:col-span-1" : "md:col-span-2"
                       )}>
-                        <h3 className="text-xl font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                          {post.title}
-                        </h3>
-                        <p className="text-muted-foreground mb-4 line-clamp-2 text-sm leading-relaxed">
-                          {post.description}
-                        </p>
-                        
+                        <div>
+                          {/* Tags */}
+                          {getTags(post.etiquetas).length > 0 && (
+                            <div className="flex flex-wrap gap-2 mb-3">
+                              {getTags(post.etiquetas).slice(0, 3).map((tag, tagIndex) => (
+                                <Badge key={tagIndex} variant="secondary" className="text-xs">
+                                  {tag}
+                                </Badge>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Title */}
+                          <h2 className={cn(
+                            "font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2",
+                            index === 0 ? "text-2xl md:text-3xl" : "text-xl"
+                          )}>
+                            {post.title}
+                          </h2>
+
+                          {/* Description */}
+                          <p className={cn(
+                            "text-muted-foreground mb-4 line-clamp-3",
+                            index === 0 ? "text-base" : "text-sm"
+                          )}>
+                            {post.description}
+                          </p>
+                        </div>
+
+                        {/* Meta */}
                         <div className="flex items-center justify-between text-sm text-muted-foreground">
                           <div className="flex items-center gap-4">
                             <div className="flex items-center gap-1">
-                              <Eye className="w-4 h-4" />
-                              {post.views.toLocaleString()}
+                              <Calendar className="w-4 h-4" />
+                              {formatDate(post.created_at)}
                             </div>
-                            <div className="flex items-center gap-1">
-                              <Clock className="w-4 h-4" />
-                              {post.readTime}min
-                            </div>
+                            {post.content && (
+                              <div className="flex items-center gap-1">
+                                <Clock className="w-4 h-4" />
+                                {getReadingTime(post.content)} min
+                              </div>
+                            )}
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                            <span>{post.rating.toFixed(1)}</span>
-                          </div>
+                          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                      </div>
+                    </div>
+                  </Card>
+                ))}
               </div>
             )}
           </div>
         </section>
       </main>
 
-      {/* Modal de descripción */}
+      {/* Article Modal */}
       {selectedPost && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 p-4">
-          <div className="bg-card rounded-2xl shadow-xl max-w-2xl w-full p-6 relative">
-            <button
-              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
-              onClick={() => setSelectedPost(null)}
-            >
-              ✕
-            </button>
-            <h2 className="text-2xl font-semibold mb-4">{selectedPost.title}</h2>
-            <p className="text-muted-foreground whitespace-pre-line">
-              {selectedPost.description}
-            </p>
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-background rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            {/* Modal Header */}
+            <div className="p-6 border-b flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="flex flex-wrap gap-2">
+                  {getTags(selectedPost.etiquetas).map((tag, index) => (
+                    <Badge key={index} variant="secondary">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSelectedPost(null)}
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="overflow-y-auto max-h-[calc(90vh-120px)]">
+              {/* Featured Image */}
+              {selectedPost.imageUrl !== '/placeholder.svg' && (
+                <div className="h-64 overflow-hidden">
+                  <img
+                    src={selectedPost.imageUrl}
+                    alt={selectedPost.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+
+              <div className="p-6">
+                {/* Article Header */}
+                <div className="mb-6">
+                  <h1 className="text-3xl font-bold mb-4">{selectedPost.title}</h1>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      {formatDate(selectedPost.created_at)}
+                    </div>
+                    {selectedPost.content && (
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        {getReadingTime(selectedPost.content)} min de lectura
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Article Content */}
+                <div className="prose prose-neutral dark:prose-invert max-w-none">
+                  {selectedPost.content ? (
+                    <div className="whitespace-pre-wrap text-base leading-relaxed">
+                      {selectedPost.content}
+                    </div>
+                  ) : (
+                    <div className="text-base leading-relaxed">
+                      {selectedPost.description}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
