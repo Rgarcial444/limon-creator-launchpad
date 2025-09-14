@@ -71,20 +71,38 @@ const Descubrir = () => {
         return;
       }
 
-      const transformedPosts: BlogPost[] = data?.map((post: any) => ({
-        id: post.id,
-        title: post.title || 'Contenido Innovador',
-        category: post.etiquetas?.toLowerCase().split(',')[0] || post.type?.toLowerCase() || 'general',
-        imageUrl: post.imagen || '/placeholder.svg', // ✅ usa directamente la URL pública
-        href: post.url || post.content || '',
-        views: 150 + (post.id * 47) % 2000,
-        readTime: 2 + (post.id * 13) % 8,
-        rating: 4 + ((post.id * 23) % 100) / 100,
-        type: post.type || 'internal',
-        description: post.descripción || 'Descubre nuevas funcionalidades y experimentos que estamos desarrollando.',
-        etiquetas: post.etiquetas,
-        created_at: post.created_at
-      })) || [];
+      const transformedPosts: BlogPost[] = data?.map((post: any) => {
+        // Crear URL de imagen desde Supabase Storage si existe
+        let imageUrl = '/placeholder.svg';
+        if (post.imagen) {
+          // Si la imagen ya es una URL completa, usarla directamente
+          if (post.imagen.startsWith('http')) {
+            imageUrl = post.imagen;
+          } else {
+            // Si es un path, construir la URL de Supabase Storage
+            const { data: { publicUrl } } = supabase
+              .storage
+              .from('imagenes limoniocreators')
+              .getPublicUrl(post.imagen);
+            imageUrl = publicUrl || '/placeholder.svg';
+          }
+        }
+
+        return {
+          id: post.id,
+          title: post.title || 'Contenido Innovador',
+          category: post.etiquetas?.toLowerCase().split(',')[0] || post.type?.toLowerCase() || 'general',
+          imageUrl: imageUrl, // ✅ imagen desde la base de datos
+          href: post.url || '', // ✅ solo URL externa, no content
+          views: 150 + (post.id * 47) % 2000,
+          readTime: 2 + (post.id * 13) % 8,
+          rating: 4 + ((post.id * 23) % 100) / 100,
+          type: post.type || 'internal',
+          description: post.descripción || post.content || 'Descubre nuevas funcionalidades y experimentos que estamos desarrollando.',
+          etiquetas: post.etiquetas,
+          created_at: post.created_at
+        };
+      }) || [];
 
       setPosts(transformedPosts);
     } catch (error) {
@@ -98,10 +116,12 @@ const Descubrir = () => {
 }, []);
 
   const handlePostClick = (post: BlogPost) => {
+    // Si tiene URL externa, abrirla en nueva pestaña
     if (post.href && post.href.trim() !== '') {
-      window.open(post.href, '_blank'); // abre URL si existe
+      window.open(post.href, '_blank');
     } else {
-      setSelectedPost(post); // abre popup con descripción
+      // Si no tiene URL externa, mostrar popup con el contenido/descripción
+      setSelectedPost(post);
     }
   };
 
