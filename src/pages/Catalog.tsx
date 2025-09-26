@@ -217,7 +217,7 @@ const Catalog = () => {
         </section>
 
         {/* Marquee Effect Footer - Versión Delgada */}
-        <footer className="relative px-6 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+        <footer className="relative px-6 mt-16 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
           <div className="relative space-y-1 py-1">
             <MarqueeAnimation
               direction="left"
