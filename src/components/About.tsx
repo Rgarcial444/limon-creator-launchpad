@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Zap, Rocket, Target, Sparkles, ArrowRight, CheckCircle, Star, Trophy, Coffee, MessageCircle } from "lucide-react";
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 import { RainbowButton } from '@/components/ui/rainbow-button';
@@ -36,13 +35,6 @@ const benefits = [
     stat: "∞ potencial",
     color: "text-blue-400"
   }
-];
-
-const achievements = [
-  { metric: '500+', label: 'Proyectos Exitosos', icon: Trophy },
-  { metric: '99.2%', label: 'Satisfacción Cliente', icon: Star },
-  { metric: '48h', label: 'Tiempo Respuesta', icon: Zap },
-  { metric: '∞', label: 'Cafés Consumidos', icon: Coffee }
 ];
 
 const About = () => {
@@ -128,40 +120,7 @@ const About = () => {
             </div>
           </div>
         </section>
-
-        {/* Métricas de Impacto */}
-        <section className="py-16 px-6 bg-gradient-to-r from-slate-900/50 via-slate-800/30 to-slate-900/50">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-                Números que Hablan por Nosotros
-              </h2>
-            </div>
-            
-            <div className="grid md:grid-cols-4 gap-6">
-              {achievements.map((achievement, index) => {
-                const Icon = achievement.icon;
-                return (
-                  <div 
-                    key={index}
-                    className="group text-center p-6 rounded-2xl bg-white/10 backdrop-blur-sm hover-lift hover:shadow-xl transition-all duration-300 border border-white/20"
-                  >
-                    <div className="w-20 h-20 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                      <Icon className="h-10 w-10 text-cyan-400" />
-                    </div>
-                    <div className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-2">
-                      {achievement.metric}
-                    </div>
-                    <div className="text-slate-300 font-medium">
-                      {achievement.label}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
+        
         {/* Nueva sección de conversación */}
         <section className="py-12 px-6 text-center">
           <div className="container mx-auto max-w-4xl">
