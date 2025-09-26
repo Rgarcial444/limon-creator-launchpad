@@ -105,7 +105,7 @@ const Services = () => {
         <Navigation />
         
         {/* Hero Section Simplificado - SIN badge y títulos grandes */}
-        <section className="py-16 px-6 text-center">
+        <section className="py-8 px-6 text-cente">
           <div className="container mx-auto max-w-4xl">
             <p className="text-xl text-slate-300 mb-8 leading-relaxed" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
               Descubre nuestros servicios especializados en desarrollo web, aplicaciones móviles y software personalizado.
@@ -141,7 +141,7 @@ const Services = () => {
         </section>
 
         {/* Services Grid */}
-        <section className="px-6 pb-16">
+        <section className="px-6 pb-6">
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredServices.map((service) => (
