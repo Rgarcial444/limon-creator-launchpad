@@ -1,76 +1,58 @@
- import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Globe, ShoppingCart, Calendar, Sparkles } from "lucide-react";
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Globe, Smartphone, Code, Zap, Star, Filter } from 'lucide-react';
+import { RainbowButton } from '@/components/ui/rainbow-button';
+import Navigation from '@/components/Navigation';
+import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 
 const services = [
   {
-    icon: Globe,
-    title: "Páginas Web Básicas",
-    description: "Sitios web que muestran tus servicios, productos y costos con animaciones modernas",
-    features: ["Diseño responsivo", "Animaciones CSS", "Contenido actualizable", "CTA integrado con WhatsApp"]
+    id: 1,
+    title: 'Sitio Web Corporativo',
+    description: 'Diseño web profesional que refleja la identidad de tu marca con funcionalidades avanzadas.',
+    category: 'web',
+    price: 'Desde $2,500 MXN',
+    features: ['Diseño responsivo', 'SEO optimizado', 'Panel de administración', 'Integración con redes sociales'],
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop',
+    rating: 4.9,
+    duration: '2-3 semanas'
   },
   {
-    icon: Calendar,
-    title: "Herramientas de Citas",
-    description: "Calendarios interactivos de Google y Luma para agendar citas y gestionar eventos con cobro de accesos.",
-    features: ["Integración Google Calendar", "Cobro por eventos", "Gestión de capacitaciones", "Reservas online"]
+    id: 2,
+    title: 'E-commerce Avanzado',
+    description: 'Tienda en línea completa con sistema de pagos, inventario y gestión de pedidos.',
+    category: 'ecommerce',
+    price: 'Desde $4,500 MXN',
+    features: ['Carrito de compras', 'Pagos seguros', 'Gestión de inventario', 'Panel de ventas'],
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop',
+    rating: 4.8,
+    duration: '4-6 semanas'
   },
   {
-    icon: ShoppingCart,
-    title: "E-commerce Completo",
-    description: "Sitios con catálogos y carritos de compra conectados a Stripe, Amazon, Mercado Libre y WhatsApp.",
-    features: ["Catálogo de productos", "Carrito de compras", "Pagos con Stripe", "Integración multi-plataforma"]
+    id: 3,
+    title: 'Aplicación Móvil',
+    description: 'App nativa o híbrida para iOS y Android con funcionalidades personalizadas.',
+    category: 'mobile',
+    price: 'Desde $6,000 MXN',
+    features: ['Multiplataforma', 'Push notifications', 'Modo offline', 'Integración con APIs'],
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=250&fit=crop',
+    rating: 4.9,
+    duration: '6-8 semanas'
   },
   {
-    icon: Sparkles,
-    title: "Proyectos con IA",
-    description: "Desarrollos experimentales con Inteligencia Artificial, juegos digitales y páginas con estilo futurista.",
-    features: ["Landings generadas por IA", "Juegos sin datos", "Diseños futuristas", "Animaciones"]
-  }
-];
-
-const Services = () => {
-  return (
-    <section className="py-24 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl font-bold mb-4">
-            Servicios que 
-            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"> impulsan</span> tu negocio
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Desde páginas web básicas hasta proyectos experimentales con IA, 
-            ofrezco soluciones digitales completas para cada necesidad.
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
-            <Card key={index} className="card-gradient border shadow-soft hover-lift">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <service.icon className="h-6 w-6 text-primary" />
-                </div>
-                <CardTitle className="text-xl">{service.title}</CardTitle>
-                <CardDescription className="text-base">
-                  {service.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="text-sm text-muted-foreground flex items-center">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default Services;
+    id: 4,
+    title: 'Landing Page Optimizada',
+    description: 'Página de conversión diseñada para maximizar ventas y generar leads.',
+    category: 'web',
+    price: 'Desde $1,800 MXN',
+    features: ['Conversión optimizada', 'A/B Testing', 'Analytics integrado', 'Formularios avanzados'],
+    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=250&fit=crop',
+    rating: 4.7,
+    duration: '1-2 semanas'
+  },
+  {
+    id: 5,
+    title: 'Sistema CRM',
+    description: 'Gestión completa de clientes y
