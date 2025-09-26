@@ -234,4 +234,21 @@ const Catalog = () => {
             
             <MarqueeAnimation
               direction="right"
-              base
+              baseVelocity={-1.5}
+              className="text-2xl md:text-3xl lg:text-4xl py-2"
+              style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}
+            >
+              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent font-semibold">
+                TECNOLOGÍA • DISEÑO • SOLUCIONES • CREATIVIDAD • RESULTADOS
+              </span>
+            </MarqueeAnimation>
+          </div>
+          
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-slate-950 to-transparent backdrop-blur-sm" />
+        </footer>
+      </div>
+    </div>
+  );
+};
+
+export default Catalog;
