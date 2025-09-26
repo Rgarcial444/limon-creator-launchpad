@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Zap, Rocket, Target, Sparkles, ArrowRight, MessageCircle } from "lucide-react";
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
@@ -56,14 +55,12 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Fondo animado con patrones sutiles */}
       <div className="fixed inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/5 to-cyan-900/10 pointer-events-none" />
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.05)_1px,transparent_0)] bg-[length:32px_32px] pointer-events-none" />
       
       <div className="relative z-10">
         <Navigation />
         
-        {/* Hero Section Simplificado */}
         <section className="py-16 px-6 text-center">
           <div className="container mx-auto max-w-4xl">
             <p className="text-xl text-slate-300 mb-8 leading-relaxed" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
@@ -72,7 +69,6 @@ const About = () => {
           </div>
         </section>
 
-        {/* Benefits Section - Full Width */}
         <section className="py-24 subtle-gradient overflow-hidden">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
@@ -87,7 +83,6 @@ const About = () => {
               </p>
             </div>
 
-            {/* Benefits Grid - Full Width */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
               {benefits.map((benefit, index) => {
                 const Icon = benefit.icon;
@@ -122,7 +117,6 @@ const About = () => {
           </div>
         </section>
         
-        {/* Nueva sección de conversación */}
         <section className="py-12 px-6 text-center">
           <div className="container mx-auto max-w-4xl">
             <p className="text-lg text-slate-300 leading-relaxed mb-8">
@@ -148,7 +142,6 @@ const About = () => {
           </div>
         </section>
 
-        {/* Marquee Effect Footer - Dos Líneas Delgadas */}
         <footer className="relative px-6 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
           <div className="relative space-y-1 py-1">
             <MarqueeAnimation
