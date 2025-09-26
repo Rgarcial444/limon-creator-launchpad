@@ -40,3 +40,24 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Estilos para el texto animado */
+.scroll-text-container {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.scroll-text {
+  display: inline-block;
+  animation: scroll 20s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
