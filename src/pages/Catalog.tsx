@@ -118,7 +118,7 @@ const Catalog = () => {
               </span>
             </h1>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
-              Descubre nuestros servicios especializados en desarrollo web, aplicaciones móviles y software personalizado.
+              Muy pronto más noticias, esperalas.
             </p>
           </div>
         </section>
