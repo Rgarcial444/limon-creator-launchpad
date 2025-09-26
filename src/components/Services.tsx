@@ -84,7 +84,7 @@ const categories = [
   { id: 'software', name: 'Software', icon: Code }
 ];
 
-const Catalog = () => {
+const Services = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   const filteredServices = services
@@ -251,4 +251,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
+export default Services;
