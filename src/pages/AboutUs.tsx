@@ -24,9 +24,9 @@ import Navigation from '@/components/Navigation';
 // Datos del fundador con background profesional creativo
 const founder = {
   name: 'Ricardo García',
-  role: 'CEO & Fundador',
-  location: 'Ciudad de México, México',
-  email: 'ricardo@limoniocreators.com',
+  role: 'Fundador',
+  location: 'Toluca/CDMX, México',
+  email: 'Limon_50@hotmail.com',
   image: '/src/assets/ricardo-portrait.jpg',
   taglines: [
     'Transformando ideas en realidades digitales',
@@ -49,12 +49,12 @@ const founder = {
     {
       year: '2018',
       title: 'Agencia Digital',
-      description: 'Fundé mi primera agencia con un equipo de 3 desarrolladores'
+      description: 'Trabajé con mi primer agencia digital con un equipo de 3 desarrolladores'
     },
     {
       year: '2020',
       title: 'Expansión Internacional',
-      description: 'Comenzamos a trabajar con clientes de LATAM y Estados Unidos'
+      description: 'Comenzamos a trabajar con clientes de LATAM'
     },
     {
       year: '2022',
@@ -68,10 +68,10 @@ const founder = {
     }
   ],
   expertise: [
-    { skill: 'Full Stack Development', level: 95 },
-    { skill: 'Product Strategy', level: 90 },
-    { skill: 'Team Leadership', level: 88 },
-    { skill: 'Client Relations', level: 92 }
+    { skill: 'Team Leadership', level: 95 },
+    { skill: 'yClient Relations', level: 90 },
+    { skill: 'Full Stack Development', level: 88 },
+    { skill: 'Product Strateg', level: 92 }
   ]
 };
 
