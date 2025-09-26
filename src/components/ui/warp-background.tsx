@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { motion } from "motion";
+import { motion } from "framer-motion";
 import React, { HTMLAttributes, useCallback, useMemo } from "react";
 
 interface WarpBackgroundProps extends HTMLAttributes<HTMLDivElement> {
