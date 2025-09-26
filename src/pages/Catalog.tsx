@@ -202,24 +202,37 @@ const Catalog = () => {
         </div>
       </section>
 
-      {/* Marquee Effect Footer */}
-      <footer className="px-6 overflow-hidden">
-        <div className="space-y-4">
+      {/* Marquee Effect Footer - Versión Profesional */}
+      <footer className="relative px-6 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        {/* Overlay sutil para mayor profundidad */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10" />
+        
+        <div className="relative space-y-6 py-8">
           <MarqueeAnimation
             direction="left"
             baseVelocity={-2}
-            className="text-primary/20 text-3xl md:text-4xl lg:text-5xl py-2"
+            className="text-3xl md:text-4xl lg:text-5xl py-2"
+            style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}
           >
-            DESARROLLO WEB • E-COMMERCE • APPS MÓVILES • SOFTWARE • INNOVACIÓN
+            <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-bold">
+              DESARROLLO WEB • E-COMMERCE • APPS MÓVILES • SOFTWARE • INNOVACIÓN
+            </span>
           </MarqueeAnimation>
+          
           <MarqueeAnimation
             direction="right"
             baseVelocity={-1.5}
-            className="text-secondary/30 text-2xl md:text-3xl lg:text-4xl py-2"
+            className="text-2xl md:text-3xl lg:text-4xl py-2"
+            style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}
           >
-            TECNOLOGÍA • DISEÑO • SOLUCIONES • CREATIVIDAD • RESULTADOS
+            <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent font-semibold">
+              TECNOLOGÍA • DISEÑO • SOLUCIONES • CREATIVIDAD • RESULTADOS
+            </span>
           </MarqueeAnimation>
         </div>
+        
+        {/* Backdrop blur sutil en la parte inferior */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-slate-900 to-transparent backdrop-blur-sm" />
       </footer>
     </div>
   );
