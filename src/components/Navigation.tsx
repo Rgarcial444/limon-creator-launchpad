@@ -31,10 +31,10 @@ const Navigation = () => {
                 key={item.name}
                 to={item.href}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
-                  location.pathname === item.href 
-                    ? 'text-primary' 
-                    : 'text-white/90 hover:text-white'
-                }`}
+  location.pathname === item.href 
+    ? 'text-white/90' 
+    : 'text-white/90 hover:text-white'
+}`}
               >
                 {item.name}
               </Link>
