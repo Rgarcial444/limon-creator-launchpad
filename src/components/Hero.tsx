@@ -18,87 +18,120 @@ const Hero = () => {
   ];
 
   return (
-    <div className="relative h-screen overflow-hidden">
-      <ImagesSlider 
-        className="h-screen brightness-125 saturate-150 contrast-110" 
-        images={images}
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-green-900/30 backdrop-blur-[0.5px]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
-
-        {/* NAVIGATION FIJO ARRIBA */}
-        <Navigation />
-
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: -80,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.6,
-          }}
-          className="z-50 flex flex-col justify-center items-center text-center px-6 relative"
+    <>
+      {/* HERO SECTION ORIGINAL */}
+      <div className="relative h-screen overflow-hidden">
+        <ImagesSlider 
+          className="h-screen brightness-125 saturate-150 contrast-110" 
+          images={images}
         >
-          <motion.h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-center text-white py-4 leading-tight drop-shadow-2xl">
-            Dale Vida a Tu Marca
-            <br />
-            <span className="text-xl md:text-3xl lg:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400">
-              Creatividad sin Límites
-            </span>
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl text-white font-semibold max-w-3xl mx-auto mb-8 leading-relaxed drop-shadow-xl"
-            style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}
-          >
-            Soluciones digitales modernas para hacer crecer tu negocio.
-          </motion.p>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-            className="flex justify-center mb-8"
-          >
-            <RainbowButton 
-              size="lg" 
-              onClick={handleWhatsAppContact}
-              className="!bg-white !text-black shadow-2xl hover:shadow-lg transition-all duration-300"
-            >
-              <MessageCircle className="mr-2 h-5 w-5" />
-              Contáctame por WhatsApp
-            </RainbowButton>
-          </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-green-900/30 backdrop-blur-[0.5px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="grid grid-cols-3 gap-8 pt-8 border-t border-white/40 backdrop-blur-md bg-white/10 rounded-xl px-8 py-4"
+          <Navigation />
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: -80,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.6,
+            }}
+            className="z-50 flex flex-col justify-center items-center text-center px-6 relative"
           >
-            <div className="text-center">
-              <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">10+</div>
-              <div className="text-sm text-white font-medium">Proyectos</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">100%</div>
-              <div className="text-sm text-white font-medium">Responsivo</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">24/7</div>
-              <div className="text-sm text-white font-medium">Soporte</div>
-            </div>
+            <motion.h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-center text-white py-4 leading-tight drop-shadow-2xl">
+              Dale Vida a Tu Marca
+              <br />
+              <span className="text-xl md:text-3xl lg:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400">
+                Creatividad sin Límites
+              </span>
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg md:text-xl text-white font-semibold max-w-3xl mx-auto mb-8 leading-relaxed drop-shadow-xl"
+              style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}
+            >
+              Soluciones digitales modernas para hacer crecer tu negocio.
+            </motion.p>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              className="flex justify-center mb-8"
+            >
+              <RainbowButton 
+                size="lg" 
+                onClick={handleWhatsAppContact}
+                className="!bg-white !text-black shadow-2xl hover:shadow-lg transition-all duration-300"
+              >
+                <MessageCircle className="mr-2 h-5 w-5" />
+                Contáctame por WhatsApp
+              </RainbowButton>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="grid grid-cols-3 gap-8 pt-8 border-t border-white/40 backdrop-blur-md bg-white/10 rounded-xl px-8 py-4"
+            >
+              <div className="text-center">
+                <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">10+</div>
+                <div className="text-sm text-white font-medium">Proyectos</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">100%</div>
+                <div className="text-sm text-white font-medium">Responsivo</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">24/7</div>
+                <div className="text-sm text-white font-medium">Soporte</div>
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      </ImagesSlider>
-    </div>
+        </ImagesSlider>
+      </div>
+
+      {/* NUEVA SECCIÓN DE CONFIANZA SOCIAL */}
+      <section className="py-20 bg-gradient-to-b from-slate-900 to-slate-800">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Empresas que confían en nosotros
+            </h2>
+            <p className="text-slate-400">Soluciones digitales para todo tipo de industrias</p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-80">
+            <div className="text-center group hover:opacity-100 transition-all duration-300 cursor-pointer">
+              <div className="text-6xl mb-2 group-hover:scale-110 transition-transform">🍕</div>
+              <p className="text-slate-400 text-sm group-hover:text-white transition-colors">Restaurantes</p>
+            </div>
+            <div className="text-center group hover:opacity-100 transition-all duration-300 cursor-pointer">
+              <div className="text-6xl mb-2 group-hover:scale-110 transition-transform">🏪</div>
+              <p className="text-slate-400 text-sm group-hover:text-white transition-colors">Retail</p>
+            </div>
+            <div className="text-center group hover:opacity-100 transition-all duration-300 cursor-pointer">
+              <div className="text-6xl mb-2 group-hover:scale-110 transition-transform">💼</div>
+              <p className="text-slate-400 text-sm group-hover:text-white transition-colors">Corporativos</p>
+            </div>
+            <div className="text-center group hover:opacity-100 transition-all duration-300 cursor-pointer">
+              <div className="text-6xl mb-2 group-hover:scale-110 transition-transform">🎨</div>
+              <p className="text-slate-400 text-sm group-hover:text-white transition-colors">Creativos</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
