@@ -108,7 +108,7 @@ const Services = () => {
         <section className="py-8 px-6 text-cente">
           <div className="container mx-auto max-w-4xl">
             <p className="text-xl text-slate-300 mb-8 leading-relaxed" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
-              Descubre nuestros servicios especializados en desarrollo web, aplicaciones móviles y software personalizado.
+              💰 Digitalizar tu negocio cuesta poco. 💸 Lo que cuesta caro es perder clientes porque no te encuentran en digital. Con Limon.io tienes soluciones de bajo costo, listas para que vendas más. 📲 No gastes: invierte..
             </p>
           </div>
         </section>
