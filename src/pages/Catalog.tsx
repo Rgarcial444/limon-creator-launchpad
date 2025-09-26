@@ -150,8 +150,8 @@ const Catalog = () => {
           </div>
         </section>
 
-        {/* Services Grid */}
-        <section className="px-6 pb-16">
+        {/* Services Grid con más espacio */}
+        <section className="px-6 pb-24">
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredServices.map((service) => (
@@ -172,7 +172,7 @@ const Catalog = () => {
                   <CardHeader>
                     <div className="flex items-center justify-between mb-2">
                       <Badge  variant="secondary" className="text-xs bg-gradient-to-r from-slate-800/80 to-slate-700/80 text-white border-slate-600/50 backdrop-blur-sm">
-  {service.duration}
+                        {service.duration}
                       </Badge>
                       <span className="text-lg font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                         {service.price}
@@ -216,18 +216,16 @@ const Catalog = () => {
           </div>
         </section>
 
-        {/* Marquee Effect Footer */}
+        {/* Marquee Effect Footer - Versión Delgada */}
         <footer className="relative px-6 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10" />
-          
-          <div className="relative space-y-6 py-8">
+          <div className="relative space-y-1 py-1">
             <MarqueeAnimation
               direction="left"
               baseVelocity={-2}
-              className="text-3xl md:text-4xl lg:text-5xl py-2"
-              style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}
+              className="text-xs md:text-sm lg:text-base py-0.5"
+              style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
             >
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-bold">
+              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-medium">
                 DESARROLLO WEB • E-COMMERCE • APPS MÓVILES • SOFTWARE • INNOVACIÓN
               </span>
             </MarqueeAnimation>
@@ -235,16 +233,14 @@ const Catalog = () => {
             <MarqueeAnimation
               direction="right"
               baseVelocity={-1.5}
-              className="text-2xl md:text-3xl lg:text-4xl py-2"
-              style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}
+              className="text-xs md:text-sm py-0.5"
+              style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
             >
-              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent font-semibold">
+              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent font-normal">
                 TECNOLOGÍA • DISEÑO • SOLUCIONES • CREATIVIDAD • RESULTADOS
               </span>
             </MarqueeAnimation>
           </div>
-          
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-slate-950 to-transparent backdrop-blur-sm" />
         </footer>
       </div>
     </div>
