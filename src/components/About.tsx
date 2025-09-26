@@ -148,20 +148,9 @@ const About = () => {
           </div>
         </section>
 
-        {/* Marquee Effect Footer - Súper Delgado */}
+        {/* Marquee Effect Footer - Solo Segunda Línea */}
         <footer className="relative px-6 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-          <div className="relative space-y-1 py-1">
-            <MarqueeAnimation
-              direction="left"
-              baseVelocity={-2}
-              className="text-xs md:text-sm lg:text-base py-0.5"
-              style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
-            >
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-medium">
-                DESARROLLO WEB • E-COMMERCE • APPS MÓVILES • SOFTWARE • INNOVACIÓN
-              </span>
-            </MarqueeAnimation>
-            
+          <div className="relative py-1">
             <MarqueeAnimation
               direction="right"
               baseVelocity={-1.5}
