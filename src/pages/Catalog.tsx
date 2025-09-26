@@ -171,8 +171,8 @@ const Catalog = () => {
                   
                   <CardHeader>
                     <div className="flex items-center justify-between mb-2">
-                      <Badge variant="secondary" className="text-xs bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/30">
-                        {service.duration}
+                      <Badge  variant="secondary" className="text-xs bg-gradient-to-r from-slate-800/80 to-slate-700/80 text-white border-slate-600/50 backdrop-blur-sm">
+  {service.duration}
                       </Badge>
                       <span className="text-lg font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                         {service.price}
