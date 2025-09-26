@@ -216,7 +216,7 @@ const Catalog = () => {
           </div>
         </section>
 
-        {/* Marquee Effect Footer - Versión Delgada */}
+        {/* Marquee Effect Footer - Estilo Minimalista Cyan */}
         <footer className="relative px-6 mt-16 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
           <div className="relative space-y-1 py-1">
             <MarqueeAnimation
@@ -225,7 +225,7 @@ const Catalog = () => {
               className="text-xs md:text-sm lg:text-base py-0.5"
               style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
             >
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-medium">
+              <span className="text-cyan-400 font-medium">
                 DESARROLLO WEB • E-COMMERCE • APPS MÓVILES • SOFTWARE • INNOVACIÓN
               </span>
             </MarqueeAnimation>
@@ -236,7 +236,7 @@ const Catalog = () => {
               className="text-xs md:text-sm py-0.5"
               style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
             >
-              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent font-normal">
+              <span className="text-slate-500 font-normal">
                 TECNOLOGÍA • DISEÑO • SOLUCIONES • CREATIVIDAD • RESULTADOS
               </span>
             </MarqueeAnimation>
