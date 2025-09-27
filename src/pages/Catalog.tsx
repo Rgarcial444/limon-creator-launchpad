@@ -7,7 +7,6 @@ import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 
 const services = [
-  // ... mismo array de services que tenías antes con expandedContent
   {
     id: 1,
     title: 'Sitio Web Corporativo',
@@ -24,7 +23,86 @@ const services = [
       process: 'Análisis → Diseño → Desarrollo → Testing → Despliegue'
     }
   },
-  // ... resto de services igual
+  {
+    id: 2,
+    title: 'E-commerce Avanzado',
+    description: 'Tienda en línea completa con sistema de pagos, inventario y gestión de pedidos.',
+    category: 'ecommerce',
+    price: 'Desde $4,500 MXN',
+    features: ['Carrito de compras', 'Pagos seguros', 'Gestión de inventario', 'Panel de ventas'],
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop',
+    rating: 4.8,
+    duration: '4-6 semanas',
+    expandedContent: {
+      technologies: ['WooCommerce', 'Stripe', 'PayPal', 'MySQL'],
+      deliverables: ['Tienda online', 'Panel administrador', 'Sistema pagos', 'App móvil'],
+      process: 'Planificación → Desarrollo → Integración pagos → Testing → Lanzamiento'
+    }
+  },
+  {
+    id: 3,
+    title: 'Aplicación Móvil',
+    description: 'App nativa o híbrida para iOS y Android con funcionalidades personalizadas.',
+    category: 'mobile',
+    price: 'Desde $6,000 MXN',
+    features: ['Multiplataforma', 'Push notifications', 'Modo offline', 'Integración con APIs'],
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=250&fit=crop',
+    rating: 4.9,
+    duration: '6-8 semanas',
+    expandedContent: {
+      technologies: ['React Native', 'Flutter', 'Firebase', 'MongoDB'],
+      deliverables: ['App iOS', 'App Android', 'Backend API', 'Panel control'],
+      process: 'Wireframes → Prototipo → Desarrollo → Testing → Store deployment'
+    }
+  },
+  {
+    id: 4,
+    title: 'Landing Page Optimizada',
+    description: 'Página de conversión diseñada para maximizar ventas y generar leads.',
+    category: 'web',
+    price: 'Desde $1,800 MXN',
+    features: ['Conversión optimizada', 'A/B Testing', 'Analytics integrado', 'Formularios avanzados'],
+    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=250&fit=crop',
+    rating: 4.7,
+    duration: '1-2 semanas',
+    expandedContent: {
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Google Analytics'],
+      deliverables: ['Landing page', 'Formularios', 'Analytics setup', 'SEO básico'],
+      process: 'Brief → Diseño → Desarrollo → Optimización → Testing'
+    }
+  },
+  {
+    id: 5,
+    title: 'Sistema CRM',
+    description: 'Gestión completa de clientes y ventas con dashboard personalizado.',
+    category: 'software',
+    price: 'Desde $5,500 MXN',
+    features: ['Gestión de leads', 'Automatización', 'Reportes detallados', 'Integración con email'],
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop',
+    rating: 4.8,
+    duration: '5-7 semanas',
+    expandedContent: {
+      technologies: ['Laravel', 'Vue.js', 'MySQL', 'Redis'],
+      deliverables: ['Sistema CRM', 'Dashboard', 'Reportes', 'Integración email'],
+      process: 'Análisis → Base de datos → Frontend → Backend → Testing'
+    }
+  },
+  {
+    id: 6,
+    title: 'Marketplace Personalizado',
+    description: 'Plataforma multi-vendor con sistema de comisiones y gestión avanzada.',
+    category: 'ecommerce',
+    price: 'Desde $8,000 MXN',
+    features: ['Multi-vendor', 'Sistema de comisiones', 'Chat integrado', 'Gestión de disputas'],
+    image: 'https://images.unsplash.com/photo-1556155092-8707de31f9c4?w=400&h=250&fit=crop',
+    rating: 4.9,
+    duration: '8-10 semanas',
+    expandedContent: {
+      technologies: ['Django', 'PostgreSQL', 'Redis', 'WebSockets'],
+      deliverables: ['Marketplace', 'Panel vendors', 'Sistema pagos', 'Chat en tiempo real'],
+      process: 'Arquitectura → MVP → Funcionalidades → Testing → Despliegue'
+    }
+  }
 ];
 
 const categories = [
@@ -60,13 +138,11 @@ const Catalog = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-100">
-      {/* Textura sutil en gris claro */}
       <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.03)_1px,transparent_0)] bg-[length:28px_28px]" />
 
       <div className="relative z-10">
         <Navigation />
         
-        {/* Hero Section - igual que antes */}
         <section className="py-16 px-6 text-center">
           <div className="container mx-auto max-w-4xl">
             <Badge className="mb-4 bg-gradient-to-r from-gray-200 to-gray-300 text-gray-700 border-gray-300 backdrop-blur-sm">
@@ -84,7 +160,6 @@ const Catalog = () => {
           </div>
         </section>
 
-        {/* Category Filter - igual que antes */}
         <section className="px-6 mb-12">
           <div className="container mx-auto max-w-6xl">
             <div className="flex flex-wrap gap-3 justify-center">
@@ -112,14 +187,12 @@ const Catalog = () => {
           </div>
         </section>
 
-        {/* Services Grid - AQUÍ ESTÁ EL CAMBIO PRINCIPAL */}
         <section className="px-6 pb-24">
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredServices.map((service) => {
                 const isExpanded = expandedCards.has(service.id);
                 return (
-                  {/* DIV WRAPPER CLICKEABLE - ESTA ES LA CLAVE */}
                   <div
                     key={service.id}
                     onClick={() => toggleCardExpansion(service.id)}
@@ -132,7 +205,7 @@ const Catalog = () => {
                           src={service.image}
                           alt={service.title}
                           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                          style={{ pointerEvents: 'none' }} {/* PREVIENE INTERFERENCIA */}
+                          style={{ pointerEvents: 'none' }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                         <div className="absolute top-4 right-4 bg-black/80 text-white px-2 py-1 rounded-md text-xs flex items-center backdrop-blur-sm">
@@ -172,7 +245,6 @@ const Catalog = () => {
                             ))}
                           </div>
                           
-                          {/* Contenido expandible */}
                           {isExpanded && service.expandedContent && (
                             <div className="space-y-4 border-t pt-4 mt-4">
                               <div>
@@ -205,10 +277,9 @@ const Catalog = () => {
                             </div>
                           )}
                           
-                          {/* Botón - AQUÍ DETIENES LA PROPAGACIÓN */}
                           <Button
                             onClick={(e) => {
-                              e.stopPropagation(); // CRUCIAL: Evita que se expanda
+                              e.stopPropagation();
                               handleContact(service.title);
                             }}
                             className="w-full bg-gray-900 text-white hover:bg-gray-900/90 shadow-md hover:shadow-lg transition-all duration-300"
@@ -234,7 +305,6 @@ const Catalog = () => {
           </div>
         </section>
 
-        {/* Footer igual que antes */}
         <footer className="relative px-6 mt-16 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
           <div className="relative space-y-1 py-1">
             <MarqueeAnimation
