@@ -78,7 +78,7 @@ const Descubrir = () => {
       // Ajusta el select a tus columnas reales
       const { data, error } = await supabase
         .from("Blog")
-        .select("id,title,content,descripcion,imagenes,url,type,etiquetas,is_published,author_id,updated_at");
+        .select("id,title,content,descripción,imagenes,url,type,etiquetas,is_published,author_id,updated_at");
 
       if (error) {
         console.error("Supabase error Blog select:", error);
@@ -103,7 +103,7 @@ const Descubrir = () => {
           id: post.id,
           title: post.title || "Sin título",
           content: post.content || "",
-          description: post.descripcion || "Sin descripción disponible",
+          description: post.descripción || "Sin descripción disponible",
           imageUrl: toPublicImage(post.imagenes),
           url: post.url || "",
           type: post.type || "article",
