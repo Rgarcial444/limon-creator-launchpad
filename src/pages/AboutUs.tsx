@@ -33,12 +33,12 @@ const founder = {
     'Arquitecto de experiencias tech',
     'Innovador serial en desarrollo web'
   ],
-  bio: 'Con más de 8 años construyendo el futuro digital, he liderado equipos que han revolucionado la presencia online de más de 500 empresas. Mi misión es democratizar la tecnología, haciendo que las mejores herramientas digitales estén al alcance de todos los emprendedores.',
+  bio: 'Con más de 2 años construyendo el futuro digital, he liderado equipos que han revolucionado la presencia online. Mi misión es democratizar la tecnología, haciendo que las mejores herramientas digitales estén al alcance de todos los emprendedores.',
   background: {
-    experience: '8+ años',
-    projects: '500+',
-    clients: '150+',
-    satisfaction: '99.2%'
+    experience: '2+ años',
+    projects: '5+',
+    clients: '15+',
+    satisfaction: '99.5%'
   },
   journey: [
     {
@@ -79,7 +79,7 @@ const companyValues = [
   {
     icon: Rocket,
     title: 'Velocidad de Ejecución',
-    description: 'Convertimos ideas en productos funcionales en tiempo récord',
+    description: 'Convertimos ideas en productos funcionales y en tiempo récord',
     metric: '3x más rápido'
   },
   {
@@ -92,7 +92,7 @@ const companyValues = [
     icon: Target,
     title: 'Resultados Medibles',
     description: 'Cada línea de código genera ROI comprobable',
-    metric: '+180% conversiones'
+    metric: '+130% conversiones'
   }
 ];
 
