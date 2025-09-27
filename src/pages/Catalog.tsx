@@ -8,11 +8,12 @@ import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 
 const services = [
   {
+    
     id: 1,
     title: 'Sitio Web Corporativo',
     description: 'Diseño web profesional que refleja la identidad de tu marca con funcionalidades avanzadas.',
     category: 'web',
-    price: 'Desde $2,500 MXN',
+    price: 'Desde $1,500 MXN',
     features: ['Diseño responsivo', 'SEO optimizado', 'Panel de administración', 'Integración con redes sociales'],
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop',
     rating: 4.9,
@@ -91,7 +92,7 @@ const Catalog = () => {
 
   const handleContact = (serviceName: string) => {
     const message = `Hola! Me interesa el servicio: ${serviceName}. ¿Podrías darme más información?`;
-    const whatsappURL = `https://wa.me/5215512345678?text=${encodeURIComponent(message)}`;
+    const whatsappURL = `https://wa.me/527223145340?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, '_blank');
   };
 
