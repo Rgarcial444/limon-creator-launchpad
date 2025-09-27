@@ -246,7 +246,7 @@ const Catalog = () => {
                           </div>
                           
                           {isExpanded && service.expandedContent && (
-                            <div className="space-y-4 border-t pt-4 mt-4">
+                            <div className="space-y-4 border-t pt-4 mt-4 pb-6">
                               <div>
                                 <h4 className="text-sm font-semibold text-gray-900 mb-2">Tecnologías:</h4>
                                 <div className="flex flex-wrap gap-1">
