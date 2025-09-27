@@ -234,7 +234,7 @@ const Catalog = () => {
                         <CardDescription className="text-sm text-gray-600">{service.description}</CardDescription>
                       </CardHeader>
 
-                      <CardContent className={isExpanded ? "pb-8" : ""}>
+                      <CardContent className={isExpanded ? "pb-12" : ""}>
                         <div className="space-y-4">
                           <div className="grid grid-cols-2 gap-2">
                             {service.features.map((feature, index) => (
