@@ -2,13 +2,12 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Globe, Smartphone, Code, Zap, Star, Filter } from 'lucide-react';
+import { Globe, Smartphone, Code, Zap, Star, Filter, ChevronDown, ChevronUp } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 
 const services = [
   {
-    
     id: 1,
     title: 'Sitio Web Corporativo',
     description: 'Diseño web profesional que refleja la identidad de tu marca con funcionalidades avanzadas.',
@@ -17,7 +16,13 @@ const services = [
     features: ['Diseño responsivo', 'SEO optimizado', 'Panel de administración', 'Integración con redes sociales'],
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop',
     rating: 4.9,
-    duration: '2-3 semanas'
+    duration: '2-3 semanas',
+    // Contenido expandible
+    expandedContent: {
+      technologies: ['React', 'Next.js', 'TailwindCSS', 'Node.js'],
+      deliverables: ['Diseño mockup', 'Sitio web completo', 'Panel admin', 'Documentación'],
+      process: 'Análisis → Diseño → Desarrollo → Testing → Despliegue'
+    }
   },
   {
     id: 2,
@@ -28,7 +33,12 @@ const services = [
     features: ['Carrito de compras', 'Pagos seguros', 'Gestión de inventario', 'Panel de ventas'],
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop',
     rating: 4.8,
-    duration: '4-6 semanas'
+    duration: '4-6 semanas',
+    expandedContent: {
+      technologies: ['WooCommerce', 'Stripe', 'PayPal', 'MySQL'],
+      deliverables: ['Tienda online', 'Panel administrador', 'Sistema pagos', 'App móvil'],
+      process: 'Planificación → Desarrollo → Integración pagos → Testing → Lanzamiento'
+    }
   },
   {
     id: 3,
@@ -39,7 +49,12 @@ const services = [
     features: ['Multiplataforma', 'Push notifications', 'Modo offline', 'Integración con APIs'],
     image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=250&fit=crop',
     rating: 4.9,
-    duration: '6-8 semanas'
+    duration: '6-8 semanas',
+    expandedContent: {
+      technologies: ['React Native', 'Flutter', 'Firebase', 'MongoDB'],
+      deliverables: ['App iOS', 'App Android', 'Backend API', 'Panel control'],
+      process: 'Wireframes → Prototipo → Desarrollo → Testing → Store deployment'
+    }
   },
   {
     id: 4,
@@ -50,7 +65,12 @@ const services = [
     features: ['Conversión optimizada', 'A/B Testing', 'Analytics integrado', 'Formularios avanzados'],
     image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=250&fit=crop',
     rating: 4.7,
-    duration: '1-2 semanas'
+    duration: '1-2 semanas',
+    expandedContent: {
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Google Analytics'],
+      deliverables: ['Landing page', 'Formularios', 'Analytics setup', 'SEO básico'],
+      process: 'Brief → Diseño → Desarrollo → Optimización → Testing'
+    }
   },
   {
     id: 5,
@@ -61,7 +81,12 @@ const services = [
     features: ['Gestión de leads', 'Automatización', 'Reportes detallados', 'Integración con email'],
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop',
     rating: 4.8,
-    duration: '5-7 semanas'
+    duration: '5-7 semanas',
+    expandedContent: {
+      technologies: ['Laravel', 'Vue.js', 'MySQL', 'Redis'],
+      deliverables: ['Sistema CRM', 'Dashboard', 'Reportes', 'Integración email'],
+      process: 'Análisis → Base de datos → Frontend → Backend → Testing'
+    }
   },
   {
     id: 6,
@@ -72,7 +97,12 @@ const services = [
     features: ['Multi-vendor', 'Sistema de comisiones', 'Chat integrado', 'Gestión de disputas'],
     image: 'https://images.unsplash.com/photo-1556155092-8707de31f9c4?w=400&h=250&fit=crop',
     rating: 4.9,
-    duration: '8-10 semanas'
+    duration: '8-10 semanas',
+    expandedContent: {
+      technologies: ['Django', 'PostgreSQL', 'Redis', 'WebSockets'],
+      deliverables: ['Marketplace', 'Panel vendors', 'Sistema pagos', 'Chat en tiempo real'],
+      process: 'Arquitectura → MVP → Funcionalidades → Testing → Despliegue'
+    }
   }
 ];
 
@@ -86,6 +116,7 @@ const categories = [
 
 const Catalog = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [expandedCards, setExpandedCards] = useState(new Set());
 
   const filteredServices = services
     .filter(service => selectedCategory === 'all' || service.category === selectedCategory);
@@ -94,6 +125,16 @@ const Catalog = () => {
     const message = `Hola! Me interesa el servicio: ${serviceName}. ¿Podrías darme más información?`;
     const whatsappURL = `https://wa.me/527223145340?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, '_blank');
+  };
+
+  const toggleCardExpansion = (serviceId: number) => {
+    const newExpanded = new Set(expandedCards);
+    if (newExpanded.has(serviceId)) {
+      newExpanded.delete(serviceId);
+    } else {
+      newExpanded.add(serviceId);
+    }
+    setExpandedCards(newExpanded);
   };
 
   return (
@@ -154,60 +195,107 @@ const Catalog = () => {
         <section className="px-6 pb-24">
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredServices.map((service) => (
-                <Card
-                  key={service.id}
-                  className="group hover-lift overflow-hidden bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    <div className="absolute top-4 right-4 bg-black/80 text-white px-2 py-1 rounded-md text-xs flex items-center backdrop-blur-sm">
-                      <Star className="h-3 w-3 mr-1 fill-yellow-400 text-yellow-400" />
-                      {service.rating}
-                    </div>
-                  </div>
-                  
-                  <CardHeader>
-                    <div className="flex items-center justify-between mb-2">
-                      <Badge variant="secondary" className="text-xs bg-gray-900 text-white border-gray-900">
-                        {service.duration}
-                      </Badge>
-                      <span className="text-lg font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
-                        {service.price}
-                      </span>
-                    </div>
-                    <CardTitle className="text-xl text-gray-900">{service.title}</CardTitle>
-                    <CardDescription className="text-sm text-gray-600">{service.description}</CardDescription>
-                  </CardHeader>
-
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-2 gap-2">
-                        {service.features.map((feature, index) => (
-                          <div key={index} className="flex items-center text-xs text-gray-600">
-                            <Zap className="h-3 w-3 mr-1 text-gray-900" />
-                            {feature}
-                          </div>
-                        ))}
+              {filteredServices.map((service) => {
+                const isExpanded = expandedCards.has(service.id);
+                return (
+                  <Card
+                    key={service.id}
+                    className="group hover-lift overflow-hidden bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    onClick={() => toggleCardExpansion(service.id)}
+                  >
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      <div className="absolute top-4 right-4 bg-black/80 text-white px-2 py-1 rounded-md text-xs flex items-center backdrop-blur-sm">
+                        <Star className="h-3 w-3 mr-1 fill-yellow-400 text-yellow-400" />
+                        {service.rating}
                       </div>
-                      
-                      {/* Botón sólido, sin efecto rainbow en hover */}
-                      <Button
-                        onClick={() => handleContact(service.title)}
-                        className="w-full bg-gray-900 text-white hover:bg-gray-900/90 shadow-md hover:shadow-lg transition-all duration-300"
-                        size="sm"
-                      >
-                        Solicitar Cotización
-                      </Button>
+                      <div className="absolute top-4 left-4">
+                        {isExpanded ? (
+                          <ChevronUp className="h-5 w-5 text-white bg-black/50 rounded-full p-1" />
+                        ) : (
+                          <ChevronDown className="h-5 w-5 text-white bg-black/50 rounded-full p-1" />
+                        )}
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    
+                    <CardHeader>
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge variant="secondary" className="text-xs bg-gray-900 text-white border-gray-900">
+                          {service.duration}
+                        </Badge>
+                        <span className="text-lg font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                          {service.price}
+                        </span>
+                      </div>
+                      <CardTitle className="text-xl text-gray-900">{service.title}</CardTitle>
+                      <CardDescription className="text-sm text-gray-600">{service.description}</CardDescription>
+                    </CardHeader>
+
+                    <CardContent className={isExpanded ? "pb-8" : ""}>
+                      <div className="space-y-4">
+                        <div className="grid grid-cols-2 gap-2">
+                          {service.features.map((feature, index) => (
+                            <div key={index} className="flex items-center text-xs text-gray-600">
+                              <Zap className="h-3 w-3 mr-1 text-gray-900" />
+                              {feature}
+                            </div>
+                          ))}
+                        </div>
+                        
+                        {/* Contenido expandible */}
+                        {isExpanded && service.expandedContent && (
+                          <div className="space-y-4 border-t pt-4 mt-4">
+                            <div>
+                              <h4 className="text-sm font-semibold text-gray-900 mb-2">Tecnologías:</h4>
+                              <div className="flex flex-wrap gap-1">
+                                {service.expandedContent.technologies.map((tech, index) => (
+                                  <Badge key={index} variant="outline" className="text-xs">
+                                    {tech}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                            
+                            <div>
+                              <h4 className="text-sm font-semibold text-gray-900 mb-2">Entregables:</h4>
+                              <ul className="text-xs text-gray-600 space-y-1">
+                                {service.expandedContent.deliverables.map((item, index) => (
+                                  <li key={index} className="flex items-center">
+                                    <div className="w-1 h-1 bg-gray-400 rounded-full mr-2" />
+                                    {item}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                            
+                            <div>
+                              <h4 className="text-sm font-semibold text-gray-900 mb-2">Proceso:</h4>
+                              <p className="text-xs text-gray-600">{service.expandedContent.process}</p>
+                            </div>
+                          </div>
+                        )}
+                        
+                        {/* Botón sólido, sin efecto rainbow en hover */}
+                        <Button
+                          onClick={(e) => {
+                            e.stopPropagation(); // Evita que se expanda/contraiga al hacer click
+                            handleContact(service.title);
+                          }}
+                          className="w-full bg-gray-900 text-white hover:bg-gray-900/90 shadow-md hover:shadow-lg transition-all duration-300"
+                          size="sm"
+                        >
+                          Solicitar Cotización
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
 
             {filteredServices.length === 0 && (
