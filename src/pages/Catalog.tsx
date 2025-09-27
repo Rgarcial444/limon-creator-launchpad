@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Globe, Smartphone, Code, Zap, Star, Filter } from 'lucide-react';
+import { RainbowButton } from '@/components/ui/rainbow-button';
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 
@@ -96,27 +97,28 @@ const Catalog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-100">
-      {/* Textura sutil en gris claro */}
-      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.03)_1px,transparent_0)] bg-[length:28px_28px]" />
-
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Fondo animado con patrones sutiles */}
+      <div className="fixed inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/5 to-cyan-900/10 pointer-events-none" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.05)_1px,transparent_0)] bg-[length:32px_32px] pointer-events-none" />
+      
       <div className="relative z-10">
         <Navigation />
         
         {/* Hero Section */}
         <section className="py-16 px-6 text-center">
           <div className="container mx-auto max-w-4xl">
-            <Badge className="mb-4 bg-gradient-to-r from-gray-200 to-gray-300 text-gray-700 border-gray-300 backdrop-blur-sm">
+            <Badge className="mb-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border-cyan-500/30 backdrop-blur-sm">
               Catálogo de Servicios
             </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               Soluciones Digitales
-              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-gray-700 via-gray-900 to-gray-700">
+              <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 Para Tu Negocio
               </span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Muy pronto más noticias, espéralas.
+            <p className="text-xl text-slate-300 mb-8 leading-relaxed" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
+              Muy pronto más noticias, esperalas.
             </p>
           </div>
         </section>
@@ -127,17 +129,16 @@ const Catalog = () => {
             <div className="flex flex-wrap gap-3 justify-center">
               {categories.map((category) => {
                 const Icon = category.icon;
-                const active = selectedCategory === category.id;
                 return (
                   <Button
                     key={category.id}
-                    variant={active ? 'default' : 'outline'}
+                    variant={selectedCategory === category.id ? 'default' : 'outline'}
                     size="lg"
                     onClick={() => setSelectedCategory(category.id)}
                     className={`text-sm transition-all duration-300 ${
-                      active
-                        ? 'bg-gray-900 text-white border-gray-900 shadow-lg hover:shadow-xl'
-                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100 hover:text-gray-900'
+                      selectedCategory === category.id
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-transparent shadow-xl hover:shadow-2xl'
+                        : 'bg-white/10 text-slate-300 border-white/20 hover:bg-white/20 hover:text-white backdrop-blur-sm'
                     }`}
                   >
                     <Icon className="h-4 w-4 mr-2" />
@@ -149,22 +150,19 @@ const Catalog = () => {
           </div>
         </section>
 
-        {/* Services Grid */}
+        {/* Services Grid con más espacio */}
         <section className="px-6 pb-24">
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredServices.map((service) => (
-                <Card
-                  key={service.id}
-                  className="group hover-lift overflow-hidden bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300"
-                >
+                <Card key={service.id} className="group hover-lift overflow-hidden bg-white/10 border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 backdrop-blur-md hover:bg-white/15">
                   <div className="relative overflow-hidden">
                     <img
                       src={service.image}
                       alt={service.title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     <div className="absolute top-4 right-4 bg-black/80 text-white px-2 py-1 rounded-md text-xs flex items-center backdrop-blur-sm">
                       <Star className="h-3 w-3 mr-1 fill-yellow-400 text-yellow-400" />
                       {service.rating}
@@ -173,43 +171,35 @@ const Catalog = () => {
                   
                   <CardHeader>
                     <div className="flex items-center justify-between mb-2">
-                      <Badge variant="secondary" className="text-xs bg-gray-900 text-white border-gray-900">
+                      <Badge  variant="secondary" className="text-xs bg-gradient-to-r from-slate-800/80 to-slate-700/80 text-white border-slate-600/50 backdrop-blur-sm">
                         {service.duration}
                       </Badge>
-                      <span className="text-lg font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                      <span className="text-lg font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                         {service.price}
                       </span>
                     </div>
-                    <CardTitle className="text-xl text-gray-900">{service.title}</CardTitle>
-                    <CardDescription className="text-sm text-gray-600">{service.description}</CardDescription>
+                    <CardTitle className="text-xl text-white">{service.title}</CardTitle>
+                    <CardDescription className="text-sm text-slate-300">{service.description}</CardDescription>
                   </CardHeader>
 
                   <CardContent>
                     <div className="space-y-4">
                       <div className="grid grid-cols-2 gap-2">
                         {service.features.map((feature, index) => (
-                          <div key={index} className="flex items-center text-xs text-gray-600">
-                            <Zap className="h-3 w-3 mr-1 text-gray-900" />
+                          <div key={index} className="flex items-center text-xs text-slate-400">
+                            <Zap className="h-3 w-3 mr-1 text-cyan-400" />
                             {feature}
                           </div>
                         ))}
                       </div>
                       
-                      {/* Botón negro con halo rainbow */}
-                      <button
+                      <RainbowButton
                         onClick={() => handleContact(service.title)}
-                        className="relative w-full rounded-md px-4 py-2 text-sm font-medium text-white bg-gray-900 transition-transform duration-300 hover:scale-[1.01] active:scale-[0.99]"
+                        className="w-full !bg-gradient-to-r from-cyan-500 to-blue-500 !text-white hover:from-cyan-600 hover:to-blue-600 shadow-lg hover:shadow-xl transition-all duration-300"
+                        size="sm"
                       >
-                        <span className="relative z-10">Solicitar Cotización</span>
-                        {/* Halo rainbow como sombra externa */}
-                        <span
-                          aria-hidden="true"
-                          className="pointer-events-none absolute inset-[-2px] -z-0 rounded-md opacity-70 blur-[6px]"
-                          style={{
-                            background: 'conic-gradient(from 0deg, #06b6d4, #3b82f6, #8b5cf6, #ec4899, #f97316, #eab308, #06b6d4)'
-                          }}
-                        />
-                      </button>
+                        Solicitar Cotización
+                      </RainbowButton>
                     </div>
                   </CardContent>
                 </Card>
@@ -218,15 +208,15 @@ const Catalog = () => {
 
             {filteredServices.length === 0 && (
               <div className="text-center py-16">
-                <Filter className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">No se encontraron servicios</h3>
-                <p className="text-gray-600">Prueba ajustando los filtros de búsqueda</p>
+                <Filter className="h-16 w-16 text-slate-500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2 text-white">No se encontraron servicios</h3>
+                <p className="text-slate-400">Prueba ajustando los filtros de búsqueda</p>
               </div>
             )}
           </div>
         </section>
 
-        {/* Marquee Effect Footer - Minimalista Cyan para contraste */}
+        {/* Marquee Effect Footer - Estilo Minimalista Cyan */}
         <footer className="relative px-6 mt-16 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
           <div className="relative space-y-1 py-1">
             <MarqueeAnimation
@@ -246,7 +236,7 @@ const Catalog = () => {
               className="text-xs md:text-sm py-0.5"
               style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
             >
-              <span className="text-slate-400 font-normal">
+              <span className="text-slate-500 font-normal">
                 TECNOLOGÍA • DISEÑO • SOLUCIONES • CREATIVIDAD • RESULTADOS
               </span>
             </MarqueeAnimation>
