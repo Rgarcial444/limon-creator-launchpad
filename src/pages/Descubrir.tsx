@@ -27,9 +27,11 @@ interface BlogPost {
   url?: string;
   type: string;
   etiquetas: string;
-  created_at: string;
+  // created_at eliminado del modelo
   is_published: boolean;
   author_id?: string;
+  // Si en el futuro agregas updated_at, lo tratamos como opcional:
+  updated_at?: string | null;
 }
 
 const IMAGE_BUCKET = "imagenes limoniocreators";
@@ -42,12 +44,12 @@ const toPublicImage = (path?: string) => {
   return data?.publicUrl || FALLBACK_IMG;
 };
 
-const formatDate = (dateString: string) =>
-  new Date(dateString).toLocaleDateString("es-ES", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+const formatMaybeDate = (d?: string | null) => {
+  if (!d) return null;
+  const date = new Date(d);
+  if (isNaN(date.getTime())) return null;
+  return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
+};
 
 const getReadingTime = (content: string) => {
   if (!content) return 1;
@@ -73,21 +75,31 @@ const Descubrir = () => {
   const fetchBlogPosts = useCallback(async () => {
     setRefreshing(true);
     try {
+      // Ajusta el select a tus columnas reales
       const { data, error } = await supabase
         .from("Blog")
-        .select(
-          "id,title,content,descripción,imagenes,url,type,etiquetas,created_at,is_published,author_id"
-        )
-        .eq("is_published", true)
-        .order("created_at", { ascending: false });
+        .select("id,title,content,descripción,imagenes,url,type,etiquetas,is_published,author_id,updated_at");
 
       if (error) {
-        console.error("Error fetching blog posts:", error);
+        console.error("Supabase error Blog select:", error);
+        setPosts([]);
         return;
       }
 
-      const transformed: BlogPost[] =
-        data?.map((post: any) => ({
+      // Orden de fallback: por id desc (más reciente por id mayor)
+      const sorted = (data || []).sort((a: any, b: any) => {
+        // Si tienes updated_at, usa eso primero
+        if (a.updated_at && b.updated_at) {
+          const da = new Date(a.updated_at).getTime();
+          const db = new Date(b.updated_at).getTime();
+          if (!isNaN(da) && !isNaN(db) && db !== da) return db - da;
+        }
+        return (b?.id || 0) - (a?.id || 0);
+      });
+
+      const transformed: BlogPost[] = sorted
+        .filter((row: any) => row.is_published === true) // aplica filtro en cliente
+        .map((post: any) => ({
           id: post.id,
           title: post.title || "Sin título",
           content: post.content || "",
@@ -96,14 +108,15 @@ const Descubrir = () => {
           url: post.url || "",
           type: post.type || "article",
           etiquetas: post.etiquetas || "",
-          created_at: post.created_at,
-          is_published: post.is_published,
+          is_published: !!post.is_published,
           author_id: post.author_id || undefined,
-        })) || [];
+          updated_at: post.updated_at ?? null,
+        }));
 
       setPosts(transformed);
     } catch (e) {
-      console.error("Error:", e);
+      console.error("Error inesperado:", e);
+      setPosts([]);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -114,7 +127,6 @@ const Descubrir = () => {
     fetchBlogPosts();
   }, [fetchBlogPosts]);
 
-  // Búsqueda simple
   const filtered = useMemo(() => {
     const term = q.trim().toLowerCase();
     if (!term) return posts;
@@ -244,10 +256,18 @@ const Descubrir = () => {
 
                     <div className="mt-auto flex items-center justify-between text-xs text-muted-foreground">
                       <div className="flex items-center gap-3">
-                        <span className="inline-flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {formatDate(featured.created_at)}
-                        </span>
+                        {/* Si hay updated_at, mostramos fecha; si no, mostramos identificador */}
+                        {featured.updated_at ? (
+                          <span className="inline-flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            {formatMaybeDate(featured.updated_at)}
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            Post #{featured.id}
+                          </span>
+                        )}
                         {featured.content && (
                           <span className="inline-flex items-center gap-1">
                             <Clock className="w-4 h-4" />
@@ -342,10 +362,17 @@ const Descubrir = () => {
 
                       <div className="mt-auto flex items-center justify-between text-xs text-muted-foreground">
                         <div className="inline-flex items-center gap-3">
-                          <span className="inline-flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
-                            {formatDate(post.created_at)}
-                          </span>
+                          {post.updated_at ? (
+                            <span className="inline-flex items-center gap-1">
+                              <Calendar className="w-4 h-4" />
+                              {formatMaybeDate(post.updated_at)}
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1">
+                              <Calendar className="w-4 h-4" />
+                              Post #{post.id}
+                            </span>
+                          )}
                           {post.content && (
                             <span className="inline-flex items-center gap-1">
                               <Clock className="w-4 h-4" />
@@ -378,7 +405,7 @@ const Descubrir = () => {
         </section>
       </main>
 
-      {/* Modal de vista previa */}
+      {/* Modal */}
       {selectedPost && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -433,10 +460,17 @@ const Descubrir = () => {
                 {selectedPost.title}
               </h1>
               <div className="flex items-center gap-4 text-xs md:text-sm text-muted-foreground mb-4">
-                <span className="inline-flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
-                  {formatDate(selectedPost.created_at)}
-                </span>
+                {selectedPost.updated_at ? (
+                  <span className="inline-flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    {formatMaybeDate(selectedPost.updated_at)}
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    Post #{selectedPost.id}
+                  </span>
+                )}
                 {selectedPost.content && (
                   <span className="inline-flex items-center gap-1">
                     <Clock className="w-4 h-4" />
