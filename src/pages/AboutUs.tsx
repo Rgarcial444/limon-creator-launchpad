@@ -69,9 +69,9 @@ const founder = {
   ],
   expertise: [
     { skill: 'Team Leadership', level: 95 },
-    { skill: 'yClient Relations', level: 90 },
+    { skill: 'Client Relations', level: 90 },
     { skill: 'Full Stack Development', level: 88 },
-    { skill: 'Product Strateg', level: 92 }
+    { skill: 'Product Strategy', level: 92 }
   ]
 };
 
