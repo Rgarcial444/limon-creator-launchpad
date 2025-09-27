@@ -19,7 +19,7 @@ const Hero = () => {
 
   return (
     <>
-      {/* HERO SECTION ORIGINAL */}
+      {/* HERO SECTION */}
       <div className="relative h-screen overflow-hidden">
         <ImagesSlider 
           className="h-screen brightness-125 saturate-150 contrast-110" 
@@ -31,17 +31,9 @@ const Hero = () => {
           <Navigation />
 
           <motion.div
-            initial={{
-              opacity: 0,
-              y: -80,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.6,
-            }}
+            initial={{ opacity: 0, y: -80 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             className="z-50 flex flex-col justify-center items-center text-center px-6 relative"
           >
             <motion.h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-center text-white py-4 leading-tight drop-shadow-2xl">
@@ -101,48 +93,44 @@ const Hero = () => {
         </ImagesSlider>
       </div>
 
-      {/* SECCIÓN CTA AGRESIVA COMERCIAL - FONDO BLANCO/GRIS */}
+      {/* SECCIÓN INTERMEDIA - PROPUESTA A */}
       <section className="py-24 bg-gradient-to-br from-gray-100 via-white to-gray-200">
         <div className="container mx-auto px-6 text-center">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              ¿Listo para el siguiente nivel?
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Respuesta en menos de cinco minutos.
             </h2>
-            <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-              No pierdas más tiempo con soluciones mediocres. 
-              <span className="text-blue-600 font-semibold"> Tu competencia ya está online.</span>
+            <p className="text-xl text-gray-700 mb-10">
+              Sin costos ocultos. Sin vueltas.
             </p>
             
-            <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+              <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="text-2xl mb-3">✅</div>
+                <h3 className="text-gray-900 font-bold text-lg mb-2">Diseño que inspira confianza</h3>
+                <p className="text-gray-600 text-sm">Interfaces claras y modernas que generan credibilidad y mejoran la conversión.</p>
+              </div>
+              <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="text-2xl mb-3">⚡</div>
+                <h3 className="text-gray-900 font-bold text-lg mb-2">Implementación rápida</h3>
+                <p className="text-gray-600 text-sm">Lanza en días, no en meses, con procesos simples y sin fricción.</p>
+              </div>
+              <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="text-2xl mb-3">💰</div>
+                <h3 className="text-gray-900 font-bold text-lg mb-2">Precio fijo</h3>
+                <p className="text-gray-600 text-sm">Presupuesto claro desde el inicio, sin sorpresas ni cargos escondidos.</p>
+              </div>
+            </div>
+
+            <div className="mt-10">
               <RainbowButton 
                 size="lg" 
                 onClick={handleWhatsAppContact}
-                className="!bg-gradient-to-r from-blue-600 to-cyan-600 !text-white shadow-2xl hover:shadow-xl hover:scale-105 transition-all duration-300"
+                className="!bg-gradient-to-r from-blue-600 to-cyan-600 !text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
-                Empezar Ahora
+                Empezar ahora
               </RainbowButton>
-              <p className="text-gray-600 text-sm font-medium">
-                🔥 Respuesta en menos de 5 minutos
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
-                <div className="text-3xl mb-3">⚡</div>
-                <h3 className="text-gray-900 font-bold text-lg mb-2">Setup Rápido</h3>
-                <p className="text-gray-600 text-sm">Tu sitio listo en 1-2 semanas</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
-                <div className="text-3xl mb-3">💰</div>
-                <h3 className="text-gray-900 font-bold text-lg mb-2">Sin Sorpresas</h3>
-                <p className="text-gray-600 text-sm">Precio fijo desde el inicio</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
-                <div className="text-3xl mb-3">🎯</div>
-                <h3 className="text-gray-900 font-bold text-lg mb-2">Garantía</h3>
-                <p className="text-gray-600 text-sm">100% satisfacción o tu dinero de vuelta</p>
-              </div>
             </div>
           </div>
         </div>
