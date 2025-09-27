@@ -3,7 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Globe, Smartphone, Code, Zap, Star, Filter } from 'lucide-react';
-import { RainbowButton } from '@/components/ui/rainbow-button';
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 
@@ -196,13 +195,14 @@ const Catalog = () => {
                         ))}
                       </div>
                       
-                      <RainbowButton
+                      {/* Botón sólido, sin efecto rainbow en hover */}
+                      <Button
                         onClick={() => handleContact(service.title)}
-                        className="w-full !bg-gray-900 !text-white hover:opacity-90 shadow-md hover:shadow-lg transition-all duration-300"
+                        className="w-full bg-gray-900 text-white hover:bg-gray-900/90 shadow-md hover:shadow-lg transition-all duration-300"
                         size="sm"
                       >
                         Solicitar Cotización
-                      </RainbowButton>
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
