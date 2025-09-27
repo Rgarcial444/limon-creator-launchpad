@@ -27,8 +27,10 @@ interface BlogPost {
   url?: string;
   type: string;
   etiquetas: string;
+  // created_at eliminado del modelo
   is_published: boolean;
   author_id?: string;
+  // Si en el futuro agregas updated_at, lo tratamos como opcional:
   updated_at?: string | null;
 }
 
@@ -73,10 +75,10 @@ const Descubrir = () => {
   const fetchBlogPosts = useCallback(async () => {
     setRefreshing(true);
     try {
-      // CORREGIDO: Usar nombres exactos de columnas sin acentos
+      // Ajusta el select a tus columnas reales
       const { data, error } = await supabase
         .from("Blog")
-        .select("id, title, content, descripcion, imagenes, url, type, etiquetas, is_published, author_id, updated_at");
+        .select("id,title,content,descripcion,imagenes,url,type,etiquetas,is_published,author_id,updated_at");
 
       if (error) {
         console.error("Supabase error Blog select:", error);
@@ -84,10 +86,9 @@ const Descubrir = () => {
         return;
       }
 
-      // Debug: verificar qué datos llegan
-      console.log("Datos recibidos de Supabase:", data);
-
+      // Orden de fallback: por id desc (más reciente por id mayor)
       const sorted = (data || []).sort((a: any, b: any) => {
+        // Si tienes updated_at, usa eso primero
         if (a.updated_at && b.updated_at) {
           const da = new Date(a.updated_at).getTime();
           const db = new Date(b.updated_at).getTime();
@@ -97,33 +98,20 @@ const Descubrir = () => {
       });
 
       const transformed: BlogPost[] = sorted
-        .filter((row: any) => row.is_published === true)
-        .map((post: any) => {
-          // CORREGIDO: Mapear correctamente descripcion a description
-          const mappedPost = {
-            id: post.id,
-            title: post.title || "Sin título",
-            content: post.content || "",
-            description: post.descripcion || "Sin descripción disponible",
-            imageUrl: toPublicImage(post.imagenes),
-            url: post.url || "",
-            type: post.type || "article",
-            etiquetas: post.etiquetas || "",
-            is_published: !!post.is_published,
-            author_id: post.author_id || undefined,
-            updated_at: post.updated_at ?? null,
-          };
-          
-          // Debug: verificar el mapeo
-          console.log("Post mapeado:", {
-            id: mappedPost.id,
-            title: mappedPost.title,
-            description: mappedPost.description,
-            original_descripcion: post.descripcion
-          });
-          
-          return mappedPost;
-        });
+        .filter((row: any) => row.is_published === true) // aplica filtro en cliente
+        .map((post: any) => ({
+          id: post.id,
+          title: post.title || "Sin título",
+          content: post.content || "",
+          description: post.descripcion || "Sin descripción disponible",
+          imageUrl: toPublicImage(post.imagenes),
+          url: post.url || "",
+          type: post.type || "article",
+          etiquetas: post.etiquetas || "",
+          is_published: !!post.is_published,
+          author_id: post.author_id || undefined,
+          updated_at: post.updated_at ?? null,
+        }));
 
       setPosts(transformed);
     } catch (e) {
@@ -268,6 +256,7 @@ const Descubrir = () => {
 
                     <div className="mt-auto flex items-center justify-between text-xs text-muted-foreground">
                       <div className="flex items-center gap-3">
+                        {/* Si hay updated_at, mostramos fecha; si no, mostramos identificador */}
                         {featured.updated_at ? (
                           <span className="inline-flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
@@ -490,25 +479,16 @@ const Descubrir = () => {
                 )}
               </div>
 
-              {/* CORREGIDO: Priorizar description en la modal si existe */}
               <div className="prose prose-neutral dark:prose-invert max-w-none">
-                {selectedPost.description && selectedPost.description !== "Sin descripción disponible" ? (
-                  <div className="text-base leading-relaxed mb-6">
-                    <strong>Descripción:</strong>
-                    <br />
-                    {selectedPost.description}
-                  </div>
-                ) : null}
-                
                 {selectedPost.content ? (
                   <div className="whitespace-pre-wrap text-base leading-relaxed">
                     {selectedPost.content}
                   </div>
-                ) : selectedPost.description === "Sin descripción disponible" ? (
-                  <div className="text-muted-foreground text-center py-8">
-                    No hay contenido disponible para este artículo.
+                ) : (
+                  <div className="text-base leading-relaxed">
+                    {selectedPost.description}
                   </div>
-                ) : null}
+                )}
               </div>
             </div>
           </div>
