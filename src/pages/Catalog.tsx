@@ -3,7 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Globe, Smartphone, Code, Zap, Star, Filter } from 'lucide-react';
-import { RainbowButton } from '@/components/ui/rainbow-button';
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 
@@ -196,13 +195,21 @@ const Catalog = () => {
                         ))}
                       </div>
                       
-                      <RainbowButton
+                      {/* Botón negro con halo rainbow */}
+                      <button
                         onClick={() => handleContact(service.title)}
-                        className="w-full !bg-gray-900 !text-white hover:opacity-90 shadow-md hover:shadow-lg transition-all duration-300"
-                        size="sm"
+                        className="relative w-full rounded-md px-4 py-2 text-sm font-medium text-white bg-gray-900 transition-transform duration-300 hover:scale-[1.01] active:scale-[0.99]"
                       >
-                        Solicitar Cotización
-                      </RainbowButton>
+                        <span className="relative z-10">Solicitar Cotización</span>
+                        {/* Halo rainbow como sombra externa */}
+                        <span
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-[-2px] -z-0 rounded-md opacity-70 blur-[6px]"
+                          style={{
+                            background: 'conic-gradient(from 0deg, #06b6d4, #3b82f6, #8b5cf6, #ec4899, #f97316, #eab308, #06b6d4)'
+                          }}
+                        />
+                      </button>
                     </div>
                   </CardContent>
                 </Card>
