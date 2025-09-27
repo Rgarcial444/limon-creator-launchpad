@@ -27,7 +27,7 @@ const founder = {
   role: 'Fundador',
   location: 'Toluca/CDMX, México',
   email: 'Limon_50@hotmail.com',
-  image: '/src/assets/ricardo-portrait.jpg',
+  image: 'https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/myphoto.png',
   taglines: [
     'Transformando ideas en realidades digitales',
     'Arquitecto de experiencias tech',
