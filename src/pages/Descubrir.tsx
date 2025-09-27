@@ -11,9 +11,9 @@ import {
   Clock,
   BookOpen,
   X,
-  Hash,
   ArrowRight,
   RefreshCw,
+  Search,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -62,27 +62,21 @@ const parseTags = (etiquetas: string) =>
         .filter(Boolean)
     : [];
 
-const EmptyState = ({ message }: { message: string }) => (
-  <div className="text-center py-20">
-    <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-    <h2 className="text-2xl font-semibold mb-3">Nada por aquí… aún</h2>
-    <p className="text-muted-foreground">{message}</p>
-  </div>
-);
-
 const Descubrir = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [refreshing, setRefreshing] = useState(false);
+  const [q, setQ] = useState("");
 
   const fetchBlogPosts = useCallback(async () => {
     setRefreshing(true);
     try {
       const { data, error } = await supabase
         .from("Blog")
-        .select("id,title,content,descripción,imagenes,url,type,etiquetas,created_at,is_published,author_id")
+        .select(
+          "id,title,content,descripción,imagenes,url,type,etiquetas,created_at,is_published,author_id"
+        )
         .eq("is_published", true)
         .order("created_at", { ascending: false });
 
@@ -119,16 +113,28 @@ const Descubrir = () => {
     fetchBlogPosts();
   }, [fetchBlogPosts]);
 
-  const categories = useMemo(() => {
-    const set = new Set<string>();
-    posts.forEach((p) => parseTags(p.etiquetas).forEach((t) => set.add(t)));
-    return Array.from(set).sort((a, b) => a.localeCompare(b, "es"));
-  }, [posts]);
+  // Búsqueda simple (título, descripción, etiquetas, contenido)
+  const filtered = useMemo(() => {
+    const term = q.trim().toLowerCase();
+    if (!term) return posts;
+    return posts.filter((p) => {
+      const haystack = [
+        p.title,
+        p.description,
+        p.etiquetas,
+        p.content?.slice(0, 500), // limitar para rendimiento
+      ]
+        .join(" ")
+        .toLowerCase();
+      return haystack.includes(term);
+    });
+  }, [posts, q]);
 
-  const filteredPosts = useMemo(() => {
-    if (selectedCategory === "all") return posts;
-    return posts.filter((p) => parseTags(p.etiquetas).includes(selectedCategory));
-  }, [posts, selectedCategory]);
+  // Destacar el más reciente y listar el resto
+  const [featured, others] = useMemo(() => {
+    if (!filtered.length) return [null, [] as BlogPost[]];
+    return [filtered[0], filtered.slice(1)];
+  }, [filtered]);
 
   const handlePostClick = (post: BlogPost) => {
     if (post.url && post.url.trim() !== "") {
@@ -156,93 +162,144 @@ const Descubrir = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       <main className="pt-16">
-        {/* Hero */}
-        <section className="py-14 px-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-secondary/10 border-b">
-          <div className="container mx-auto max-w-5xl text-center">
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-5">
-              <BookOpen className="w-4 h-4" /> Blog
+        {/* Hero compacto con búsqueda */}
+        <section className="py-10 px-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-secondary/10 border-b">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center">
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+                <BookOpen className="w-4 h-4" />
+                Blog
+              </div>
+              <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+                Descubrir
+              </h1>
+              <p className="text-base md:text-lg text-muted-foreground mt-3">
+                Lecturas sobre tecnología útil, clara y humana.
+              </p>
             </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-              Descubrir
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Artículos, experimentos y reflexiones sobre tecnología útil, clara y humana.
-            </p>
-            <div className="mt-6 flex items-center justify-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="rounded-full"
-                onClick={() => fetchBlogPosts()}
-                disabled={refreshing}
-              >
-                <RefreshCw className={cn("w-4 h-4 mr-2", refreshing && "animate-spin")} />
-                Actualizar
-              </Button>
-            </div>
-          </div>
-        </section>
 
-        {/* Filtros */}
-        <section className="py-6 px-4 sticky top-16 z-10 bg-background/70 backdrop-blur supports-[backdrop-filter]:bg-background/50 border-b">
-          <div className="container mx-auto max-w-5xl">
-            <div className="flex flex-wrap gap-2 justify-center">
-              <Button
-                variant={selectedCategory === "all" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setSelectedCategory("all")}
-                className="rounded-full"
-              >
-                Todos
-              </Button>
-              {categories.map((category) => (
+            {/* Buscador */}
+            <div className="mt-6 mx-auto max-w-2xl">
+              <div className="relative">
+                <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  type="search"
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  placeholder="Buscar por título, tema o palabra clave…"
+                  className="w-full pl-10 pr-28 h-11 rounded-full bg-card/60 border border-primary/20 focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                />
                 <Button
-                  key={category}
-                  variant={selectedCategory === category ? "default" : "outline"}
+                  variant="outline"
                   size="sm"
-                  onClick={() => setSelectedCategory(category)}
-                  className="rounded-full"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full"
+                  onClick={() => fetchBlogPosts()}
+                  disabled={refreshing}
                 >
-                  <Hash className="w-3 h-3 mr-1" />
-                  {category}
+                  <RefreshCw className={cn("w-4 h-4", refreshing && "animate-spin")} />
                 </Button>
-              ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Grid de posts */}
+        {/* Post destacado */}
+        <section className="px-4 pt-8">
+          <div className="container mx-auto max-w-6xl">
+            {!featured ? (
+              <div className="py-20 text-center text-muted-foreground">
+                No hay artículos publicados aún.
+              </div>
+            ) : (
+              <Card
+                className="group overflow-hidden rounded-2xl border border-primary/20 bg-card/60 backdrop-blur-sm hover:border-primary/40 transition-all"
+                onClick={() => handlePostClick(featured)}
+              >
+                <div className="grid md:grid-cols-2 gap-0">
+                  <div className="relative h-56 md:h-full">
+                    <img
+                      src={featured.imageUrl}
+                      alt={featured.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) =>
+                        ((e.currentTarget as HTMLImageElement).src = FALLBACK_IMG)
+                      }
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    {featured.url && (
+                      <div className="absolute top-3 right-3">
+                        <div className="bg-black/45 backdrop-blur-sm rounded-full p-2">
+                          <ExternalLink className="w-4 h-4 text-white" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-6 md:p-8 flex flex-col gap-4">
+                    {/* Etiquetas (máx 3) */}
+                    {parseTags(featured.etiquetas).length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {parseTags(featured.etiquetas)
+                          .slice(0, 3)
+                          .map((tag, i) => (
+                            <Badge key={i} variant="secondary" className="text-xs">
+                              {tag}
+                            </Badge>
+                          ))}
+                      </div>
+                    )}
+                    <h2 className="text-2xl md:text-3xl font-bold leading-tight">
+                      {featured.title}
+                    </h2>
+                    <p className="text-sm md:text-base text-muted-foreground line-clamp-4">
+                      {featured.description}
+                    </p>
+                    <div className="mt-auto flex items-center justify-between text-xs text-muted-foreground">
+                      <div className="flex items-center gap-3">
+                        <span className="inline-flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          {formatDate(featured.created_at)}
+                        </span>
+                        {featured.content && (
+                          <span className="inline-flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            {getReadingTime(featured.content)} min
+                          </span>
+                        )}
+                      </div>
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            )}
+          </div>
+        </section>
+
+        {/* Grid del resto */}
         <section className="py-10 px-4">
           <div className="container mx-auto max-w-6xl">
-            {filteredPosts.length === 0 ? (
-              <EmptyState
-                message={
-                  selectedCategory === "all"
-                    ? "Pronto publicaremos contenido interesante."
-                    : `No hay artículos en la categoría “${selectedCategory}”.`
-                }
-              />
-            ) : (
-              <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {filteredPosts.map((post) => (
+            {others.length === 0 ? null : (
+              <div className="grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {others.map((post) => (
                   <Card
                     key={post.id}
                     className="group cursor-pointer overflow-hidden transition-all duration-300 border border-primary/10 hover:border-primary/30 hover:shadow-[0_0_0_1px_rgba(var(--primary),0.2)] bg-card/60 backdrop-blur-sm rounded-2xl"
                     onClick={() => handlePostClick(post)}
                   >
-                    {/* Imagen */}
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-44">
                       <img
                         src={post.imageUrl}
                         alt={post.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = FALLBACK_IMG;
-                        }}
                         loading="lazy"
                         decoding="async"
+                        onError={(e) =>
+                          ((e.currentTarget as HTMLImageElement).src = FALLBACK_IMG)
+                        }
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
                       {post.url && (
                         <div className="absolute top-3 right-3">
                           <div className="bg-black/45 backdrop-blur-sm rounded-full p-2">
@@ -252,34 +309,28 @@ const Descubrir = () => {
                       )}
                     </div>
 
-                    {/* Contenido */}
-                    <div className="p-5 flex flex-col gap-4">
-                      {/* Tags */}
+                    <div className="p-5 flex flex-col gap-3">
                       {parseTags(post.etiquetas).length > 0 && (
                         <div className="flex flex-wrap gap-2">
                           {parseTags(post.etiquetas)
-                            .slice(0, 3)
+                            .slice(0, 2)
                             .map((tag, idx) => (
-                              <Badge key={idx} variant="secondary" className="text-xs">
+                              <Badge key={idx} variant="secondary" className="text-[10px]">
                                 {tag}
                               </Badge>
                             ))}
                         </div>
                       )}
 
-                      {/* Título */}
-                      <h2 className="text-xl font-bold leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+                      <h3 className="text-lg font-semibold leading-tight line-clamp-2 group-hover:text-primary transition-colors">
                         {post.title}
-                      </h2>
-
-                      {/* Descripción */}
+                      </h3>
                       <p className="text-sm text-muted-foreground line-clamp-3">
                         {post.description}
                       </p>
 
-                      {/* Meta */}
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <div className="flex items-center gap-3">
+                      <div className="mt-auto flex items-center justify-between text-xs text-muted-foreground">
+                        <div className="inline-flex items-center gap-3">
                           <span className="inline-flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
                             {formatDate(post.created_at)}
@@ -302,7 +353,7 @@ const Descubrir = () => {
         </section>
       </main>
 
-      {/* Modal de artículo */}
+      {/* Modal */}
       {selectedPost && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -310,7 +361,6 @@ const Descubrir = () => {
           aria-modal="true"
         >
           <div className="bg-background rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-primary/20">
-            {/* Header */}
             <div className="p-4 md:p-6 border-b flex items-center justify-between">
               <div className="flex flex-wrap gap-2">
                 {parseTags(selectedPost.etiquetas).map((tag, index) => (
@@ -324,7 +374,6 @@ const Descubrir = () => {
               </Button>
             </div>
 
-            {/* Imagen destacada */}
             {selectedPost.imageUrl !== FALLBACK_IMG && (
               <div className="h-56 md:h-64 overflow-hidden">
                 <img
@@ -335,7 +384,6 @@ const Descubrir = () => {
               </div>
             )}
 
-            {/* Contenido */}
             <div className="p-4 md:p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
               <h1 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">{selectedPost.title}</h1>
               <div className="flex items-center gap-4 text-xs md:text-sm text-muted-foreground mb-4">
