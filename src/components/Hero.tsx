@@ -34,10 +34,10 @@ const Hero = () => {
             className="z-50 flex flex-col justify-center items-center text-center px-6 relative"
           >
             <motion.h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-center text-white py-4 leading-tight drop-shadow-2xl">
-              Dale Vida a Tu Marca
+              Desarrollo Web Profesional
               <br />
               <span className="text-xl md:text-3xl lg:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400">
-                Creatividad sin Límites
+                Dale Vida a Tu Marca Digital
               </span>
             </motion.h1>
             
@@ -78,12 +78,12 @@ const Hero = () => {
       <section className="py-24 bg-gradient-to-br from-gray-100 via-white to-gray-200">
         <div className="container mx-auto px-6 text-center">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Respuesta en menos de cinco minutos.
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+              Respuesta en menos de cinco minutos
             </h2>
-            <p className="text-xl text-gray-700 mb-6 md:mb-8">
+            <h3 className="text-lg md:text-xl text-gray-700 mb-6 md:mb-8 font-semibold">
               Sin costos ocultos. Sin vueltas.
-            </p>
+            </h3>
             
             <div className="mt-5 md:mt-6 mb-10 md:mb-12 flex justify-center">
               <Link to="/catalogo" className="inline-block">
@@ -96,22 +96,22 @@ const Hero = () => {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-              <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300">
-                <div className="text-2xl mb-3">✅</div>
-                <h3 className="text-gray-900 font-bold text-lg mb-2">Diseño que inspira confianza</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-left">
+              <article className="bg-white/90 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="text-2xl mb-3" aria-hidden="true">✅</div>
+                <h3 className="text-gray-900 font-bold text-base md:text-lg mb-2">Diseño que inspira confianza</h3>
                 <p className="text-gray-600 text-sm">Interfaces claras y modernas que generan credibilidad y mejoran la conversión.</p>
-              </div>
-              <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300">
-                <div className="text-2xl mb-3">⚡</div>
-                <h3 className="text-gray-900 font-bold text-lg mb-2">Implementación rápida</h3>
+              </article>
+              <article className="bg-white/90 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="text-2xl mb-3" aria-hidden="true">⚡</div>
+                <h3 className="text-gray-900 font-bold text-base md:text-lg mb-2">Implementación rápida</h3>
                 <p className="text-gray-600 text-sm">Lanza en días, no en meses, con procesos simples y sin fricción.</p>
-              </div>
-              <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300">
-                <div className="text-2xl mb-3">💰</div>
-                <h3 className="text-gray-900 font-bold text-lg mb-2">Precio fijo</h3>
+              </article>
+              <article className="bg-white/90 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="text-2xl mb-3" aria-hidden="true">💰</div>
+                <h3 className="text-gray-900 font-bold text-base md:text-lg mb-2">Precio fijo</h3>
                 <p className="text-gray-600 text-sm">Presupuesto claro desde el inicio, sin sorpresas ni cargos escondidos.</p>
-              </div>
+              </article>
             </div>
           </div>
         </div>

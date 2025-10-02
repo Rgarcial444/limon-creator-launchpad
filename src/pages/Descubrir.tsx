@@ -76,7 +76,8 @@ const Descubrir = () => {
     setRefreshing(true);
     try {
       // Ajusta el select a tus columnas reales
-      const { data, error } = await supabase
+      const supabaseAny = supabase as any;
+      const { data, error } = await supabaseAny
         .from("Blog")
         .select("id,title,content,descripción,imagenes,url,type,etiquetas,is_published,author_id,updated_at");
 

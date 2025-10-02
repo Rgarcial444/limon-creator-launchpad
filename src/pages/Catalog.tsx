@@ -148,15 +148,12 @@ const Catalog = () => {
             <Badge className="mb-4 bg-gradient-to-r from-gray-200 to-gray-300 text-gray-700 border-gray-300 backdrop-blur-sm">
               Catálogo de Servicios
             </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-              Soluciones Digitales
-              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-gray-700 via-gray-900 to-gray-700">
-                Para Tu Negocio
-              </span>
+            <h1 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
+              Soluciones Digitales Para Tu Negocio
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Muy pronto más noticias, espéralas.
-            </p>
+            <h2 className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+              Desarrollo web, e-commerce y aplicaciones móviles profesionales
+            </h2>
           </div>
         </section>
 
@@ -187,13 +184,13 @@ const Catalog = () => {
           </div>
         </section>
 
-        <section className="px-6 pb-24">
+        <section className="px-4 md:px-6 pb-24">
           <div className="container mx-auto max-w-6xl">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               {filteredServices.map((service) => {
                 const isExpanded = expandedCards.has(service.id);
                 return (
-                  <div
+                  <article
                     key={service.id}
                     onClick={() => toggleCardExpansion(service.id)}
                     style={{ cursor: 'pointer' }}
@@ -203,9 +200,11 @@ const Catalog = () => {
                       <div className="relative overflow-hidden">
                         <img
                           src={service.image}
-                          alt={service.title}
+                          alt={`Servicio de ${service.title} - Desarrollo web profesional`}
                           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                           style={{ pointerEvents: 'none' }}
+                          loading="lazy"
+                          decoding="async"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                         <div className="absolute top-4 right-4 bg-black/80 text-white px-2 py-1 rounded-md text-xs flex items-center backdrop-blur-sm">
@@ -290,7 +289,7 @@ const Catalog = () => {
                         </div>
                       </CardContent>
                     </Card>
-                  </div>
+                  </article>
                 );
               })}
             </div>
@@ -307,27 +306,25 @@ const Catalog = () => {
 
         <footer className="relative px-6 mt-16 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
           <div className="relative space-y-1 py-1">
-            <MarqueeAnimation
-              direction="left"
-              baseVelocity={-2}
-              className="text-xs md:text-sm lg:text-base py-0.5"
-              style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
-            >
-              <span className="text-cyan-400 font-medium">
+            <div className="text-xs md:text-sm lg:text-base py-0.5" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
+              <MarqueeAnimation
+                direction="left"
+                baseVelocity={-2}
+                className="text-cyan-400 font-medium"
+              >
                 DESARROLLO WEB • E-COMMERCE • APPS MÓVILES • SOFTWARE • INNOVACIÓN
-              </span>
-            </MarqueeAnimation>
+              </MarqueeAnimation>
+            </div>
             
-            <MarqueeAnimation
-              direction="right"
-              baseVelocity={-1.5}
-              className="text-xs md:text-sm py-0.5"
-              style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
-            >
-              <span className="text-slate-400 font-normal">
+            <div className="text-xs md:text-sm py-0.5" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
+              <MarqueeAnimation
+                direction="right"
+                baseVelocity={-1.5}
+                className="text-slate-400 font-normal"
+              >
                 TECNOLOGÍA • DISEÑO • SOLUCIONES • CREATIVIDAD • RESULTADOS
-              </span>
-            </MarqueeAnimation>
+              </MarqueeAnimation>
+            </div>
           </div>
         </footer>
       </div>

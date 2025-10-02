@@ -63,24 +63,22 @@ const About = () => {
         
         <section className="py-16 px-6 text-center">
           <div className="container mx-auto max-w-4xl">
-            <p className="text-xl text-slate-300 mb-8 leading-relaxed" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
-              Descubre nuestros servicios especializados en desarrollo web, aplicaciones móviles y software personalizado.
-            </p>
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">Sobre Nosotros</h1>
+            <h2 className="text-lg md:text-xl text-slate-300 mb-8 leading-relaxed" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
+              Servicios especializados en desarrollo web, aplicaciones móviles y software personalizado
+            </h2>
           </div>
         </section>
 
         <section className="py-24 subtle-gradient overflow-hidden">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-white">
-                Transformamos Ideas en
-                <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  Éxito Digital
-                </span>
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-6 text-white">
+                Transformamos Ideas en Éxito Digital
               </h2>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                No solo creamos sitios web, construimos máquinas de conversión que impulsan tu negocio hacia el siguiente nivel
-              </p>
+              <h3 className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
+                Creamos sitios web y soluciones digitales que impulsan tu negocio
+              </h3>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
@@ -144,27 +142,25 @@ const About = () => {
 
         <footer className="relative px-6 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
           <div className="relative space-y-1 py-1">
-            <MarqueeAnimation
-              direction="left"
-              baseVelocity={-2}
-              className="text-xs md:text-sm lg:text-base py-0.5"
-              style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
-            >
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-medium">
+            <div className="text-xs md:text-sm lg:text-base py-0.5" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
+              <MarqueeAnimation
+                direction="left"
+                baseVelocity={-2}
+                className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-medium"
+              >
                 DESARROLLO WEB • E-COMMERCE • APPS MÓVILES • SOFTWARE • INNOVACIÓN
-              </span>
-            </MarqueeAnimation>
+              </MarqueeAnimation>
+            </div>
             
-            <MarqueeAnimation
-              direction="right"
-              baseVelocity={-1.5}
-              className="text-xs md:text-sm py-0.5"
-              style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
-            >
-              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent font-normal">
+            <div className="text-xs md:text-sm py-0.5" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
+              <MarqueeAnimation
+                direction="right"
+                baseVelocity={-1.5}
+                className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent font-normal"
+              >
                 TECNOLOGÍA • DISEÑO • SOLUCIONES • CREATIVIDAD • RESULTADOS
-              </span>
-            </MarqueeAnimation>
+              </MarqueeAnimation>
+            </div>
           </div>
         </footer>
       </div>
