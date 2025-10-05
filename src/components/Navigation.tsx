@@ -6,8 +6,8 @@ import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
   { name: 'Inicio', href: '/' },
-  { name: 'Servicios', href: '/catalogo' },
   { name: 'Descubrir', href: '/descubrir' },
+  { name: 'Servicios', href: '/catalogo' },
   { name: 'Nosotros', href: '/nosotros' }
 ];
 

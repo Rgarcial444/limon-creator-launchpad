@@ -1,5 +1,7 @@
-import { Heart, Code, MessageCircle, Mail, MapPin } from "lucide-react";
+import { Heart, Code, MessageCircle, Mail, MapPin, BookOpen } from "lucide-react";
 import { RainbowButton } from "@/components/ui/rainbow-button";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -71,6 +73,28 @@ const Footer = () => {
                 <span className="text-sm">Toluca, México & Remoto </span>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* CTA Descubrir */}
+        <div className="mt-12 p-6 rounded-2xl bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="text-center md:text-left">
+              <h3 className="text-xl font-bold mb-2">Explora nuestro blog</h3>
+              <p className="text-primary-foreground/80 text-sm">
+                Descubre artículos sobre tecnología, tendencias y soluciones digitales.
+              </p>
+            </div>
+            <Link to="/descubrir">
+              <Button 
+                size="lg" 
+                variant="secondary"
+                className="bg-background text-foreground hover:bg-background/90 font-semibold whitespace-nowrap"
+              >
+                <BookOpen className="h-5 w-5 mr-2" />
+                Ir a Descubrir
+              </Button>
+            </Link>
           </div>
         </div>
 
