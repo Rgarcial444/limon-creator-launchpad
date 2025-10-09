@@ -24,52 +24,42 @@ function HandWrittenTitle({
   };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto py-24">
-      <div className="absolute inset-0">
+    <div className="relative w-full mx-auto">
+      <div className="absolute inset-0 flex items-center justify-center">
         <motion.svg
           width="100%"
-          height="100%"
-          viewBox="0 0 1200 600"
+          height="200"
+          viewBox="0 0 1200 300"
           initial="hidden"
           animate="visible"
-          className="w-full h-full"
+          className="w-full max-w-2xl"
         >
           <title>Limon.io</title>
           <motion.path
             d="M 950 90 
-               C 1250 300, 1050 480, 600 520
-               C 250 520, 150 480, 150 300
-               C 150 120, 350 80, 600 80
-               C 850 80, 950 180, 950 180"
+               C 1150 180, 1050 240, 600 260
+               C 250 260, 150 240, 150 150
+               C 150 60, 350 40, 600 40
+               C 850 40, 950 90, 950 90"
             fill="none"
-            strokeWidth="12"
+            strokeWidth="8"
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={draw}
-            className="text-foreground/90"
+            className="text-foreground/80"
           />
         </motion.svg>
       </div>
-      <div className="relative text-center z-10 flex flex-col items-center justify-center">
+      <div className="relative text-center z-10 flex flex-col items-center justify-center py-12">
         <motion.h2
-          className="text-4xl md:text-6xl text-foreground tracking-tighter flex items-center gap-2"
+          className="text-4xl md:text-6xl text-foreground tracking-tighter font-bold"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
           {title}
         </motion.h2>
-        {subtitle && (
-          <motion.p
-            className="text-xl text-muted-foreground"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.8 }}
-          >
-            {subtitle}
-          </motion.p>
-        )}
       </div>
     </div>
   );
