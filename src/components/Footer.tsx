@@ -2,7 +2,6 @@ import { Heart, Code, MessageCircle, Mail, MapPin, BookOpen } from "lucide-react
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import PageNavigation from "@/components/PageNavigation";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -17,13 +16,6 @@ const Footer = () => {
 
   return (
     <footer className="bg-primary text-primary-foreground">
-      {/* Page Navigation */}
-      <div className="border-b border-primary-foreground/10">
-        <div className="container mx-auto px-6">
-          <PageNavigation />
-        </div>
-      </div>
-
       <div className="container mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
