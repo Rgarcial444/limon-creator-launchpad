@@ -39,25 +39,26 @@ const Navigation = () => {
                     isActive 
                       ? 'text-white' 
                       : isDescubrir
-                      ? 'text-primary hover:text-primary/80'
+                      ? ''
                       : 'text-white/90 hover:text-white'
+                  } ${
+                    isDescubrir 
+                      ? 'px-4 py-2 rounded-lg bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 border border-primary/40 hover:border-primary/60 hover:from-primary/30 hover:via-primary/20 hover:to-primary/30 shadow-lg shadow-primary/20 hover:shadow-primary/40' 
+                      : ''
                   }`}
                 >
                   <div className="flex items-center gap-1.5">
-                    {isDescubrir && <Sparkles className="h-3.5 w-3.5 animate-pulse" />}
-                    <span className={isDescubrir ? 'font-semibold' : ''}>{item.name}</span>
+                    {isDescubrir && <Sparkles className="h-3.5 w-3.5 animate-pulse text-primary" />}
+                    <span className={isDescubrir ? 'font-bold text-primary' : ''}>{item.name}</span>
                     {isDescubrir && (
                       <Badge 
                         variant="secondary" 
-                        className="ml-1 text-[10px] px-1.5 py-0 h-4 bg-primary/20 text-primary border-primary/30 group-hover:bg-primary/30 transition-colors"
+                        className="ml-1 text-[10px] px-1.5 py-0 h-4 bg-primary text-primary-foreground font-semibold animate-pulse"
                       >
                         Blog
                       </Badge>
                     )}
                   </div>
-                  {isDescubrir && (
-                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/0 via-primary to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  )}
                 </Link>
               );
             })}
@@ -103,19 +104,19 @@ const Navigation = () => {
                         isActive 
                           ? 'bg-accent text-accent-foreground' 
                           : isDescubrir
-                          ? 'bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20'
+                          ? 'bg-gradient-to-r from-primary/20 via-primary/15 to-primary/20 text-primary border-2 border-primary/50 hover:border-primary hover:from-primary/30 hover:via-primary/25 hover:to-primary/30 shadow-lg shadow-primary/30'
                           : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          {isDescubrir && <Sparkles className="h-4 w-4" />}
-                          <span className={isDescubrir ? 'font-semibold' : ''}>{item.name}</span>
+                          {isDescubrir && <Sparkles className="h-4 w-4 animate-pulse" />}
+                          <span className={isDescubrir ? 'font-bold' : ''}>{item.name}</span>
                         </div>
                         {isDescubrir && (
                           <Badge 
                             variant="secondary" 
-                            className="text-[10px] px-2 py-0.5 h-5 bg-primary text-primary-foreground"
+                            className="text-[10px] px-2 py-0.5 h-5 bg-primary text-primary-foreground font-semibold animate-pulse"
                           >
                             Blog
                           </Badge>
