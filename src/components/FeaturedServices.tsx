@@ -81,9 +81,14 @@ const FeaturedServices = () => {
       <div className="mb-16">
         <div className="grid md:grid-cols-3 gap-6">
           {benefits.map((benefit, index) => {
-          const Icon = benefit.icon;
-          return;
-        })}
+            const Icon = benefit.icon;
+            return (
+              <div key={index} className="flex items-center justify-center gap-3 p-4 rounded-xl bg-card border border-border">
+                <Icon className="h-5 w-5 text-primary flex-shrink-0" />
+                <span className="text-sm font-medium">{benefit.text}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
 
