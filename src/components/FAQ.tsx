@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
 
 const FAQ = () => {
   useEffect(() => {
@@ -17,50 +18,34 @@ const FAQ = () => {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "¿Qué tecnologías utilizan para desarrollar sitios web?",
+          "name": "¿Cuánto tiempo toma desarrollar un sitio web?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Utilizamos las tecnologías más modernas y demandadas del mercado: React para interfaces dinámicas, TypeScript para código más seguro y mantenible, Tailwind CSS para diseños responsivos, Node.js para backend escalable, y WordPress cuando se requiere un CMS robusto. Todas nuestras soluciones están optimizadas para SEO y rendimiento."
+            "text": "Un sitio web básico puede estar listo en 2-3 semanas, mientras que proyectos complejos toman 2-3 meses. Proporcionamos cronogramas detallados antes de comenzar."
           }
         },
         {
           "@type": "Question",
-          "name": "¿Cuánto tiempo toma desarrollar un sitio web profesional?",
+          "name": "¿Los sitios son responsivos y optimizados para móviles?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "El tiempo de desarrollo varía según la complejidad del proyecto. Un sitio web corporativo básico puede tomar 2-3 semanas, mientras que aplicaciones web complejas o e-commerce pueden requerir 6-12 semanas. Siempre proporcionamos un cronograma detallado después de analizar tus requisitos específicos."
+            "text": "Sí, todos nuestros desarrollos son completamente responsivos con diseño mobile-first, garantizando experiencia perfecta en todos los dispositivos."
           }
         },
         {
           "@type": "Question",
-          "name": "¿Los sitios web son responsivos y optimizados para móviles?",
+          "name": "¿Ofrecen mantenimiento y soporte?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Absolutamente. Todos nuestros desarrollos son 100% responsivos y mobile-first. Utilizamos diseño adaptativo que garantiza una experiencia óptima en smartphones, tablets y computadoras. También optimizamos para Core Web Vitals de Google, mejorando tu posicionamiento SEO."
+            "text": "Sí, ofrecemos planes de mantenimiento con actualizaciones de seguridad, correcciones, optimizaciones y soporte técnico continuo."
           }
         },
         {
           "@type": "Question",
-          "name": "¿Ofrecen servicios de mantenimiento y soporte?",
+          "name": "¿Pueden ayudar con el SEO?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sí, ofrecemos planes de mantenimiento continuo que incluyen: actualizaciones de seguridad, optimización de rendimiento, copias de seguridad automáticas, monitoreo 24/7, y soporte técnico prioritario. Nuestro objetivo es que tu sitio siempre esté actualizado, seguro y funcionando perfectamente."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Pueden ayudarme con el SEO y posicionamiento en Google?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Definitivamente. Todos nuestros sitios incluyen optimización SEO básica: estructura semántica HTML5, metadatos apropiados, velocidad de carga optimizada, y sitemap XML. También ofrecemos servicios avanzados de SEO técnico, optimización de contenido, link building, y auditorías completas de posicionamiento."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Trabajan con WordPress o solo con React?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Trabajamos con ambas tecnologías y más. React es ideal para aplicaciones web interactivas y SPAs (Single Page Applications). WordPress es perfecto para sitios con gestión de contenido frecuente, blogs, y e-commerce con WooCommerce. También desarrollamos con Vue.js, Next.js, y otras tecnologías según las necesidades de cada proyecto."
+            "text": "Todos nuestros sitios incluyen SEO básico optimizado. También ofrecemos servicios avanzados de posicionamiento, keywords y estrategias orgánicas."
           }
         }
       ]
@@ -74,61 +59,52 @@ const FAQ = () => {
 
   const faqs = [
     {
-      question: "¿Qué tecnologías utilizan para desarrollar sitios web?",
-      answer: "Utilizamos las tecnologías más modernas y demandadas del mercado: React para interfaces dinámicas, TypeScript para código más seguro y mantenible, Tailwind CSS para diseños responsivos, Node.js para backend escalable, y WordPress cuando se requiere un CMS robusto. Todas nuestras soluciones están optimizadas para SEO y rendimiento."
+      question: "¿Cuánto tiempo toma desarrollar un sitio web?",
+      answer: "Un sitio web básico puede estar listo en 2-3 semanas, mientras que proyectos complejos toman 2-3 meses. Proporcionamos cronogramas detallados antes de comenzar."
     },
     {
-      question: "¿Cuánto tiempo toma desarrollar un sitio web profesional?",
-      answer: "El tiempo de desarrollo varía según la complejidad del proyecto. Un sitio web corporativo básico puede tomar 2-3 semanas, mientras que aplicaciones web complejas o e-commerce pueden requerir 6-12 semanas. Siempre proporcionamos un cronograma detallado después de analizar tus requisitos específicos."
+      question: "¿Los sitios son responsivos y optimizados para móviles?",
+      answer: "Sí, todos nuestros desarrollos son completamente responsivos con diseño mobile-first, garantizando experiencia perfecta en todos los dispositivos."
     },
     {
-      question: "¿Los sitios web son responsivos y optimizados para móviles?",
-      answer: "Absolutamente. Todos nuestros desarrollos son 100% responsivos y mobile-first. Utilizamos diseño adaptativo que garantiza una experiencia óptima en smartphones, tablets y computadoras. También optimizamos para Core Web Vitals de Google, mejorando tu posicionamiento SEO."
+      question: "¿Ofrecen mantenimiento y soporte?",
+      answer: "Sí, ofrecemos planes de mantenimiento con actualizaciones de seguridad, correcciones, optimizaciones y soporte técnico continuo."
     },
     {
-      question: "¿Ofrecen servicios de mantenimiento y soporte?",
-      answer: "Sí, ofrecemos planes de mantenimiento continuo que incluyen: actualizaciones de seguridad, optimización de rendimiento, copias de seguridad automáticas, monitoreo 24/7, y soporte técnico prioritario. Nuestro objetivo es que tu sitio siempre esté actualizado, seguro y funcionando perfectamente."
-    },
-    {
-      question: "¿Pueden ayudarme con el SEO y posicionamiento en Google?",
-      answer: "Definitivamente. Todos nuestros sitios incluyen optimización SEO básica: estructura semántica HTML5, metadatos apropiados, velocidad de carga optimizada, y sitemap XML. También ofrecemos servicios avanzados de SEO técnico, optimización de contenido, link building, y auditorías completas de posicionamiento."
-    },
-    {
-      question: "¿Trabajan con WordPress o solo con React?",
-      answer: "Trabajamos con ambas tecnologías y más. React es ideal para aplicaciones web interactivas y SPAs (Single Page Applications). WordPress es perfecto para sitios con gestión de contenido frecuente, blogs, y e-commerce con WooCommerce. También desarrollamos con Vue.js, Next.js, y otras tecnologías según las necesidades de cada proyecto."
+      question: "¿Pueden ayudar con el SEO?",
+      answer: "Todos nuestros sitios incluyen SEO básico optimizado. También ofrecemos servicios avanzados de posicionamiento, keywords y estrategias orgánicas."
     }
   ];
 
   return (
-    <section className="bg-muted/30 py-20">
+    <section className="bg-muted/30 py-16">
       <div className="container mx-auto px-6">
-        <header className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+        <header className="text-center mb-10">
+          <Badge variant="outline" className="mb-3">FAQ</Badge>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">
             Preguntas Frecuentes
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Resolvemos tus dudas sobre desarrollo web, tecnologías y nuestros servicios
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Respuestas rápidas sobre desarrollo web y servicios
           </p>
         </header>
 
-        <div className="max-w-4xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem 
-                key={index} 
-                value={`item-${index}`}
-                className="bg-card border border-border rounded-xl px-6 hover:border-primary/50 transition-colors"
-              >
-                <AccordionTrigger className="text-lg font-semibold text-left hover:text-primary">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
+        <Accordion type="single" collapsible className="max-w-2xl mx-auto space-y-4">
+          {faqs.map((faq, index) => (
+            <AccordionItem 
+              key={index} 
+              value={`item-${index}`}
+              className="bg-card border border-border rounded-lg px-6"
+            >
+              <AccordionTrigger className="text-left font-semibold hover:no-underline">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </section>
   );
