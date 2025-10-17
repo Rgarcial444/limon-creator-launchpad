@@ -43,17 +43,17 @@ const Navigation = () => {
                       : 'text-white/90 hover:text-white'
                   } ${
                     isDescubrir 
-                      ? 'px-4 py-2 rounded-lg bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 border border-primary/40 hover:border-primary/60 hover:from-primary/30 hover:via-primary/20 hover:to-primary/30 shadow-lg shadow-primary/20 hover:shadow-primary/40' 
+                      ? 'px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600/30 via-blue-600/30 to-purple-600/30 border border-purple-400/50 hover:border-purple-300/70 hover:from-purple-500/40 hover:via-blue-500/40 hover:to-purple-500/40 shadow-lg shadow-purple-500/30 hover:shadow-purple-400/50' 
                       : ''
                   }`}
                 >
                   <div className="flex items-center gap-1.5">
-                    {isDescubrir && <Sparkles className="h-3.5 w-3.5 animate-pulse text-primary" />}
-                    <span className={isDescubrir ? 'font-bold text-primary' : ''}>{item.name}</span>
+                    {isDescubrir && <Sparkles className="h-3.5 w-3.5 animate-pulse text-purple-200" />}
+                    <span className={isDescubrir ? 'font-bold text-white drop-shadow-[0_0_8px_rgba(168,85,247,0.8)]' : ''}>{item.name}</span>
                     {isDescubrir && (
                       <Badge 
                         variant="secondary" 
-                        className="ml-1 text-[10px] px-1.5 py-0 h-4 bg-primary text-primary-foreground font-semibold animate-pulse"
+                        className="ml-1 text-[10px] px-1.5 py-0 h-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold border border-white/30 shadow-md"
                       >
                         Blog
                       </Badge>
@@ -104,19 +104,19 @@ const Navigation = () => {
                         isActive 
                           ? 'bg-accent text-accent-foreground' 
                           : isDescubrir
-                          ? 'bg-gradient-to-r from-primary/20 via-primary/15 to-primary/20 text-primary border-2 border-primary/50 hover:border-primary hover:from-primary/30 hover:via-primary/25 hover:to-primary/30 shadow-lg shadow-primary/30'
+                          ? 'bg-gradient-to-r from-purple-600/30 via-blue-600/30 to-purple-600/30 text-white border-2 border-purple-400/60 hover:border-purple-300 hover:from-purple-500/40 hover:via-blue-500/40 hover:to-purple-500/40 shadow-lg shadow-purple-500/30'
                           : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          {isDescubrir && <Sparkles className="h-4 w-4 animate-pulse" />}
+                          {isDescubrir && <Sparkles className="h-4 w-4 animate-pulse text-purple-200" />}
                           <span className={isDescubrir ? 'font-bold' : ''}>{item.name}</span>
                         </div>
                         {isDescubrir && (
                           <Badge 
                             variant="secondary" 
-                            className="text-[10px] px-2 py-0.5 h-5 bg-primary text-primary-foreground font-semibold animate-pulse"
+                            className="text-[10px] px-2 py-0.5 h-5 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold border border-white/30"
                           >
                             Blog
                           </Badge>
