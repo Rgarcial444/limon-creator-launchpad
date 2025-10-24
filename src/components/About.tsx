@@ -140,29 +140,6 @@ const About = () => {
           </div>
         </section>
 
-        <footer className="relative px-6 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-          <div className="relative space-y-1 py-1">
-            <div className="text-xs md:text-sm lg:text-base py-0.5" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
-              <MarqueeAnimation
-                direction="left"
-                baseVelocity={-2}
-                className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-medium"
-              >
-                DESARROLLO WEB • E-COMMERCE • APPS MÓVILES • SOFTWARE • INNOVACIÓN
-              </MarqueeAnimation>
-            </div>
-            
-            <div className="text-xs md:text-sm py-0.5" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
-              <MarqueeAnimation
-                direction="right"
-                baseVelocity={-1.5}
-                className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent font-normal"
-              >
-                TECNOLOGÍA • DISEÑO • SOLUCIONES • CREATIVIDAD • RESULTADOS
-              </MarqueeAnimation>
-            </div>
-          </div>
-        </footer>
       </div>
     </div>
   );
