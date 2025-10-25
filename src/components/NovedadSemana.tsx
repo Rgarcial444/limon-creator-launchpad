@@ -7,19 +7,16 @@ const NovedadSemana = () => {
     {
       title: "Novedad 1",
       description: "Aquí va el texto de la primera novedad de la semana. Este contenido se actualizará regularmente con las últimas novedades, anuncios o contenido destacado que queramos compartir con nuestra audiencia.",
-      date: "Actualizado recientemente",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana.png"
     },
     {
       title: "Novedad 2",
       description: "Descubre las últimas actualizaciones y proyectos que hemos estado desarrollando. Mantente al día con todo lo nuevo que tenemos para ofrecerte.",
-      date: "Esta semana",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana3.png"
     },
     {
       title: "Novedad 3",
       description: "Explora nuestras últimas innovaciones y descubre cómo estamos transformando ideas en realidad con creatividad y tecnología.",
-      date: "Reciente",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana4.png"
     }
   ];
@@ -36,7 +33,6 @@ const NovedadSemana = () => {
             Lo Más Reciente
           </h2>
         </div>
-
         <AnimatedNovedades items={novedades} autoplay={true} />
       </div>
     </section>
