@@ -1,11 +1,33 @@
 import { Badge } from "@/components/ui/badge";
 import { Sparkles } from "lucide-react";
+import { AnimatedNovedades } from "@/components/ui/animated-testimonials";
 
 const NovedadSemana = () => {
+  const novedades = [
+    {
+      title: "Novedad 1",
+      description: "Aquí va el texto de la primera novedad de la semana. Este contenido se actualizará regularmente con las últimas novedades, anuncios o contenido destacado que queramos compartir con nuestra audiencia.",
+      date: "Actualizado recientemente",
+      src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana.png"
+    },
+    {
+      title: "Novedad 2",
+      description: "Descubre las últimas actualizaciones y proyectos que hemos estado desarrollando. Mantente al día con todo lo nuevo que tenemos para ofrecerte.",
+      date: "Esta semana",
+      src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana3.png"
+    },
+    {
+      title: "Novedad 3",
+      description: "Explora nuestras últimas innovaciones y descubre cómo estamos transformando ideas en realidad con creatividad y tecnología.",
+      date: "Reciente",
+      src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana4.png"
+    }
+  ];
+
   return (
     <section className="py-24 px-6">
-      <div className="container mx-auto max-w-5xl">
-        <div className="text-center mb-12">
+      <div className="container mx-auto max-w-6xl">
+        <div className="text-center mb-8">
           <Badge className="mb-4 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-white border-cyan-500/30 backdrop-blur-sm">
             <Sparkles className="w-4 h-4 mr-2" />
             Novedad de la Semana
@@ -15,29 +37,7 @@ const NovedadSemana = () => {
           </h2>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/20 overflow-hidden hover:border-cyan-500/30 transition-all duration-300 hover-lift">
-          <div className="grid md:grid-cols-2 gap-0">
-            <div className="relative aspect-video md:aspect-auto">
-              <img 
-                src="https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana.png"
-                alt="Novedad de la Semana"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            <div className="p-8 flex flex-col justify-center">
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Título de la Novedad
-              </h3>
-              <p className="text-slate-300 leading-relaxed mb-6">
-                Aquí va el texto de la novedad de la semana. Este contenido se actualizará regularmente con las últimas novedades, anuncios o contenido destacado que queramos compartir con nuestra audiencia.
-              </p>
-              <p className="text-sm text-slate-400">
-                Actualizado recientemente
-              </p>
-            </div>
-          </div>
-        </div>
+        <AnimatedNovedades items={novedades} autoplay={true} />
       </div>
     </section>
   );
