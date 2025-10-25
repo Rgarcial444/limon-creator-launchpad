@@ -4,7 +4,7 @@ import { MessageCircle, Mail, ArrowRight, Clock, Shield, Zap } from "lucide-reac
 
 const Contact = () => {
   const handleWhatsAppContact = () => {
-    window.open("https://wa.me/528116825524?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20Limon.io", "_blank");
+    window.open("https://wa.me/527223145340?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20Limon.io", "_blank");
   };
 
   const handleEmailContact = () => {
