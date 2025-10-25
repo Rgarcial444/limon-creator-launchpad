@@ -49,7 +49,7 @@ const About = () => {
 
   const handleContact = () => {
     const message = 'Hola! Quiero conocer más sobre sus servicios digitales';
-    const whatsappURL = `https://wa.me/5215512345678?text=${encodeURIComponent(message)}`;
+    const whatsappURL = `https://wa.me/527223145340?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, '_blank');
   };
 
