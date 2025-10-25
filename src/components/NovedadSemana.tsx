@@ -27,10 +27,10 @@ const NovedadSemana = () => {
         <div className="text-center mb-8">
           <Badge className="mb-4 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-white border-cyan-500/30 backdrop-blur-sm">
             <Sparkles className="w-4 h-4 mr-2" />
-            Novedad de la Semana
+            NLimon.io Creators
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Lo Más Reciente
+            Lo más nuevo en tecnología
           </h2>
         </div>
         <AnimatedNovedades items={novedades} autoplay={true} />
