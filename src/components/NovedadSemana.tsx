@@ -10,7 +10,7 @@ const NovedadSemana = () => {
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana.png"
     },
     {
-      title: "Entrenado",
+      title: "Entrenamiento Real",
       description: "Impulsa ventas y conversiones al responder al momento y mantener interesados a tus leads en cualquier horario ",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana3.png"
     },
