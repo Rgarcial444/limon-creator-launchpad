@@ -22,7 +22,7 @@ const NovedadSemana = () => {
   ];
 
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6 bg-black/80">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-8">
           <Badge className="mb-4 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-white border-cyan-500/30 backdrop-blur-sm">
