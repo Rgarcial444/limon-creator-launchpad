@@ -120,7 +120,7 @@ const About = () => {
             <p className="text-lg text-slate-300 leading-relaxed mb-8">
               Conversemos sobre tu proyecto. Te ayudo a crear la presencia digital que tu negocio necesita para crecer y destacar.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div className="flex justify-center">
               <RainbowButton
                 onClick={handleContact}
                 className="!bg-gradient-to-r from-cyan-500 to-blue-500 !text-white hover:from-cyan-600 hover:to-blue-600 shadow-lg hover:shadow-xl transition-all duration-300"
@@ -129,13 +129,6 @@ const About = () => {
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Conversemos
               </RainbowButton>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="bg-white/10 text-slate-300 border-white/20 hover:bg-white/20 hover:text-white backdrop-blur-sm transition-all duration-300"
-              >
-                Ver Portafolio <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
             </div>
           </div>
         </section>
