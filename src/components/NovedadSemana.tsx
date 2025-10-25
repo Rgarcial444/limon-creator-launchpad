@@ -6,17 +6,17 @@ const NovedadSemana = () => {
   const novedades = [
     {
       title: "Novedad 1",
-      description: "Aquí va el texto de la primera novedad de la semana. Este contenido se actualizará regularmente con las últimas novedades, anuncios o contenido destacado que queramos compartir con nuestra audiencia.",
+      description: "Presentamos tu nuevo agente conversacional: atención instantánea 24/7 que resuelve preguntas frecuentes, gestiona picos de demanda y escala lo complejo a tu equipo sin fricción. Con IA y NLP avanzados, reduce tiempos de respuesta, mejora la satisfacción y optimiza costos al manejar múltiples conversaciones en paralelo. ",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana.png"
     },
     {
       title: "Novedad 2",
-      description: "Descubre las últimas actualizaciones y proyectos que hemos estado desarrollando. Mantente al día con todo lo nuevo que tenemos para ofrecerte.",
+      description: "Impulsa ventas y conversiones al responder al momento y mantener interesados a tus leads en cualquier horario. La categoría está en pleno auge, con un mercado de IA conversacional valorado en 2024 en 12.24 mil millones y con crecimiento acelerado proyectado, lo que respalda su ROI ",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana3.png"
     },
     {
       title: "Novedad 3",
-      description: "Explora nuestras últimas innovaciones y descubre cómo estamos transformando ideas en realidad con creatividad y tecnología.",
+      description: "Listo para trabajar, para capturar datos, calificar leads, crear tickets y agendar demos automáticamente, con el historial unificado. Así tu equipo se enfoca en lo estratégico mientras el agente automatiza lo repetitivo con respuestas personalizadas y derivación inteligente cuando se requiere un humano .",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana4.png"
     }
   ];
