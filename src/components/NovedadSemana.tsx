@@ -6,17 +6,17 @@ const NovedadSemana = () => {
   const novedades = [
     {
       title: "Agente Inteligente",
-      description: "Presentamos tu nuevo agente conversacional: atención instantánea 24/7 que resuelve preguntas frecuentes, gestiona picos de demanda y escala lo complejo a tu equipo sin fricción. Con IA y NLP avanzados, reduce tiempos de respuesta, mejora la satisfacción y optimiza costos al manejar múltiples conversaciones en paralelo. ",
+      description: "Presentamos tu nuevo agente conversacional: atención instantánea 24/7 que resuelve preguntas frecuentes ",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana.png"
     },
     {
       title: "Entrenado",
-      description: "Impulsa ventas y conversiones al responder al momento y mantener interesados a tus leads en cualquier horario. La categoría está en pleno auge, con un mercado de IA conversacional valorado en 2024 en 12.24 mil millones y con crecimiento acelerado proyectado, lo que respalda su ROI ",
+      description: "Impulsa ventas y conversiones al responder al momento y mantener interesados a tus leads en cualquier horario ",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana3.png"
     },
     {
       title: "Fácil de usar",
-      description: "Listo para trabajar, para capturar datos, calificar leads, crear tickets y agendar demos automáticamente, con el historial unificado. Así tu equipo se enfoca en lo estratégico mientras el agente automatiza lo repetitivo con respuestas personalizadas y derivación inteligente cuando se requiere un humano .",
+      description: "Listo para trabajar, para capturar datos, calificar leads, crear tickets y agendar demos automáticamente, con el historial unificado.",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana4.png"
     }
   ];
