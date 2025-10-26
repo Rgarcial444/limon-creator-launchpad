@@ -197,7 +197,7 @@ const Descubrir = () => {
           </div>
         </section>
 
-        {/* Destacado */}
+        {/* Destacado - DESCRIPCIÓN COMPLETA */}
         <section className="px-4 pt-8">
           <div className="container mx-auto max-w-6xl">
             {featured && (
@@ -205,14 +205,14 @@ const Descubrir = () => {
                 <div className="grid md:grid-cols-2">
                   <button
                     type="button"
-                    className="relative h-56 md:h-full text-left"
+                    className="relative h-56 md:h-full text-left overflow-hidden bg-gray-100 dark:bg-gray-900"
                     onClick={() => setSelectedPost(featured)}
                     aria-label="Abrir vista previa"
                   >
                     <img
                       src={featured.imageUrl}
                       alt={featured.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-contain md:object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
                       onError={(e) =>
@@ -220,7 +220,7 @@ const Descubrir = () => {
                       }
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                    <div className="absolute bottom-3 left-3 inline-flex items-center gap-1 bg-black/40 text-white px-2 py-1 rounded-full text-xs">
+                    <div className="absolute bottom-3 left-3 inline-flex items-center gap-1 bg-black/40 text-white px-2 py-1 rounded-full text-xs backdrop-blur-sm">
                       <Eye className="w-3 h-3" /> Vista previa
                     </div>
                   </button>
@@ -246,7 +246,7 @@ const Descubrir = () => {
                         {featured.title}
                       </h2>
                     </button>
-                    {/* CAMBIADO: Removido line-clamp-4 para mostrar descripción completa */}
+                    {/* DESCRIPCIÓN COMPLETA - SIN line-clamp */}
                     <p className="text-sm md:text-base text-muted-foreground">
                       {featured.description}
                     </p>
@@ -292,7 +292,7 @@ const Descubrir = () => {
           </div>
         </section>
 
-        {/* Resto en grid */}
+        {/* Resto en grid - DESCRIPCIÓN TRUNCADA */}
         <section className="py-10 px-4">
           <div className="container mx-auto max-w-6xl">
             {others.length === 0 ? (
@@ -308,7 +308,7 @@ const Descubrir = () => {
                   >
                     <button
                       type="button"
-                      className="relative h-44 w-full text-left"
+                      className="relative h-44 w-full text-left overflow-hidden bg-gray-100 dark:bg-gray-900"
                       onClick={() => setSelectedPost(post)}
                       aria-label="Abrir vista previa"
                     >
@@ -323,7 +323,7 @@ const Descubrir = () => {
                         }
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-                      <div className="absolute bottom-2 left-2 inline-flex items-center gap-1 bg-black/40 text-white px-2 py-1 rounded-full text-[10px]">
+                      <div className="absolute bottom-2 left-2 inline-flex items-center gap-1 bg-black/40 text-white px-2 py-1 rounded-full text-[10px] backdrop-blur-sm">
                         <Eye className="w-3 h-3" /> Vista previa
                       </div>
                     </button>
@@ -352,8 +352,8 @@ const Descubrir = () => {
                         </h3>
                       </button>
 
-                      {/* CAMBIADO: Removido line-clamp-3 para mostrar descripción completa */}
-                      <p className="text-sm text-muted-foreground">
+                      {/* DESCRIPCIÓN TRUNCADA - CON line-clamp-3 */}
+                      <p className="text-sm text-muted-foreground line-clamp-3">
                         {post.description}
                       </p>
 
@@ -408,8 +408,12 @@ const Descubrir = () => {
           className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           role="dialog"
           aria-modal="true"
+          onClick={() => setSelectedPost(null)}
         >
-          <div className="bg-background rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-primary/20">
+          <div 
+            className="bg-background rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-primary/20"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="p-4 md:p-6 border-b flex items-center justify-between">
               <div className="flex flex-wrap gap-2">
                 {parseTags(selectedPost.etiquetas).map((tag, index) => (
@@ -443,11 +447,13 @@ const Descubrir = () => {
             </div>
 
             {selectedPost.imageUrl !== FALLBACK_IMG && (
-              <div className="h-56 md:h-64 overflow-hidden">
+              <div className="h-56 md:h-80 overflow-hidden bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
                 <img
                   src={selectedPost.imageUrl}
                   alt={selectedPost.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             )}
