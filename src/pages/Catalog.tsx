@@ -203,14 +203,28 @@ const Catalog = () => {
                       className="group bg-white border border-gray-200 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
                     >
                       <div className="grid md:grid-cols-2 gap-8 p-6 md:p-8">
-                        {/* Columna izquierda - UNA SOLA IMAGEN */}
-                        <div className="order-2 md:order-1">
-                          <div className="relative w-full h-full min-h-[300px] rounded-xl overflow-hidden">
+                        {/* Columna izquierda - GLASSMORPHISM IMAGE */}
+                        <div className="order-2 md:order-1 relative">
+                          {/* Imagen de fondo con blur */}
+                          <div className="absolute inset-0 rounded-xl overflow-hidden">
+                            <img
+                              src={service.image}
+                              alt=""
+                              className="w-full h-full object-cover scale-110 blur-2xl opacity-40"
+                            />
+                          </div>
+                          
+                          {/* Card de vidrio flotante */}
+                          <div className="relative w-full h-full min-h-[300px] rounded-xl overflow-hidden backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl p-4">
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/5 to-transparent"></div>
                             <img
                               src={service.image}
                               alt={service.title}
-                              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                              className="relative w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition-transform duration-500 shadow-lg"
                             />
+                            
+                            {/* Brillo animado en hover */}
+                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/0 to-white/0 group-hover:via-white/10 transition-all duration-500 rounded-lg"></div>
                           </div>
                         </div>
 
