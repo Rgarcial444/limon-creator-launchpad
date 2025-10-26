@@ -27,10 +27,8 @@ interface BlogPost {
   url?: string;
   type: string;
   etiquetas: string;
-  // created_at eliminado del modelo
   is_published: boolean;
   author_id?: string;
-  // Si en el futuro agregas updated_at, lo tratamos como opcional:
   updated_at?: string | null;
 }
 
@@ -75,7 +73,6 @@ const Descubrir = () => {
   const fetchBlogPosts = useCallback(async () => {
     setRefreshing(true);
     try {
-      // Ajusta el select a tus columnas reales
       const supabaseAny = supabase as any;
       const { data, error } = await supabaseAny
         .from("Blog")
@@ -87,9 +84,7 @@ const Descubrir = () => {
         return;
       }
 
-      // Orden de fallback: por id desc (más reciente por id mayor)
       const sorted = (data || []).sort((a: any, b: any) => {
-        // Si tienes updated_at, usa eso primero
         if (a.updated_at && b.updated_at) {
           const da = new Date(a.updated_at).getTime();
           const db = new Date(b.updated_at).getTime();
@@ -99,7 +94,7 @@ const Descubrir = () => {
       });
 
       const transformed: BlogPost[] = sorted
-        .filter((row: any) => row.is_published === true) // aplica filtro en cliente
+        .filter((row: any) => row.is_published === true)
         .map((post: any) => ({
           id: post.id,
           title: post.title || "Sin título",
@@ -251,13 +246,13 @@ const Descubrir = () => {
                         {featured.title}
                       </h2>
                     </button>
-                    <p className="text-sm md:text-base text-muted-foreground line-clamp-4">
+                    {/* CAMBIADO: Removido line-clamp-4 para mostrar descripción completa */}
+                    <p className="text-sm md:text-base text-muted-foreground">
                       {featured.description}
                     </p>
 
                     <div className="mt-auto flex items-center justify-between text-xs text-muted-foreground">
                       <div className="flex items-center gap-3">
-                        {/* Si hay updated_at, mostramos fecha; si no, mostramos identificador */}
                         {featured.updated_at ? (
                           <span className="inline-flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
@@ -357,7 +352,8 @@ const Descubrir = () => {
                         </h3>
                       </button>
 
-                      <p className="text-sm text-muted-foreground line-clamp-3">
+                      {/* CAMBIADO: Removido line-clamp-3 para mostrar descripción completa */}
+                      <p className="text-sm text-muted-foreground">
                         {post.description}
                       </p>
 
