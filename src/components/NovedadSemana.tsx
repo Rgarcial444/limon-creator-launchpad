@@ -33,7 +33,7 @@ const NovedadSemana = () => {
             Limon.io Creators
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Lo más nuevo en tecnología
+            Agente de Inteligencia Artificial
           </h2>
         </div>
         <AnimatedNovedades items={novedades} autoplay={true} />
