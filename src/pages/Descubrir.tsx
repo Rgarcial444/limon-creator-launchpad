@@ -197,7 +197,7 @@ const Descubrir = () => {
           </div>
         </section>
 
-        {/* Destacado - DESCRIPCIÓN COMPLETA */}
+        {/* Destacado - DESCRIPCIÓN COMPLETA CON FORMATO */}
         <section className="px-4 pt-8">
           <div className="container mx-auto max-w-6xl">
             {featured && (
@@ -246,8 +246,8 @@ const Descubrir = () => {
                         {featured.title}
                       </h2>
                     </button>
-                    {/* DESCRIPCIÓN COMPLETA - SIN line-clamp */}
-                    <p className="text-sm md:text-base text-muted-foreground">
+                    {/* DESCRIPCIÓN COMPLETA - RESPETA FORMATO ORIGINAL */}
+                    <p className="text-sm md:text-base text-muted-foreground whitespace-pre-wrap">
                       {featured.description}
                     </p>
 
@@ -352,8 +352,8 @@ const Descubrir = () => {
                         </h3>
                       </button>
 
-                      {/* DESCRIPCIÓN TRUNCADA - CON line-clamp-3 */}
-                      <p className="text-sm text-muted-foreground line-clamp-3">
+                      {/* DESCRIPCIÓN TRUNCADA - line-clamp-3 mantiene el truncado visual */}
+                      <p className="text-sm text-muted-foreground line-clamp-3 whitespace-pre-wrap">
                         {post.description}
                       </p>
 
@@ -402,7 +402,7 @@ const Descubrir = () => {
         </section>
       </main>
 
-      {/* Modal */}
+      {/* Modal - CONTENIDO CON FORMATO COMPLETO */}
       {selectedPost && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -488,7 +488,7 @@ const Descubrir = () => {
                     {selectedPost.content}
                   </div>
                 ) : (
-                  <div className="text-base leading-relaxed">
+                  <div className="whitespace-pre-wrap text-base leading-relaxed">
                     {selectedPost.description}
                   </div>
                 )}
