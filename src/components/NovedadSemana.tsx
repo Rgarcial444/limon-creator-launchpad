@@ -7,16 +7,19 @@ const NovedadSemana = () => {
     {
       title: "Agente Inteligente",
       description: "Presentamos tu nuevo agente conversacional: atención instantánea 24/7 que resuelve preguntas frecuentes ",
+      date: "Esta semana",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana.png"
     },
     {
       title: "Entrenamiento Real",
       description: "Impulsa ventas y conversiones al responder al momento y mantener interesados a tus leads en cualquier horario ",
+      date: "Disponible ahora",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana3.png"
     },
     {
       title: "Fácil de usar",
       description: "Listo para trabajar, para capturar datos, calificar leads, crear tickets y agendar demos automáticamente, con el historial unificado.",
+      date: "Listo para usar",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana4.png"
     }
   ];

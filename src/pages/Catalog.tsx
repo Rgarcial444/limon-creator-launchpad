@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Globe, Smartphone, Code, Zap, Star, Filter, ChevronDown, ChevronUp } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
+import ImageMask from '@/components/ui/image-mask';
 
 const services = [
   {
@@ -185,120 +186,128 @@ const Catalog = () => {
         </section>
 
         <section className="px-4 md:px-6 pb-24">
-          <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-              {filteredServices.map((service) => {
-                const isExpanded = expandedCards.has(service.id);
-                return (
-                  <article
-                    key={service.id}
-                    onClick={() => toggleCardExpansion(service.id)}
-                    style={{ cursor: 'pointer' }}
-                    className="group transition-all duration-300"
-                  >
-                    <Card className="hover-lift overflow-hidden bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 h-full">
-                      <div className="relative overflow-hidden">
-                        <img
-                          src={service.image}
-                          alt={`Servicio de ${service.title} - Desarrollo web profesional`}
-                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                          style={{ pointerEvents: 'none' }}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                        <div className="absolute top-4 right-4 bg-black/80 text-white px-2 py-1 rounded-md text-xs flex items-center backdrop-blur-sm">
-                          <Star className="h-3 w-3 mr-1 fill-yellow-400 text-yellow-400" />
-                          {service.rating}
-                        </div>
-                        <div className="absolute top-4 left-4">
-                          {isExpanded ? (
-                            <ChevronUp className="h-5 w-5 text-white bg-black/50 rounded-full p-1" />
-                          ) : (
-                            <ChevronDown className="h-5 w-5 text-white bg-black/50 rounded-full p-1" />
-                          )}
-                        </div>
-                      </div>
-                      
-                      <CardHeader>
-                        <div className="flex items-center justify-between mb-2">
-                          <Badge variant="secondary" className="text-xs bg-gray-900 text-white border-gray-900">
-                            {service.duration}
-                          </Badge>
-                          <span className="text-lg font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
-                            {service.price}
-                          </span>
-                        </div>
-                        <CardTitle className="text-xl text-gray-900">{service.title}</CardTitle>
-                        <CardDescription className="text-sm text-gray-600">{service.description}</CardDescription>
-                      </CardHeader>
-
-                      <CardContent className={isExpanded ? "pb-12" : ""}>
-                        <div className="space-y-4">
-                          <div className="grid grid-cols-2 gap-2">
-                            {service.features.map((feature, index) => (
-                              <div key={index} className="flex items-center text-xs text-gray-600">
-                                <Zap className="h-3 w-3 mr-1 text-gray-900" />
-                                {feature}
-                              </div>
-                            ))}
-                          </div>
-                          
-                          {isExpanded && service.expandedContent && (
-                            <div className="space-y-4 border-t pt-4 mt-4 pb-6">
-                              <div>
-                                <h4 className="text-sm font-semibold text-gray-900 mb-2">Tecnologías:</h4>
-                                <div className="flex flex-wrap gap-1">
-                                  {service.expandedContent.technologies.map((tech, index) => (
-                                    <Badge key={index} variant="outline" className="text-xs">
-                                      {tech}
-                                    </Badge>
-                                  ))}
-                                </div>
-                              </div>
-                              
-                              <div>
-                                <h4 className="text-sm font-semibold text-gray-900 mb-2">Entregables:</h4>
-                                <ul className="text-xs text-gray-600 space-y-1">
-                                  {service.expandedContent.deliverables.map((item, index) => (
-                                    <li key={index} className="flex items-center">
-                                      <div className="w-1 h-1 bg-gray-400 rounded-full mr-2" />
-                                      {item}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                              
-                              <div>
-                                <h4 className="text-sm font-semibold text-gray-900 mb-2">Proceso:</h4>
-                                <p className="text-xs text-gray-600">{service.expandedContent.process}</p>
-                              </div>
-                            </div>
-                          )}
-                          
-                          <Button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleContact(service.title);
-                            }}
-                            className="w-full bg-gray-900 text-white hover:bg-gray-900/90 shadow-md hover:shadow-lg transition-all duration-300"
-                            size="sm"
-                          >
-                            Solicitar Cotización
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </article>
-                );
-              })}
-            </div>
-
-            {filteredServices.length === 0 && (
+          <div className="container mx-auto max-w-7xl">
+            {filteredServices.length === 0 ? (
               <div className="text-center py-16">
                 <Filter className="h-16 w-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-2 text-gray-900">No se encontraron servicios</h3>
                 <p className="text-gray-600">Prueba ajustando los filtros de búsqueda</p>
+              </div>
+            ) : (
+              <div className="space-y-12">
+                {filteredServices.map((service) => {
+                  const isExpanded = expandedCards.has(service.id);
+                  // Crear array de 9 imágenes del servicio (repetir si es necesario)
+                  const serviceImages = Array(9).fill(service.image);
+                  
+                  return (
+                    <article
+                      key={service.id}
+                      className="group bg-white border border-gray-200 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+                    >
+                      <div className="grid md:grid-cols-2 gap-8 p-6 md:p-8">
+                        {/* Columna izquierda - Galería con máscaras */}
+                        <div className="order-2 md:order-1">
+                          <ImageMask images={serviceImages} />
+                        </div>
+
+                        {/* Columna derecha - Información del servicio */}
+                        <div className="order-1 md:order-2 flex flex-col justify-between space-y-6">
+                          <div>
+                            <div className="flex items-center justify-between mb-4">
+                              <Badge variant="secondary" className="text-sm bg-gray-900 text-white border-gray-900 px-4 py-1">
+                                {service.duration}
+                              </Badge>
+                              <div className="flex items-center gap-2">
+                                <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                                <span className="text-lg font-semibold text-gray-900">{service.rating}</span>
+                              </div>
+                            </div>
+
+                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                              {service.title}
+                            </h2>
+                            
+                            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                              {service.description}
+                            </p>
+
+                            <div className="mb-6">
+                              <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                                {service.price}
+                              </h3>
+                            </div>
+
+                            {/* Características principales */}
+                            <div className="grid grid-cols-2 gap-3 mb-6">
+                              {service.features.map((feature, index) => (
+                                <div key={index} className="flex items-start text-sm text-gray-700">
+                                  <Zap className="h-4 w-4 mr-2 text-gray-900 flex-shrink-0 mt-0.5" />
+                                  <span>{feature}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Sección expandible */}
+                          <div>
+                            <button
+                              onClick={() => toggleCardExpansion(service.id)}
+                              className="w-full mb-4 flex items-center justify-between text-sm font-semibold text-gray-900 hover:text-gray-700 transition-colors"
+                            >
+                              <span>Ver detalles técnicos</span>
+                              {isExpanded ? (
+                                <ChevronUp className="h-5 w-5" />
+                              ) : (
+                                <ChevronDown className="h-5 w-5" />
+                              )}
+                            </button>
+
+                            {isExpanded && service.expandedContent && (
+                              <div className="space-y-4 border-t pt-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                                <div>
+                                  <h4 className="text-sm font-semibold text-gray-900 mb-2">Tecnologías:</h4>
+                                  <div className="flex flex-wrap gap-2">
+                                    {service.expandedContent.technologies.map((tech, index) => (
+                                      <Badge key={index} variant="outline" className="text-xs">
+                                        {tech}
+                                      </Badge>
+                                    ))}
+                                  </div>
+                                </div>
+                                
+                                <div>
+                                  <h4 className="text-sm font-semibold text-gray-900 mb-2">Entregables:</h4>
+                                  <ul className="text-sm text-gray-600 space-y-1">
+                                    {service.expandedContent.deliverables.map((item, index) => (
+                                      <li key={index} className="flex items-center">
+                                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2" />
+                                        {item}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                                
+                                <div>
+                                  <h4 className="text-sm font-semibold text-gray-900 mb-2">Proceso:</h4>
+                                  <p className="text-sm text-gray-600">{service.expandedContent.process}</p>
+                                </div>
+                              </div>
+                            )}
+
+                            <Button
+                              onClick={() => handleContact(service.title)}
+                              className="w-full bg-gray-900 text-white hover:bg-gray-900/90 shadow-md hover:shadow-lg transition-all duration-300 mt-4"
+                              size="lg"
+                            >
+                              Solicitar Cotización
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
             )}
           </div>
