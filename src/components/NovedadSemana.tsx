@@ -7,7 +7,7 @@ const NovedadSemana = () => {
     {
       title: "Agente Inteligente",
       description: "Presentamos tu nuevo agente conversacional: atención instantánea 24/7 que resuelve preguntas frecuentes ",
-      date: "Esta semana",
+      date: "Contáctame",
       src: "https://haxduiibwxlolflkrjuz.supabase.co/storage/v1/object/public/imagenes%20limoniocreators/novedaddelasemana.png"
     },
     {
