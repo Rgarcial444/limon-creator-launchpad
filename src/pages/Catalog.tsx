@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Globe, Smartphone, Code, Zap, Star, Filter, ChevronDown, ChevronUp } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
-import ImageMask from '@/components/ui/image-mask';
 
 const services = [
   {
@@ -121,13 +120,13 @@ const Catalog = () => {
   const filteredServices = services
     .filter(service => selectedCategory === 'all' || service.category === selectedCategory);
 
-  const handleContact = (serviceName: string) => {
+  const handleContact = (serviceName) => {
     const message = `Hola! Me interesa el servicio: ${serviceName}. ¿Podrías darme más información?`;
     const whatsappURL = `https://wa.me/527223145340?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, '_blank');
   };
 
-  const toggleCardExpansion = (serviceId: number) => {
+  const toggleCardExpansion = (serviceId) => {
     const newExpanded = new Set(expandedCards);
     if (newExpanded.has(serviceId)) {
       newExpanded.delete(serviceId);
@@ -197,8 +196,6 @@ const Catalog = () => {
               <div className="space-y-12">
                 {filteredServices.map((service) => {
                   const isExpanded = expandedCards.has(service.id);
-                  // Crear array de 9 imágenes del servicio (repetir si es necesario)
-                  const serviceImages = Array(9).fill(service.image);
                   
                   return (
                     <article
@@ -206,9 +203,15 @@ const Catalog = () => {
                       className="group bg-white border border-gray-200 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
                     >
                       <div className="grid md:grid-cols-2 gap-8 p-6 md:p-8">
-                        {/* Columna izquierda - Galería con máscaras */}
+                        {/* Columna izquierda - UNA SOLA IMAGEN */}
                         <div className="order-2 md:order-1">
-                          <ImageMask images={serviceImages} />
+                          <div className="relative w-full h-full min-h-[300px] rounded-xl overflow-hidden">
+                            <img
+                              src={service.image}
+                              alt={service.title}
+                              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                            />
+                          </div>
                         </div>
 
                         {/* Columna derecha - Información del servicio */}
