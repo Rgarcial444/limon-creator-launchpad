@@ -114,43 +114,43 @@ const AboutUs = () => {
       
       {/* Hero Minimalista con Warp Background */}
       <WarpBackground 
-        className="relative py-20 px-6 overflow-hidden min-h-[80vh] flex items-center"
+        className="relative py-12 md:py-20 px-4 md:px-6 overflow-hidden min-h-[auto] lg:min-h-[80vh] flex items-center"
         perspective={120}
         beamsPerSide={3}
         beamDuration={8}
         gridColor="hsl(220 13% 91% / 0.3)"
       >
         <div className="container mx-auto max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             
             {/* Contenido Principal */}
-            <div className={`space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-              <div className="space-y-6">
+            <div className={`space-y-6 md:space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+              <div className="space-y-4 md:space-y-6">
                 <div className="flex items-center space-x-3 text-slate-600">
                   <MapPin className="h-4 w-4" />
                   <span className="text-sm">{founder.location}</span>
                 </div>
                 
-                <h1 className="text-6xl md:text-7xl font-light leading-tight text-slate-900">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-tight text-slate-900">
                   {founder.name}
                 </h1>
                 
-                <div className="h-16 flex items-center">
-                  <h2 className="text-2xl md:text-3xl text-slate-600 font-light transition-all duration-500">
+                <div className="h-12 md:h-16 flex items-center">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl text-slate-600 font-light transition-all duration-500">
                     {founder.taglines[activeTagline]}
                   </h2>
                 </div>
                 
-                <p className="text-lg text-slate-700 leading-relaxed max-w-xl font-light">
+                <p className="text-base md:text-lg text-slate-700 leading-relaxed max-w-xl font-light">
                   {founder.bio}
                 </p>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                 <Button 
                   size="lg" 
                   onClick={() => window.open('https://wa.me/527223145340?text=Hola Ricardo, quiero conocer más sobre Limon Creators', '_blank')}
-                  className="bg-slate-900 hover:bg-slate-800 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="bg-slate-900 hover:bg-slate-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto"
                 >
                   <MessageCircle className="mr-2 h-5 w-5" />
                   Conversemos
@@ -158,38 +158,38 @@ const AboutUs = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-300"
+                  className="border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-300 w-full sm:w-auto text-xs sm:text-sm"
                 >
-                  <Mail className="mr-2 h-5 w-5" />
-                  {founder.email}
+                  <Mail className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                  <span className="truncate">{founder.email}</span>
                 </Button>
               </div>
             </div>
 
             {/* Tarjeta de Perfil Profesional */}
-            <div className="relative">
-              <Card className="p-8 bg-white/80 backdrop-blur-sm border-0 shadow-2xl hover:shadow-3xl transition-all duration-500">
-                <div className="text-center space-y-6">
+            <div className="relative order-first lg:order-last">
+              <Card className="p-6 md:p-8 bg-white/80 backdrop-blur-sm border-0 shadow-2xl hover:shadow-3xl transition-all duration-500">
+                <div className="text-center space-y-4 md:space-y-6">
                   <div className="relative inline-block">
-                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center text-4xl font-bold text-slate-700 shadow-lg">
+                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center text-3xl md:text-4xl font-bold text-slate-700 shadow-lg">
                       RG
                     </div>
-                    <div className="absolute -bottom-2 -right-2 bg-green-500 w-8 h-8 rounded-full border-4 border-white flex items-center justify-center">
-                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    <div className="absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 md:w-8 md:h-8 rounded-full border-4 border-white flex items-center justify-center">
+                      <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full"></div>
                     </div>
                   </div>
                   
                   <div>
-                    <h3 className="text-xl font-semibold text-slate-900">{founder.role}</h3>
-                    <p className="text-slate-600">Limon Creators</p>
+                    <h3 className="text-lg md:text-xl font-semibold text-slate-900">{founder.role}</h3>
+                    <p className="text-slate-600 text-sm md:text-base">Limon Creators</p>
                   </div>
 
                   {/* Métricas de Impacto */}
-                  <div className="grid grid-cols-2 gap-4 pt-6 border-t border-slate-100">
+                  <div className="grid grid-cols-2 gap-3 md:gap-4 pt-4 md:pt-6 border-t border-slate-100">
                     {Object.entries(founder.background).map(([key, value]) => (
                       <div key={key} className="text-center">
-                        <div className="text-2xl font-bold text-slate-900">{value}</div>
-                        <div className="text-xs text-slate-500 capitalize">{key.replace('_', ' ')}</div>
+                        <div className="text-xl md:text-2xl font-bold text-slate-900">{value}</div>
+                        <div className="text-[10px] md:text-xs text-slate-500 capitalize">{key.replace('_', ' ')}</div>
                       </div>
                     ))}
                   </div>
@@ -201,29 +201,29 @@ const AboutUs = () => {
       </WarpBackground>
 
       {/* Journey Timeline Moderna */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-12 md:py-20 px-4 md:px-6 bg-white">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 md:mb-16">
             <Badge className="mb-4 bg-slate-100 text-slate-700 border-slate-200">
               <Calendar className="mr-2 h-3 w-3" />
               Mi Trayectoria
             </Badge>
-            <h2 className="text-4xl font-light text-slate-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-4">
               El Camino hacia la Excelencia
             </h2>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {founder.journey.map((milestone, index) => (
-              <div key={index} className="flex items-start space-x-6 group">
+              <div key={index} className="flex items-start space-x-4 md:space-x-6 group">
                 <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-slate-900 text-white rounded-full flex items-center justify-center text-sm font-semibold shadow-lg group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs md:text-sm font-semibold shadow-lg group-hover:scale-110 transition-transform">
                     {milestone.year}
                   </div>
                 </div>
-                <div className="flex-1 pb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-2">{milestone.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">{milestone.description}</p>
+                <div className="flex-1 pb-6 md:pb-8">
+                  <h3 className="text-lg md:text-xl font-semibold text-slate-900 mb-2">{milestone.title}</h3>
+                  <p className="text-sm md:text-base text-slate-600 leading-relaxed">{milestone.description}</p>
                 </div>
               </div>
             ))}
@@ -232,32 +232,32 @@ const AboutUs = () => {
       </section>
 
       {/* Valores Minimalistas */}
-      <section className="py-20 px-6 bg-slate-50">
+      <section className="py-12 md:py-20 px-4 md:px-6 bg-slate-50">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-light text-slate-900 mb-4">
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-4">
               Lo que nos Define
             </h2>
-            <p className="text-xl text-slate-600 font-light">
+            <p className="text-base md:text-xl text-slate-600 font-light">
               Principios que guían cada decisión y cada línea de código
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
             {companyValues.map((value, index) => {
               const Icon = value.icon;
               return (
-                <Card key={index} className="p-8 text-center bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                  <div className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Icon className="h-8 w-8 text-white" />
+                <Card key={index} className="p-5 md:p-8 text-center bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                    <Icon className="h-6 w-6 md:h-8 md:w-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                  <h3 className="text-lg md:text-xl font-semibold text-slate-900 mb-2 md:mb-3">
                     {value.title}
                   </h3>
-                  <p className="text-slate-600 leading-relaxed mb-4">
+                  <p className="text-sm md:text-base text-slate-600 leading-relaxed mb-3 md:mb-4">
                     {value.description}
                   </p>
-                  <Badge className="bg-slate-100 text-slate-700 border-slate-200">
+                  <Badge className="bg-slate-100 text-slate-700 border-slate-200 text-xs md:text-sm">
                     {value.metric}
                   </Badge>
                 </Card>
@@ -268,20 +268,20 @@ const AboutUs = () => {
       </section>
 
       {/* Expertise Section */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-12 md:py-20 px-4 md:px-6 bg-white">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-light text-slate-900 mb-4">
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-4">
               Áreas de Expertise
             </h2>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
             {founder.expertise.map((item, index) => (
-              <div key={index} className="flex items-center justify-between p-6 bg-slate-50 rounded-lg">
-                <span className="text-lg font-medium text-slate-900">{item.skill}</span>
-                <div className="flex items-center space-x-4">
-                  <div className="w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
+              <div key={index} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 md:p-6 bg-slate-50 rounded-lg gap-3">
+                <span className="text-base md:text-lg font-medium text-slate-900">{item.skill}</span>
+                <div className="flex items-center space-x-3 md:space-x-4">
+                  <div className="flex-1 sm:w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-slate-900 transition-all duration-1000"
                       style={{ width: `${item.level}%` }}
@@ -298,19 +298,19 @@ const AboutUs = () => {
       </section>
 
       {/* CTA Final Minimalista */}
-      <section className="py-20 px-6 bg-slate-900 text-white">
+      <section className="py-12 md:py-20 px-4 md:px-6 bg-slate-900 text-white">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl font-light mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 md:mb-6">
             ¿Listo para crear algo extraordinario?
           </h2>
-          <p className="text-xl text-slate-300 mb-8 font-light">
+          <p className="text-base md:text-xl text-slate-300 mb-6 md:mb-8 font-light">
             Transformemos tu visión en una realidad digital que impacte
           </p>
           
           <Button 
             size="lg" 
             onClick={() => window.open('https://wa.me/527223145340?text=Hola Ricardo, tengo una idea que quiero convertir en realidad', '_blank')}
-            className="bg-white text-slate-900 hover:bg-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 text-lg px-8 py-4"
+            className="bg-white text-slate-900 hover:bg-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 text-base md:text-lg px-6 md:px-8 py-3 md:py-4 w-full sm:w-auto"
           >
             Iniciar Proyecto <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
