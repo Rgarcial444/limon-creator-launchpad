@@ -7,7 +7,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const handleWhatsAppContact = () => {
-    window.open("https://wa.me/527223145340?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20Limon.io", "_blank");
+    window.open("https://wa.me/527223145340?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20Limon%20io%20Creators", "_blank");
   };
 
   const handleEmailContact = () => {
@@ -22,7 +22,7 @@ const Footer = () => {
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center space-x-2">
               <Code className="h-8 w-8" />
-              <span className="text-2xl font-bold">Limon.io</span>
+              <span className="text-2xl font-bold">Limon io Creators</span>
             </div>
             <p className="text-primary-foreground/80 max-w-md">
               Soluciones digitales modernas para hacer crecer tu negocio.
