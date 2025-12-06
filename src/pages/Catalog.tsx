@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Globe, Smartphone, Code, Zap, Star, Filter, ChevronDown, ChevronUp } from 'lucide-react';
+import { Globe, Smartphone, Code, Zap, Star, Filter, ChevronDown, ChevronUp, TrendingUp, Headphones } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 
@@ -102,6 +102,38 @@ const services = [
       deliverables: ['Marketplace', 'Panel vendors', 'Sistema pagos', 'Chat en tiempo real'],
       process: 'Arquitectura → MVP → Funcionalidades → Testing → Despliegue'
     }
+  },
+  {
+    id: 7,
+    title: 'Growth Partner',
+    description: 'Estrategia integral de crecimiento digital para escalar tu negocio con marketing, automatización y optimización continua.',
+    category: 'consulting',
+    price: 'Desde $8,000 MXN/mes',
+    features: ['Estrategia de crecimiento', 'Marketing digital', 'Análisis de datos', 'Optimización de conversión'],
+    image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=250&fit=crop',
+    rating: 5.0,
+    duration: 'Contrato mensual',
+    expandedContent: {
+      technologies: ['Google Analytics', 'Meta Ads', 'Google Ads', 'HubSpot'],
+      deliverables: ['Plan de crecimiento', 'Reportes mensuales', 'Campañas publicitarias', 'Optimización SEO'],
+      process: 'Auditoría → Estrategia → Implementación → Medición → Optimización'
+    }
+  },
+  {
+    id: 8,
+    title: 'Asistente Virtual',
+    description: 'Soporte operativo remoto para gestión de tareas, atención a clientes, administración y organización de tu negocio.',
+    category: 'consulting',
+    price: 'Desde $4,500 MXN/mes',
+    features: ['Gestión de agenda', 'Atención al cliente', 'Organización de archivos', 'Seguimiento de tareas'],
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=250&fit=crop',
+    rating: 4.9,
+    duration: 'Contrato mensual',
+    expandedContent: {
+      technologies: ['Notion', 'Slack', 'Trello', 'Google Workspace'],
+      deliverables: ['Asistente dedicado', 'Reportes semanales', 'Gestión de comunicación', 'Soporte 8 hrs/día'],
+      process: 'Onboarding → Capacitación → Integración → Operación → Mejora continua'
+    }
   }
 ];
 
@@ -110,7 +142,8 @@ const categories = [
   { id: 'web', name: 'Sitios Web', icon: Globe },
   { id: 'ecommerce', name: 'E-commerce', icon: Smartphone },
   { id: 'mobile', name: 'Apps Móviles', icon: Smartphone },
-  { id: 'software', name: 'Software', icon: Code }
+  { id: 'software', name: 'Software', icon: Code },
+  { id: 'consulting', name: 'Consultoría', icon: TrendingUp }
 ];
 
 const Catalog = () => {
