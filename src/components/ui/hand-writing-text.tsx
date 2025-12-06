@@ -35,7 +35,7 @@ function HandWrittenTitle({
           className="w-full max-w-3xl"
           preserveAspectRatio="xMidYMid meet"
         >
-          <title>Limon.io</title>
+          <title>Limon io Creators</title>
           <motion.path
             d="M 150 50 
                C 200 35, 300 30, 400 30
