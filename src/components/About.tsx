@@ -5,6 +5,7 @@ import { Zap, Rocket, Target, Sparkles, ArrowRight, MessageCircle } from "lucide
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 import { RainbowButton } from '@/components/ui/rainbow-button';
+import AISection from '@/components/AISection';
 
 const benefits = [
   {
@@ -69,6 +70,9 @@ const About = () => {
             </h2>
           </div>
         </section>
+
+        {/* AI Section - antes de Transformamos Ideas */}
+        <AISection />
 
         <section className="py-24 subtle-gradient overflow-hidden">
           <div className="container mx-auto px-6">
