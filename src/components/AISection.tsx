@@ -1,5 +1,5 @@
 import { CircularTestimonials } from '@/components/ui/circular-testimonials';
-import { Sparkles, Brain, Zap, Bot } from 'lucide-react';
+import { Brain, Zap, Bot } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const aiShowcases = [
@@ -39,26 +39,6 @@ const AISection = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <motion.div 
-          className="text-center mb-12 md:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
-            <Sparkles className="w-5 h-5 text-primary animate-pulse" />
-            <span className="text-sm font-medium text-primary">Próximamente</span>
-          </div>
-          
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-            Inteligencia Artificial
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Descubre las nuevas soluciones de IA que estamos preparando para impulsar tu negocio al siguiente nivel
-          </p>
-        </motion.div>
 
         {/* Features pills */}
         <motion.div 
