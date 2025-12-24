@@ -17,6 +17,7 @@ import {
   Eye,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ScrollExpandHero from "@/components/ui/scroll-expand-hero";
 
 interface BlogPost {
   id: number;
@@ -153,49 +154,52 @@ const Descubrir = () => {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-background">
-      <Navigation />
-      <main className="pt-16">
-        {/* Hero + búsqueda */}
-        <section className="py-10 px-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-secondary/10 border-b">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
-                <BookOpen className="w-4 h-4" />
-                Blog
-              </div>
-              <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-                Descubrir
-              </h1>
-              <p className="text-base md:text-lg text-muted-foreground mt-3">
-                Lecturas sobre tecnología útil, clara y humana.
-              </p>
-            </div>
+  // Hero image for scroll expansion - use featured post image or fallback
+  const heroImage = featured?.imageUrl || "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80";
 
-            <div className="mt-6 mx-auto max-w-2xl">
-              <div className="relative">
-                <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  type="search"
-                  value={q}
-                  onChange={(e) => setQ(e.target.value)}
-                  placeholder="Buscar por título, tema o palabra clave…"
-                  className="w-full pl-10 pr-28 h-11 rounded-full bg-card/60 border border-primary/20 focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                />
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full"
-                  onClick={() => fetchBlogPosts()}
-                  disabled={refreshing}
-                >
-                  <RefreshCw className={cn("w-4 h-4", refreshing && "animate-spin")} />
-                </Button>
+  return (
+    <ScrollExpandHero
+      mediaSrc={heroImage}
+      title="Descubrir Contenido"
+      subtitle="Lecturas sobre tecnología útil, clara y humana"
+      scrollToExpand="Desliza para explorar"
+    >
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <main className="pt-4">
+          {/* Búsqueda */}
+          <section className="py-6 px-4">
+            <div className="container mx-auto max-w-6xl">
+              <div className="flex items-center justify-between mb-6">
+                <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
+                  <BookOpen className="w-4 h-4" />
+                  Blog
+                </div>
+              </div>
+
+              <div className="mx-auto max-w-2xl">
+                <div className="relative">
+                  <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                  <input
+                    type="search"
+                    value={q}
+                    onChange={(e) => setQ(e.target.value)}
+                    placeholder="Buscar por título, tema o palabra clave…"
+                    className="w-full pl-10 pr-28 h-11 rounded-full bg-card/60 border border-primary/20 focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full"
+                    onClick={() => fetchBlogPosts()}
+                    disabled={refreshing}
+                  >
+                    <RefreshCw className={cn("w-4 h-4", refreshing && "animate-spin")} />
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
         {/* Destacado - DESCRIPCIÓN COMPLETA CON FORMATO */}
         <section className="px-4 pt-8">
@@ -497,7 +501,8 @@ const Descubrir = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </ScrollExpandHero>
   );
 };
 
