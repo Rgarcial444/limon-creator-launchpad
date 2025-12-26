@@ -1,27 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { WarpBackground } from '@/components/ui/warp-background';
 import { 
   Rocket, 
-  Zap, 
   Heart, 
-  Code2, 
   ArrowRight,
   MessageCircle,
-  Trophy,
   Target,
-  Briefcase,
-  GraduationCap,
-  Users,
   MapPin,
   Mail,
   Calendar
 } from 'lucide-react';
-import Navigation from '@/components/Navigation';
 
-// Datos del fundador con background profesional creativo
 const founder = {
   name: 'Ricardo García',
   role: 'Fundador',
@@ -96,7 +88,7 @@ const companyValues = [
   }
 ];
 
-const AboutUs = () => {
+const NosotrosSection = () => {
   const [activeTagline, setActiveTagline] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -109,9 +101,7 @@ const AboutUs = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
-      <Navigation />
-      
+    <section id="nosotros" className="bg-gradient-to-br from-slate-50 via-white to-slate-100">
       {/* Hero Minimalista con Warp Background */}
       <WarpBackground 
         className="relative py-12 md:py-20 px-4 md:px-6 overflow-hidden min-h-[auto] lg:min-h-[80vh] flex items-center"
@@ -131,14 +121,14 @@ const AboutUs = () => {
                   <span className="text-sm">{founder.location}</span>
                 </div>
                 
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-tight text-slate-900">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-tight text-slate-900">
                   {founder.name}
-                </h1>
+                </h2>
                 
                 <div className="h-12 md:h-16 flex items-center">
-                  <h2 className="text-xl sm:text-2xl md:text-3xl text-slate-600 font-light transition-all duration-500">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl text-slate-600 font-light transition-all duration-500">
                     {founder.taglines[activeTagline]}
-                  </h2>
+                  </h3>
                 </div>
                 
                 <p className="text-base md:text-lg text-slate-700 leading-relaxed max-w-xl font-light">
@@ -201,7 +191,7 @@ const AboutUs = () => {
       </WarpBackground>
 
       {/* Journey Timeline Moderna */}
-      <section className="py-12 md:py-20 px-4 md:px-6 bg-white">
+      <div className="py-12 md:py-20 px-4 md:px-6 bg-white">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-10 md:mb-16">
             <Badge className="mb-4 bg-slate-100 text-slate-700 border-slate-200">
@@ -229,10 +219,10 @@ const AboutUs = () => {
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Valores Minimalistas */}
-      <section className="py-12 md:py-20 px-4 md:px-6 bg-slate-50">
+      <div className="py-12 md:py-20 px-4 md:px-6 bg-slate-50">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-10 md:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-4">
@@ -265,10 +255,10 @@ const AboutUs = () => {
             })}
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Expertise Section */}
-      <section className="py-12 md:py-20 px-4 md:px-6 bg-white">
+      <div className="py-12 md:py-20 px-4 md:px-6 bg-white">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-10 md:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-4">
@@ -295,10 +285,10 @@ const AboutUs = () => {
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
       {/* CTA Final Minimalista */}
-      <section className="py-12 md:py-20 px-4 md:px-6 bg-slate-900 text-white">
+      <div className="py-12 md:py-20 px-4 md:px-6 bg-slate-900 text-white">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 md:mb-6">
             ¿Listo para crear algo extraordinario?
@@ -315,9 +305,9 @@ const AboutUs = () => {
             Iniciar Proyecto <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
-export default AboutUs;
+export default NosotrosSection;

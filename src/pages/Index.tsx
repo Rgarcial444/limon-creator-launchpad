@@ -4,14 +4,20 @@ import DiscoverCTA from '@/components/DiscoverCTA';
 import About from '@/components/About';
 import FAQ from '@/components/FAQ';
 import NovedadSemana from '@/components/NovedadSemana';
+import DescubrirSection from '@/components/DescubrirSection';
+import NosotrosSection from '@/components/NosotrosSection';
 
 const Index = () => {
   return (
     <div>
-      <Hero />
+      <section id="inicio">
+        <Hero />
+      </section>
       <NovedadSemana />
       <About />
       <FAQ />
+      <DescubrirSection />
+      <NosotrosSection />
       <DiscoverCTA />
       <Footer />
     </div>

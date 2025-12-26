@@ -3,18 +3,41 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import { Menu, X, Sparkles } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const navItems = [
-  { name: 'Inicio', href: '/' },
-  { name: 'Descubrir', href: '/descubrir' },
+  { name: 'Inicio', href: '/#inicio' },
+  { name: 'Descubrir', href: '/#descubrir' },
   { name: 'Servicios', href: '/catalogo' },
-  { name: 'Nosotros', href: '/nosotros' }
+  { name: 'Nosotros', href: '/#nosotros' }
 ];
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleNavClick = (href: string, e: React.MouseEvent) => {
+    if (href.startsWith('/#')) {
+      e.preventDefault();
+      const sectionId = href.replace('/#', '');
+      
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  };
   
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/20 shadow-lg">
@@ -29,12 +52,15 @@ const Navigation = () => {
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => {
               const isDescubrir = item.name === 'Descubrir';
-              const isActive = location.pathname === item.href;
+              const isActive = item.href.startsWith('/#') 
+                ? location.pathname === '/' && location.hash === `#${item.href.replace('/#', '')}`
+                : location.pathname === item.href;
               
               return (
                 <Link
                   key={item.name}
                   to={item.href}
+                  onClick={(e) => handleNavClick(item.href, e)}
                   className={`relative text-sm font-medium transition-all duration-300 group ${
                     isActive 
                       ? 'text-white' 
@@ -93,13 +119,18 @@ const Navigation = () => {
               <nav className="space-y-4">
                 {navItems.map((item) => {
                   const isDescubrir = item.name === 'Descubrir';
-                  const isActive = location.pathname === item.href;
+                  const isActive = item.href.startsWith('/#') 
+                    ? location.pathname === '/' && location.hash === `#${item.href.replace('/#', '')}`
+                    : location.pathname === item.href;
                   
                   return (
                     <Link
                       key={item.name}
                       to={item.href}
-                      onClick={() => setIsOpen(false)}
+                      onClick={(e) => {
+                        handleNavClick(item.href, e);
+                        setIsOpen(false);
+                      }}
                       className={`block py-3 px-4 rounded-lg text-sm font-medium transition-all ${
                         isActive 
                           ? 'bg-accent text-accent-foreground' 
