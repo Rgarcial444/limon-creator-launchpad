@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Zap, Rocket, Target, Sparkles, MessageCircle, Brain, Bot } from "lucide-react";
-import Navigation from '@/components/Navigation';
 import { RainbowButton } from '@/components/ui/rainbow-button';
 import { CircularTestimonials } from '@/components/ui/circular-testimonials';
 import { motion } from 'framer-motion';
@@ -86,7 +85,6 @@ const About = () => {
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.05)_1px,transparent_0)] bg-[length:32px_32px] pointer-events-none" />
       
       <div className="relative z-10">
-        <Navigation />
         
         {/* Header + AI Section combinados */}
         <section className="py-16 px-6">
