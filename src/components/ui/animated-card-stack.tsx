@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 interface CardItem {
   id: number
@@ -22,8 +22,8 @@ interface AnimatedCardStackProps {
 
 const positionStyles = [
   { scale: 1, y: 0, zIndex: 3 },
-  { scale: 0.95, y: -30, zIndex: 2 },
-  { scale: 0.9, y: -60, zIndex: 1 },
+  { scale: 0.96, y: -20, zIndex: 2 },
+  { scale: 0.92, y: -40, zIndex: 1 },
 ]
 
 const parseTags = (etiquetas?: string) =>
@@ -44,32 +44,30 @@ function CardContent({
   const tags = parseTags(item.etiquetas)
 
   return (
-    <div className="w-full h-full rounded-2xl overflow-hidden bg-card border border-primary/20 shadow-2xl">
-      <div className="relative h-48 overflow-hidden bg-muted">
+    <div className="w-full rounded-2xl overflow-hidden bg-card border border-border shadow-xl">
+      {/* Image section - horizontal aspect ratio */}
+      <div className="relative h-40 md:h-48 overflow-hidden bg-muted">
         <img
           src={item.imageUrl}
           alt={item.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
           loading="lazy"
           onError={(e) => {
             (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
       </div>
 
-      <div className="p-5 space-y-3">
+      {/* Content section */}
+      <div className="p-4 space-y-3">
         {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {tags.slice(0, 2).map((tag, i) => (
-              <Badge key={i} variant="secondary" className="text-xs">
-                {tag}
-              </Badge>
-            ))}
-          </div>
+          <Badge variant="outline" className="text-xs font-medium uppercase tracking-wider">
+            {tags[0]}
+          </Badge>
         )}
 
-        <h3 className="text-lg font-bold text-foreground line-clamp-2">
+        <h3 className="text-base font-bold text-foreground line-clamp-2 leading-tight">
           {item.title}
         </h3>
         
@@ -77,31 +75,16 @@ function CardContent({
           {item.description}
         </p>
 
-        <div className="flex items-center justify-between pt-2">
+        <div className="flex items-center justify-between pt-1">
           <Button
             variant="ghost"
             size="sm"
-            className="text-primary hover:text-primary/80"
+            className="text-foreground hover:text-primary p-0 h-auto font-medium"
             onClick={() => onCardClick?.(item)}
           >
             Ver más
             <ArrowRight className="w-4 h-4 ml-1" />
           </Button>
-
-          {item.url && (
-            <Button
-              variant="outline"
-              size="sm"
-              className="rounded-full"
-              onClick={(e) => {
-                e.stopPropagation()
-                window.open(item.url!, "_blank", "noopener,noreferrer")
-              }}
-            >
-              Visitar
-              <ExternalLink className="w-4 h-4 ml-1" />
-            </Button>
-          )}
         </div>
       </div>
     </div>
@@ -124,14 +107,14 @@ function AnimatedCard({
   return (
     <motion.div
       layout
-      initial={index === 2 ? { y: -60, scale: 0.9, opacity: 0 } : false}
+      initial={index === 2 ? { y: -40, scale: 0.92, opacity: 0 } : false}
       animate={{
         scale: style.scale,
         y: style.y,
         zIndex: index === 0 && isAnimating ? 10 : style.zIndex,
         opacity: 1,
       }}
-      exit={{ y: 300, scale: 1, opacity: 0 }}
+      exit={{ y: 250, scale: 1, opacity: 0 }}
       transition={{ 
         type: "spring", 
         stiffness: 300, 
@@ -173,13 +156,13 @@ export default function AnimatedCardStack({ items, onCardClick }: AnimatedCardSt
     }, 100)
   }, [items, currentIndex, isAnimating])
 
-  // Auto-rotate every 4 seconds
+  // Auto-rotate every 5 seconds
   useEffect(() => {
     if (items.length <= 1) return
     
     const interval = setInterval(() => {
       handleNext()
-    }, 4000)
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [handleNext, items.length])
@@ -189,9 +172,9 @@ export default function AnimatedCardStack({ items, onCardClick }: AnimatedCardSt
   }
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-4 w-full">
       <div 
-        className="relative w-full max-w-sm h-[420px]"
+        className="relative w-full h-[340px] md:h-[380px]"
         onClick={handleNext}
       >
         <AnimatePresence mode="popLayout">
@@ -207,14 +190,15 @@ export default function AnimatedCardStack({ items, onCardClick }: AnimatedCardSt
         </AnimatePresence>
       </div>
 
-      <div className="flex items-center gap-2">
+      {/* Pagination dots */}
+      <div className="flex items-center gap-1.5">
         {items.slice(0, Math.min(6, items.length)).map((_, idx) => (
           <div
             key={idx}
-            className={`w-2 h-2 rounded-full transition-colors ${
+            className={`w-1.5 h-1.5 rounded-full transition-all ${
               idx === (currentIndex - 3 + items.length) % items.length
-                ? "bg-primary"
-                : "bg-muted-foreground/30"
+                ? "bg-foreground w-3"
+                : "bg-muted-foreground/40"
             }`}
           />
         ))}
@@ -223,7 +207,7 @@ export default function AnimatedCardStack({ items, onCardClick }: AnimatedCardSt
       <Button 
         variant="outline" 
         onClick={handleNext}
-        className="rounded-full"
+        className="rounded-full border-border"
       >
         Siguiente
         <ArrowRight className="w-4 h-4 ml-2" />
