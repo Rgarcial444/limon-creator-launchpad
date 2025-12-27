@@ -155,20 +155,17 @@ const DescubrirSection = () => {
         </div>
       </div>
 
-      {/* Card Stacks por grupos de 6 */}
-      <div className="py-16 px-4">
+      {/* Card Stacks - 3 columnas en desktop, 1 en móvil */}
+      <div className="py-12 px-4">
         <div className="container mx-auto max-w-6xl">
           {posts.length === 0 ? (
             <div className="py-20 text-center text-muted-foreground">
               No hay artículos disponibles.
             </div>
           ) : (
-            <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+            <div className="grid gap-12 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {postGroups.map((group, groupIndex) => (
-                <div key={groupIndex} className="w-full flex flex-col items-center">
-                  <Badge variant="outline" className="mb-4">
-                    Grupo {groupIndex + 1}
-                  </Badge>
+                <div key={groupIndex} className="w-full">
                   <AnimatedCardStack 
                     items={group.map(p => ({
                       id: p.id,
