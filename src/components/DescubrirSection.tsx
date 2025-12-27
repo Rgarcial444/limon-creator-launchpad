@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Loader2,
@@ -9,10 +8,8 @@ import {
   ExternalLink,
   Clock,
   X,
-  ArrowRight,
-  Eye,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import AnimatedCardStack from "@/components/ui/animated-card-stack";
 
 interface BlogPost {
   id: number;
@@ -63,11 +60,8 @@ const DescubrirSection = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
-  const [refreshing, setRefreshing] = useState(false);
-  const [q, setQ] = useState("");
 
   const fetchBlogPosts = useCallback(async () => {
-    setRefreshing(true);
     try {
       const supabaseAny = supabase as any;
       const { data, error } = await supabaseAny
@@ -111,7 +105,6 @@ const DescubrirSection = () => {
       setPosts([]);
     } finally {
       setLoading(false);
-      setRefreshing(false);
     }
   }, []);
 
@@ -119,21 +112,19 @@ const DescubrirSection = () => {
     fetchBlogPosts();
   }, [fetchBlogPosts]);
 
-  const filtered = useMemo(() => {
-    const term = q.trim().toLowerCase();
-    if (!term) return posts;
-    return posts.filter((p) => {
-      const haystack = [p.title, p.description, p.etiquetas, p.content?.slice(0, 600)]
-        .join(" ")
-        .toLowerCase();
-      return haystack.includes(term);
-    });
-  }, [posts, q]);
+  // Dividir posts en grupos de 6
+  const postGroups = useMemo(() => {
+    const groups: BlogPost[][] = [];
+    for (let i = 0; i < posts.length; i += 6) {
+      groups.push(posts.slice(i, i + 6));
+    }
+    return groups;
+  }, [posts]);
 
-  const [featured, others] = useMemo(() => {
-    if (!filtered.length) return [null, [] as BlogPost[]];
-    return [filtered[0], filtered.slice(1)];
-  }, [filtered]);
+  const handleCardClick = (item: { id: number }) => {
+    const post = posts.find(p => p.id === item.id);
+    if (post) setSelectedPost(post);
+  };
 
   if (loading) {
     return (
@@ -164,202 +155,32 @@ const DescubrirSection = () => {
         </div>
       </div>
 
-      {/* Destacado */}
-      <div className="px-4 pt-8">
+      {/* Card Stacks por grupos de 6 */}
+      <div className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
-          {featured && (
-            <Card className="group overflow-hidden rounded-2xl border border-primary/20 bg-card/60 backdrop-blur-sm">
-              <div className="grid md:grid-cols-2">
-                <button
-                  type="button"
-                  className="relative h-56 md:h-full text-left overflow-hidden bg-gray-100 dark:bg-gray-900"
-                  onClick={() => setSelectedPost(featured)}
-                  aria-label="Abrir vista previa"
-                >
-                  <img
-                    src={featured.imageUrl}
-                    alt={featured.title}
-                    className="w-full h-full object-contain md:object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
-                    onError={(e) =>
-                      ((e.currentTarget as HTMLImageElement).src = FALLBACK_IMG)
-                    }
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-3 inline-flex items-center gap-1 bg-black/40 text-white px-2 py-1 rounded-full text-xs backdrop-blur-sm">
-                    <Eye className="w-3 h-3" /> Vista previa
-                  </div>
-                </button>
-                <div className="p-6 md:p-8 flex flex-col gap-4">
-                  {parseTags(featured.etiquetas).length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {parseTags(featured.etiquetas)
-                        .slice(0, 3)
-                        .map((tag, i) => (
-                          <Badge key={i} variant="secondary" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                    </div>
-                  )}
-                  <button
-                    type="button"
-                    className="text-left"
-                    onClick={() => setSelectedPost(featured)}
-                    aria-label="Abrir vista previa"
-                  >
-                    <h3 className="text-2xl md:text-3xl font-bold leading-tight hover:text-primary transition-colors">
-                      {featured.title}
-                    </h3>
-                  </button>
-                  <p className="text-sm md:text-base text-muted-foreground whitespace-pre-wrap">
-                    {featured.description}
-                  </p>
-
-                  <div className="mt-auto flex items-center justify-between text-xs text-muted-foreground">
-                    <div className="flex items-center gap-3">
-                      {featured.updated_at ? (
-                        <span className="inline-flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {formatMaybeDate(featured.updated_at)}
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          Post #{featured.id}
-                        </span>
-                      )}
-                      {featured.content && (
-                        <span className="inline-flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          {getReadingTime(featured.content)} min
-                        </span>
-                      )}
-                    </div>
-
-                    {featured.url && (
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="rounded-full"
-                        onClick={() =>
-                          window.open(featured.url!, "_blank", "noopener,noreferrer")
-                        }
-                      >
-                        Visitar <ExternalLink className="w-4 h-4 ml-2" />
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </Card>
-          )}
-        </div>
-      </div>
-
-      {/* Grid */}
-      <div className="py-10 px-4">
-        <div className="container mx-auto max-w-6xl">
-          {others.length === 0 ? (
+          {posts.length === 0 ? (
             <div className="py-20 text-center text-muted-foreground">
-              No hay más artículos por ahora.
+              No hay artículos disponibles.
             </div>
           ) : (
-            <div className="grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {others.map((post) => (
-                <Card
-                  key={post.id}
-                  className="overflow-hidden rounded-2xl border border-primary/10 bg-card/60 backdrop-blur-sm hover:border-primary/30 transition-all"
-                >
-                  <button
-                    type="button"
-                    className="relative h-44 w-full text-left overflow-hidden bg-gray-100 dark:bg-gray-900"
-                    onClick={() => setSelectedPost(post)}
-                    aria-label="Abrir vista previa"
-                  >
-                    <img
-                      src={post.imageUrl}
-                      alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                      onError={(e) =>
-                        ((e.currentTarget as HTMLImageElement).src = FALLBACK_IMG)
-                      }
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-                    <div className="absolute bottom-2 left-2 inline-flex items-center gap-1 bg-black/40 text-white px-2 py-1 rounded-full text-[10px] backdrop-blur-sm">
-                      <Eye className="w-3 h-3" /> Vista previa
-                    </div>
-                  </button>
-
-                  <div className="p-5 flex flex-col gap-3">
-                    {parseTags(post.etiquetas).length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {parseTags(post.etiquetas)
-                          .slice(0, 2)
-                          .map((tag, idx) => (
-                            <Badge key={idx} variant="secondary" className="text-[10px]">
-                              {tag}
-                            </Badge>
-                          ))}
-                      </div>
-                    )}
-
-                    <button
-                      type="button"
-                      className="text-left"
-                      onClick={() => setSelectedPost(post)}
-                      aria-label="Abrir vista previa"
-                    >
-                      <h3 className="text-lg font-semibold leading-tight line-clamp-2 hover:text-primary transition-colors">
-                        {post.title}
-                      </h3>
-                    </button>
-
-                    <p className="text-sm text-muted-foreground line-clamp-3 whitespace-pre-wrap">
-                      {post.description}
-                    </p>
-
-                    <div className="mt-auto flex items-center justify-between text-xs text-muted-foreground">
-                      <div className="inline-flex items-center gap-3">
-                        {post.updated_at ? (
-                          <span className="inline-flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
-                            {formatMaybeDate(post.updated_at)}
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
-                            Post #{post.id}
-                          </span>
-                        )}
-                        {post.content && (
-                          <span className="inline-flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            {getReadingTime(post.content)} min
-                          </span>
-                        )}
-                      </div>
-
-                      {post.url ? (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="rounded-full"
-                          onClick={() =>
-                            window.open(post.url!, "_blank", "noopener,noreferrer")
-                          }
-                        >
-                          Visitar <ExternalLink className="w-4 h-4 ml-2" />
-                        </Button>
-                      ) : (
-                        <ArrowRight className="w-4 h-4" />
-                      )}
-                    </div>
-                  </div>
-                </Card>
+            <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+              {postGroups.map((group, groupIndex) => (
+                <div key={groupIndex} className="w-full flex flex-col items-center">
+                  <Badge variant="outline" className="mb-4">
+                    Grupo {groupIndex + 1}
+                  </Badge>
+                  <AnimatedCardStack 
+                    items={group.map(p => ({
+                      id: p.id,
+                      title: p.title,
+                      description: p.description,
+                      imageUrl: p.imageUrl,
+                      url: p.url,
+                      etiquetas: p.etiquetas,
+                    }))} 
+                    onCardClick={handleCardClick}
+                  />
+                </div>
               ))}
             </div>
           )}
@@ -411,7 +232,7 @@ const DescubrirSection = () => {
             </div>
 
             {selectedPost.imageUrl !== FALLBACK_IMG && (
-              <div className="h-56 md:h-80 overflow-hidden bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+              <div className="h-56 md:h-80 overflow-hidden bg-muted flex items-center justify-center">
                 <img
                   src={selectedPost.imageUrl}
                   alt={selectedPost.title}
