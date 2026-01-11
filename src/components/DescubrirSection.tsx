@@ -9,7 +9,7 @@ import {
   Clock,
   X,
 } from "lucide-react";
-import { CardsParallax, type iCardItem } from "@/components/ui/scroll-cards";
+import ClippedMediaGallery, { type ClippedMediaItem } from "@/components/ui/clip-path-image";
 
 interface BlogPost {
   id: number;
@@ -55,6 +55,12 @@ const parseTags = (etiquetas: string) =>
         .map((t) => t.trim())
         .filter(Boolean)
     : [];
+
+const clipIds: Array<'clip-squiggle' | 'clip-rect' | 'clip-another'> = [
+  'clip-squiggle',
+  'clip-rect', 
+  'clip-another',
+];
 
 const DescubrirSection = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -112,22 +118,14 @@ const DescubrirSection = () => {
     fetchBlogPosts();
   }, [fetchBlogPosts]);
 
-  // Transform posts to scroll cards format
-  const cardItems: iCardItem[] = posts.map((p) => ({
-    id: p.id,
-    title: p.title,
-    description: p.description,
-    tag: parseTags(p.etiquetas)[0] || p.type,
+  // Transform posts to clipped media format (limit to 3 for gallery)
+  const mediaItems: ClippedMediaItem[] = posts.slice(0, 3).map((p, index) => ({
     src: p.imageUrl,
-    link: p.url || "#",
-    color: "#0a0a0a",
-    textColor: "white",
+    type: 'image' as const,
+    alt: p.title,
+    clipId: clipIds[index % clipIds.length],
+    onClick: () => setSelectedPost(p),
   }));
-
-  const handleCardClick = (item: iCardItem) => {
-    const post = posts.find((p) => p.id === item.id);
-    if (post) setSelectedPost(post);
-  };
 
   if (loading) {
     return (
@@ -158,14 +156,14 @@ const DescubrirSection = () => {
         </div>
       </div>
 
-      {/* Scroll Cards */}
+      {/* Clipped Media Gallery */}
       <div className="container mx-auto max-w-6xl px-4">
         {posts.length === 0 ? (
           <div className="py-20 text-center text-muted-foreground">
             No hay artículos disponibles.
           </div>
         ) : (
-          <CardsParallax items={cardItems} onCardClick={handleCardClick} />
+          <ClippedMediaGallery mediaItems={mediaItems} />
         )}
       </div>
 
