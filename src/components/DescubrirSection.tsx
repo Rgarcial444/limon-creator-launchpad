@@ -9,7 +9,7 @@ import {
   Clock,
   X,
 } from "lucide-react";
-import ClippedMediaGallery, { type ClippedMediaItem } from "@/components/ui/clip-path-image";
+import { Gallery, ImageModal, type GalleryImage } from "@/components/ui/react-tailwind-image-gallery";
 
 interface BlogPost {
   id: number;
@@ -56,16 +56,24 @@ const parseTags = (etiquetas: string) =>
         .filter(Boolean)
     : [];
 
-const clipIds: Array<'clip-squiggle' | 'clip-rect' | 'clip-another'> = [
-  'clip-squiggle',
-  'clip-rect', 
-  'clip-another',
+// Span patterns for masonry effect
+const spanPatterns = [
+  "col-span-1",
+  "sm:col-span-2",
+  "col-span-1",
+  "col-span-1",
+  "sm:col-span-2",
+  "col-span-1",
+  "col-span-1",
+  "col-span-1",
+  "sm:col-span-2",
 ];
 
 const DescubrirSection = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [modalImage, setModalImage] = useState<string | null>(null);
 
   const fetchBlogPosts = useCallback(async () => {
     try {
@@ -118,14 +126,34 @@ const DescubrirSection = () => {
     fetchBlogPosts();
   }, [fetchBlogPosts]);
 
-  // Transform posts to clipped media format (limit to 3 for gallery)
-  const mediaItems: ClippedMediaItem[] = posts.slice(0, 3).map((p, index) => ({
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setModalImage(null);
+        setSelectedPost(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Transform posts to gallery format
+  const galleryData: GalleryImage[] = posts.map((p, index) => ({
+    id: p.id,
     src: p.imageUrl,
-    type: 'image' as const,
     alt: p.title,
-    clipId: clipIds[index % clipIds.length],
-    onClick: () => setSelectedPost(p),
+    title: p.title,
+    span: spanPatterns[index % spanPatterns.length],
   }));
+
+  const handleImageClick = (src: string) => {
+    const post = posts.find((p) => p.imageUrl === src);
+    if (post) {
+      setSelectedPost(post);
+    } else {
+      setModalImage(src);
+    }
+  };
 
   if (loading) {
     return (
@@ -146,9 +174,6 @@ const DescubrirSection = () => {
       <div className="py-10 px-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-secondary/10 border-b">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center">
-            <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-              Descubrir
-            </h2>
             <p className="text-base md:text-lg text-muted-foreground mt-3">
               Lecturas sobre tecnología útil, clara y humana.
             </p>
@@ -156,18 +181,21 @@ const DescubrirSection = () => {
         </div>
       </div>
 
-      {/* Clipped Media Gallery */}
-      <div className="container mx-auto max-w-6xl px-4">
+      {/* Image Gallery */}
+      <div className="container mx-auto max-w-6xl">
         {posts.length === 0 ? (
           <div className="py-20 text-center text-muted-foreground">
             No hay artículos disponibles.
           </div>
         ) : (
-          <ClippedMediaGallery mediaItems={mediaItems} />
+          <Gallery data={galleryData} onImageClick={handleImageClick} title="Descubrir" />
         )}
       </div>
 
-      {/* Modal */}
+      {/* Simple Image Modal */}
+      <ImageModal src={modalImage} onClose={() => setModalImage(null)} />
+
+      {/* Post Detail Modal */}
       {selectedPost && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
