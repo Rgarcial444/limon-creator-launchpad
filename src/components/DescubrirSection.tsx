@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,7 +9,7 @@ import {
   Clock,
   X,
 } from "lucide-react";
-import AnimatedCardStack from "@/components/ui/animated-card-stack";
+import { CardsParallax, type iCardItem } from "@/components/ui/scroll-cards";
 
 interface BlogPost {
   id: number;
@@ -112,17 +112,20 @@ const DescubrirSection = () => {
     fetchBlogPosts();
   }, [fetchBlogPosts]);
 
-  // Dividir posts en grupos de 6
-  const postGroups = useMemo(() => {
-    const groups: BlogPost[][] = [];
-    for (let i = 0; i < posts.length; i += 6) {
-      groups.push(posts.slice(i, i + 6));
-    }
-    return groups;
-  }, [posts]);
+  // Transform posts to scroll cards format
+  const cardItems: iCardItem[] = posts.map((p) => ({
+    id: p.id,
+    title: p.title,
+    description: p.description,
+    tag: parseTags(p.etiquetas)[0] || p.type,
+    src: p.imageUrl,
+    link: p.url || "#",
+    color: "#0a0a0a",
+    textColor: "white",
+  }));
 
-  const handleCardClick = (item: { id: number }) => {
-    const post = posts.find(p => p.id === item.id);
+  const handleCardClick = (item: iCardItem) => {
+    const post = posts.find((p) => p.id === item.id);
     if (post) setSelectedPost(post);
   };
 
@@ -155,33 +158,15 @@ const DescubrirSection = () => {
         </div>
       </div>
 
-      {/* Card Stacks - 3 columnas en desktop, 1 en móvil */}
-      <div className="py-12 px-4">
-        <div className="container mx-auto max-w-6xl">
-          {posts.length === 0 ? (
-            <div className="py-20 text-center text-muted-foreground">
-              No hay artículos disponibles.
-            </div>
-          ) : (
-            <div className="grid gap-12 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {postGroups.map((group, groupIndex) => (
-                <div key={groupIndex} className="w-full">
-                  <AnimatedCardStack 
-                    items={group.map(p => ({
-                      id: p.id,
-                      title: p.title,
-                      description: p.description,
-                      imageUrl: p.imageUrl,
-                      url: p.url,
-                      etiquetas: p.etiquetas,
-                    }))} 
-                    onCardClick={handleCardClick}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+      {/* Scroll Cards */}
+      <div className="container mx-auto max-w-6xl px-4">
+        {posts.length === 0 ? (
+          <div className="py-20 text-center text-muted-foreground">
+            No hay artículos disponibles.
+          </div>
+        ) : (
+          <CardsParallax items={cardItems} onCardClick={handleCardClick} />
+        )}
       </div>
 
       {/* Modal */}
