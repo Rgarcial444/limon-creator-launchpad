@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Badge } from '@/components/ui/badge';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const navItems = [
   { name: 'Inicio', href: '/#inicio' },
-  { name: 'Descubrir', href: '/#descubrir' },
+  { name: 'Portafolio', href: '/#portafolio' },
   { name: 'Servicios', href: '/catalogo' },
   { name: 'Nosotros', href: '/#nosotros' }
 ];
@@ -51,7 +50,6 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => {
-              const isDescubrir = item.name === 'Descubrir';
               const isActive = item.href.startsWith('/#') 
                 ? location.pathname === '/' && location.hash === `#${item.href.replace('/#', '')}`
                 : location.pathname === item.href;
@@ -61,30 +59,11 @@ const Navigation = () => {
                   key={item.name}
                   to={item.href}
                   onClick={(e) => handleNavClick(item.href, e)}
-                  className={`relative text-sm font-medium transition-all duration-300 group ${
-                    isActive 
-                      ? 'text-white' 
-                      : isDescubrir
-                      ? ''
-                      : 'text-white/90 hover:text-white'
-                  } ${
-                    isDescubrir 
-                      ? 'px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600/30 via-blue-600/30 to-purple-600/30 border border-purple-400/50 hover:border-purple-300/70 hover:from-purple-500/40 hover:via-blue-500/40 hover:to-purple-500/40 shadow-lg shadow-purple-500/30 hover:shadow-purple-400/50' 
-                      : ''
+                  className={`relative text-sm font-medium transition-all duration-300 ${
+                    isActive ? 'text-white' : 'text-white/90 hover:text-white'
                   }`}
                 >
-                  <div className="flex items-center gap-1.5">
-                    {isDescubrir && <Sparkles className="h-3.5 w-3.5 animate-pulse text-purple-200" />}
-                    <span className={isDescubrir ? 'font-bold text-white drop-shadow-[0_0_8px_rgba(168,85,247,0.8)]' : ''}>{item.name}</span>
-                    {isDescubrir && (
-                      <Badge 
-                        variant="secondary" 
-                        className="ml-1 text-[10px] px-1.5 py-0 h-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold border border-white/30 shadow-md"
-                      >
-                        Blog
-                      </Badge>
-                    )}
-                  </div>
+                  {item.name}
                 </Link>
               );
             })}
@@ -118,7 +97,6 @@ const Navigation = () => {
               
               <nav className="space-y-4">
                 {navItems.map((item) => {
-                  const isDescubrir = item.name === 'Descubrir';
                   const isActive = item.href.startsWith('/#') 
                     ? location.pathname === '/' && location.hash === `#${item.href.replace('/#', '')}`
                     : location.pathname === item.href;
@@ -134,25 +112,10 @@ const Navigation = () => {
                       className={`block py-3 px-4 rounded-lg text-sm font-medium transition-all ${
                         isActive 
                           ? 'bg-accent text-accent-foreground' 
-                          : isDescubrir
-                          ? 'bg-gradient-to-r from-purple-600/30 via-blue-600/30 to-purple-600/30 text-white border-2 border-purple-400/60 hover:border-purple-300 hover:from-purple-500/40 hover:via-blue-500/40 hover:to-purple-500/40 shadow-lg shadow-purple-500/30'
                           : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                       }`}
                     >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          {isDescubrir && <Sparkles className="h-4 w-4 animate-pulse text-purple-200" />}
-                          <span className={isDescubrir ? 'font-bold' : ''}>{item.name}</span>
-                        </div>
-                        {isDescubrir && (
-                          <Badge 
-                            variant="secondary" 
-                            className="text-[10px] px-2 py-0.5 h-5 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold border border-white/30"
-                          >
-                            Blog
-                          </Badge>
-                        )}
-                      </div>
+                      {item.name}
                     </Link>
                   );
                 })}
