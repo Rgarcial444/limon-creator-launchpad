@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Calendar, ExternalLink, Clock, X, Globe, Code, Palette, Briefcase, Rocket } from "lucide-react";
+import { Loader2, Calendar, ExternalLink, Clock, X, Globe, Code, Palette, Briefcase, Rocket, Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import InteractiveSelector, { type SelectorOption } from "@/components/ui/interactive-selector";
+import { ImagePlayer } from "@/components/ui/image-player";
 
 interface BlogPost {
   id: number;
@@ -17,6 +17,15 @@ interface BlogPost {
   is_published: boolean;
   author_id?: string;
   updated_at?: string | null;
+}
+
+interface PortfolioItem {
+  title: string;
+  description: string;
+  image: string;
+  url?: string;
+  tags: string[];
+  isCompany?: boolean;
 }
 
 const IMAGE_BUCKET = "imagenes limoniocreators";
@@ -44,30 +53,31 @@ const getReadingTime = (content: string) => {
 const parseTags = (etiquetas: string) =>
   etiquetas ? etiquetas.split(/[,;]+/g).map((t) => t.trim()).filter(Boolean) : [];
 
-// Icons to cycle through for blog posts
-const postIcons = [<Code className="w-5 h-5" />, <Palette className="w-5 h-5" />, <Rocket className="w-5 h-5" />, <Briefcase className="w-5 h-5" />];
-
 // Static portfolio companies
-const empresasOptions: SelectorOption[] = [
+const empresas: PortfolioItem[] = [
   {
     title: "Clinical Equipment Service",
-    description: "Sitio web profesional para equipo médico",
-    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80",
-    icon: <Globe className="w-5 h-5" />,
+    description: "Sitio web profesional para equipo clínico y hospitalario. Diseño moderno con catálogo de productos y contacto directo.",
+    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
     url: "https://clinicalequipmentservice.com",
+    tags: ["Web", "E-commerce", "Salud"],
+    isCompany: true,
   },
   {
     title: "Tecnolan",
-    description: "Soluciones tecnológicas empresariales",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
-    icon: <Globe className="w-5 h-5" />,
+    description: "Plataforma de soluciones tecnológicas empresariales. Networking, infraestructura y soporte técnico.",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
     url: "https://tecnolan.mx",
+    tags: ["Web", "Tecnología", "B2B"],
+    isCompany: true,
   },
 ];
 
 const PortafolioSection = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
   const fetchBlogPosts = useCallback(async () => {
@@ -115,25 +125,30 @@ const PortafolioSection = () => {
 
   useEffect(() => { fetchBlogPosts(); }, [fetchBlogPosts]);
 
-  // Build selector options: empresas first, then blog posts
-  const selectorOptions: SelectorOption[] = [
-    ...empresasOptions,
-    ...posts.map((p, i) => ({
+  // Build combined items: empresas + blog posts
+  const allItems: PortfolioItem[] = [
+    ...empresas,
+    ...posts.map((p) => ({
       title: p.title,
-      description: p.description || p.content.slice(0, 60),
+      description: p.description || p.content.slice(0, 120),
       image: p.imageUrl === FALLBACK_IMG
-        ? "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80"
+        ? "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1200&q=80"
         : p.imageUrl,
-      icon: postIcons[i % postIcons.length],
       url: p.url || undefined,
+      tags: parseTags(p.etiquetas),
     })),
   ];
 
-  // When a blog-post option is clicked we want to open a detail modal
-  const handleOptionClick = (index: number) => {
-    const blogIndex = index - empresasOptions.length;
+  const images = allItems.map((item) => item.image);
+  const currentItem = allItems[currentIndex] || allItems[0];
+
+  const handleViewMore = () => {
+    // If it's a blog post (index >= empresas.length), open modal
+    const blogIndex = currentIndex - empresas.length;
     if (blogIndex >= 0 && blogIndex < posts.length) {
       setSelectedPost(posts[blogIndex]);
+    } else if (currentItem?.url) {
+      window.open(currentItem.url, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -147,13 +162,109 @@ const PortafolioSection = () => {
     );
   }
 
+  if (allItems.length === 0) return null;
+
   return (
     <section id="portafolio" className="bg-background">
-      <InteractiveSelector
-        options={selectorOptions}
-        title="Portafolio"
-        subtitle="Proyectos y empresas que confían en nosotros."
-      />
+      {/* Player area */}
+      <div
+        className="relative w-full h-[70vh] sm:h-[80vh] overflow-hidden group"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <ImagePlayer
+          images={images}
+          interval={4500}
+          paused={paused}
+          onIndexChange={setCurrentIndex}
+          className="relative w-full h-full"
+          renderImage={(src, idx) => (
+            <>
+              {/* Preload next image */}
+              {images[(idx + 1) % images.length] && (
+                <link rel="preload" as="image" href={images[(idx + 1) % images.length]} />
+              )}
+              <img
+                key={src}
+                src={src}
+                alt={allItems[idx]?.title || "Portafolio"}
+                className="w-full h-full object-cover animate-fade-in"
+                loading="lazy"
+              />
+            </>
+          )}
+        />
+
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent z-10 pointer-events-none" />
+
+        {/* Content overlay */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 p-6 sm:p-10 md:p-14">
+          <div className="max-w-3xl space-y-3">
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2">
+              {currentItem?.tags?.map((tag, i) => (
+                <Badge key={i} variant="secondary" className="bg-white/15 text-white/90 backdrop-blur-sm border-white/20 text-xs">
+                  {tag}
+                </Badge>
+              ))}
+              {currentItem?.isCompany && (
+                <Badge className="bg-primary/80 text-primary-foreground border-primary/40 text-xs">
+                  <Globe className="w-3 h-3 mr-1" /> Cliente
+                </Badge>
+              )}
+            </div>
+
+            {/* Title */}
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white leading-tight tracking-tight">
+              {currentItem?.title}
+            </h2>
+
+            {/* Description — visible on pause/hover */}
+            <p className={`text-white/80 text-sm sm:text-base md:text-lg max-w-xl transition-all duration-500 ${paused ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 md:opacity-70 md:translate-y-0'}`}>
+              {currentItem?.description}
+            </p>
+
+            {/* Actions */}
+            <div className={`flex items-center gap-3 pt-2 transition-all duration-500 ${paused ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 sm:opacity-100 sm:translate-y-0'}`}>
+              <Button
+                onClick={handleViewMore}
+                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6"
+              >
+                {currentItem?.url ? 'Visitar' : 'Ver más'}
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white/70 hover:text-white hover:bg-white/10 rounded-full"
+                onClick={() => setPaused(!paused)}
+                aria-label={paused ? "Reanudar" : "Pausar"}
+              >
+                {paused ? <Play className="w-5 h-5" /> : <Pause className="w-5 h-5" />}
+              </Button>
+            </div>
+          </div>
+
+          {/* Counter */}
+          <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 text-white/50 text-xs font-mono">
+            {String(currentIndex + 1).padStart(2, '0')} / {String(allItems.length).padStart(2, '0')}
+          </div>
+        </div>
+      </div>
+
+      {/* Section label */}
+      <div className="py-4 px-6 border-b border-border/50 bg-muted/30">
+        <div className="container mx-auto max-w-6xl flex items-center justify-between">
+          <p className="text-xs uppercase tracking-widest text-muted-foreground">
+            Portafolio — Proyectos & Clientes
+          </p>
+          <p className="text-xs text-muted-foreground hidden sm:block">
+            Pasa el cursor para pausar y explorar
+          </p>
+        </div>
+      </div>
 
       {/* Post Detail Modal */}
       {selectedPost && (
