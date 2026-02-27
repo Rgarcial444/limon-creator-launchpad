@@ -5,6 +5,7 @@ import FAQ from '@/components/FAQ';
 import NovedadSemana from '@/components/NovedadSemana';
 import DescubrirSection from '@/components/DescubrirSection';
 import NosotrosSection from '@/components/NosotrosSection';
+import EmpresasConfian from '@/components/EmpresasConfian';
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       </section>
       <NovedadSemana />
       <About />
+      <EmpresasConfian />
       <DescubrirSection />
       <NosotrosSection />
       <FAQ />
