@@ -3,9 +3,8 @@ import Footer from '@/components/Footer';
 import About from '@/components/About';
 import FAQ from '@/components/FAQ';
 import NovedadSemana from '@/components/NovedadSemana';
-import DescubrirSection from '@/components/DescubrirSection';
+import PortafolioSection from '@/components/PortafolioSection';
 import NosotrosSection from '@/components/NosotrosSection';
-import EmpresasConfian from '@/components/EmpresasConfian';
 
 const Index = () => {
   return (
@@ -15,8 +14,7 @@ const Index = () => {
       </section>
       <NovedadSemana />
       <About />
-      <EmpresasConfian />
-      <DescubrirSection />
+      <PortafolioSection />
       <NosotrosSection />
       <FAQ />
       <Footer />
