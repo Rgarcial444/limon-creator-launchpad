@@ -103,22 +103,22 @@ const Footer = () => {
             className="border-primary-foreground/20 bg-primary-foreground/5"
           >
             <DockIcon className="bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors">
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <a href="https://www.facebook.com/profile.php?id=61576804383038" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <FacebookIcon className="h-6 w-6" />
               </a>
             </DockIcon>
             <DockIcon className="bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors">
-              <a href="https://wa.me/527223145340" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <a href="https://wa.me/527223145340?text=Hola%20vengo%20de%20tu%20sitio%20web%2C%20podemos%20hablar%3F" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <WhatsAppIcon className="h-6 w-6" />
               </a>
             </DockIcon>
             <DockIcon className="bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors">
-              <a href="https://linktr.ee" target="_blank" rel="noopener noreferrer" aria-label="Linktree">
+              <a href="https://linktr.ee/rglimon" target="_blank" rel="noopener noreferrer" aria-label="Linktree">
                 <LinktreeIcon className="h-6 w-6" />
               </a>
             </DockIcon>
             <DockIcon className="bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors">
-              <a href="https://limoncreators.lovable.app" target="_blank" rel="noopener noreferrer" aria-label="Sitio Web">
+              <a href="https://portafoliolimoniocreators.lovable.app" target="_blank" rel="noopener noreferrer" aria-label="Sitio Web">
                 <Globe className="h-6 w-6 text-primary-foreground" />
               </a>
             </DockIcon>
