@@ -9,6 +9,7 @@ import {
   Heart, 
   ArrowRight,
   MessageCircle,
+  ChevronDown,
   Target,
   MapPin,
   Mail,
