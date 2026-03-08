@@ -6,7 +6,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import { Vortex } from "@/components/ui/vortex";
 
 const FAQ = () => {
   useEffect(() => {
