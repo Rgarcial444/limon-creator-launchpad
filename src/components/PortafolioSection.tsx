@@ -126,7 +126,7 @@ const PortafolioSection = () => {
   useEffect(() => { fetchBlogPosts(); }, [fetchBlogPosts]);
 
   // Build combined items: empresas + blog posts
-  const allItems: PortfolioItem[] = [
+  const allItems: PortfolioItem[] = useMemo(() => [
     ...empresas,
     ...posts.map((p) => ({
       title: p.title,
@@ -137,9 +137,9 @@ const PortafolioSection = () => {
       url: p.url || undefined,
       tags: parseTags(p.etiquetas),
     })),
-  ];
+  ], [posts]);
 
-  const images = allItems.map((item) => item.image);
+  const images = useMemo(() => allItems.map((item) => item.image), [allItems]);
   const currentItem = allItems[currentIndex] || allItems[0];
 
   const handleViewMore = () => {
