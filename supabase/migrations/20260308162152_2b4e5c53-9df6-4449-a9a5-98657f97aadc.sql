@@ -1,0 +1,1 @@
+UPDATE "Blog" SET title = 'Consigue tu página Gratis' WHERE id = 85;
