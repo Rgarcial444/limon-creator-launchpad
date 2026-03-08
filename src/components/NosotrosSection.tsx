@@ -240,25 +240,6 @@ const NosotrosSection = () => {
 
 
 
-      {/* CTA Final Minimalista */}
-      <div className="py-12 md:py-20 px-4 md:px-6 bg-slate-900 text-white">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 md:mb-6">
-            ¿Listo para crear algo extraordinario?
-          </h2>
-          <p className="text-base md:text-xl text-slate-300 mb-6 md:mb-8 font-light">
-            Transformemos tu visión en una realidad digital que impacte
-          </p>
-          
-          <Button 
-            size="lg" 
-            onClick={() => window.open('https://wa.me/527223145340?text=Hola Ricardo, tengo una idea que quiero convertir en realidad', '_blank')}
-            className="bg-white text-slate-900 hover:bg-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 text-base md:text-lg px-6 md:px-8 py-3 md:py-4 w-full sm:w-auto"
-          >
-            Iniciar Proyecto <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-        </div>
-      </div>
     </section>
   );
 };
