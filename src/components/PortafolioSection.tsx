@@ -4,6 +4,7 @@ import { Loader2, Calendar, ExternalLink, Clock, X, Globe, Code, Palette, Briefc
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ImagePlayer } from "@/components/ui/image-player";
+import sitio18Img from "@/assets/sitio-18.png";
 
 interface BlogPost {
   id: number;
