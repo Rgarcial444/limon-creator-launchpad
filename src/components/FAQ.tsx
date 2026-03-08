@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { WarpBackground } from "@/components/ui/warp-background";
 import {
   Accordion,
   AccordionContent,
@@ -73,7 +74,14 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden py-16 px-6 bg-background">
+    <WarpBackground
+      className="py-16 px-6 border-0 rounded-none"
+      beamsPerSide={4}
+      beamSize={3}
+      beamDelayMax={5}
+      beamDuration={5}
+      gridColor="hsl(var(--border) / 0.3)"
+    >
       <div className="container mx-auto relative z-10">
         <header className="text-center mb-10">
           <Badge variant="outline" className="mb-3">FAQ</Badge>
@@ -102,7 +110,7 @@ const FAQ = () => {
           ))}
         </Accordion>
       </div>
-    </section>
+    </WarpBackground>
   );
 };
 
