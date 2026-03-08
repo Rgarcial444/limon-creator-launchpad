@@ -239,27 +239,22 @@ const Catalog = () => {
                       <div className="grid md:grid-cols-2 gap-8 p-6 md:p-8">
                         {/* Columna izquierda - GLASSMORPHISM IMAGE */}
                         <div className="order-2 md:order-1 relative">
-                          {/* Imagen de fondo con blur */}
-                          <div className="absolute inset-0 rounded-xl overflow-hidden">
-                            <img
+                          <ImageComparison className="w-full min-h-[300px] rounded-xl" enableHover>
+                            <ImageComparisonImage
                               src={service.image}
-                              alt=""
-                              className="w-full h-full object-cover scale-110 blur-2xl opacity-40"
+                              className="grayscale"
+                              alt={`${service.title} - antes`}
+                              position="left"
                             />
-                          </div>
-                          
-                          {/* Card de vidrio flotante */}
-                          <div className="relative w-full h-full min-h-[300px] rounded-xl overflow-hidden backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl p-4">
-                            <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/5 to-transparent"></div>
-                            <img
+                            <ImageComparisonImage
                               src={service.image}
-                              alt={service.title}
-                              className="relative w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition-transform duration-500 shadow-lg"
+                              alt={`${service.title} - después`}
+                              position="right"
                             />
-                            
-                            {/* Brillo animado en hover */}
-                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/0 to-white/0 group-hover:via-white/10 transition-all duration-500 rounded-lg"></div>
-                          </div>
+                            <ImageComparisonSlider className="w-0.5 bg-white/50 backdrop-blur-sm">
+                              <div className="absolute top-1/2 left-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-lg"></div>
+                            </ImageComparisonSlider>
+                          </ImageComparison>
                         </div>
 
                         {/* Columna derecha - Información del servicio */}
