@@ -4,6 +4,7 @@ import { Loader2, Calendar, ExternalLink, Clock, X, Globe, Code, Palette, Briefc
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ImagePlayer } from "@/components/ui/image-player";
+import sitio18Img from "@/assets/sitio-18.png";
 
 interface BlogPost {
   id: number;
@@ -88,7 +89,7 @@ const empresas: PortfolioItem[] = [
   {
     title: "Sitio +18",
     description: "Plataforma de contenido exclusivo para adultos. Diseño discreto, seguro y con sistema de verificación de edad.",
-    image: "https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1200&q=80",
+    image: sitio18Img,
     tags: ["Web", "+18", "Plataforma"],
     isCompany: true,
   },
