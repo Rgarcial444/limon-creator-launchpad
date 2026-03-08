@@ -230,19 +230,11 @@ const PortafolioSection = () => {
             <div className={`flex items-center gap-3 pt-2 transition-all duration-500 ${paused ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 sm:opacity-100 sm:translate-y-0'}`}>
               <Button
                 onClick={handleViewMore}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6"
+                variant="secondary"
+                className="bg-white text-foreground hover:bg-white/90 rounded-full px-6"
               >
                 {currentItem?.url ? 'Visitar' : 'Ver más'}
                 <ExternalLink className="w-4 h-4 ml-2" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-white/70 hover:text-white hover:bg-white/10 rounded-full"
-                onClick={() => setPaused(!paused)}
-                aria-label={paused ? "Reanudar" : "Pausar"}
-              >
-                {paused ? <Play className="w-5 h-5" /> : <Pause className="w-5 h-5" />}
               </Button>
             </div>
           </div>
