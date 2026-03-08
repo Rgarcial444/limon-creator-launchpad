@@ -73,48 +73,35 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden">
-      <Vortex
-        backgroundColor="hsl(var(--background))"
-        baseHue={200}
-        rangeY={200}
-        particleCount={500}
-        baseSpeed={0.0}
-        rangeSpeed={1.0}
-        baseRadius={1}
-        rangeRadius={1.5}
-        containerClassName="min-h-0"
-        className="py-16 px-6"
-      >
-        <div className="container mx-auto relative z-10">
-          <header className="text-center mb-10">
-            <Badge variant="outline" className="mb-3">FAQ</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">
-              Preguntas Frecuentes
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Respuestas rápidas sobre desarrollo web y servicios
-            </p>
-          </header>
+    <section className="relative overflow-hidden py-16 px-6 bg-background">
+      <div className="container mx-auto relative z-10">
+        <header className="text-center mb-10">
+          <Badge variant="outline" className="mb-3">FAQ</Badge>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">
+            Preguntas Frecuentes
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Respuestas rápidas sobre desarrollo web y servicios
+          </p>
+        </header>
 
-          <Accordion type="single" collapsible className="max-w-2xl mx-auto space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className="bg-card/80 backdrop-blur-sm border border-border rounded-lg px-6"
-              >
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </Vortex>
+        <Accordion type="single" collapsible className="max-w-2xl mx-auto space-y-4">
+          {faqs.map((faq, index) => (
+            <AccordionItem
+              key={index}
+              value={`item-${index}`}
+              className="bg-card/80 backdrop-blur-sm border border-border rounded-lg px-6"
+            >
+              <AccordionTrigger className="text-left font-semibold hover:no-underline">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
     </section>
   );
 };
