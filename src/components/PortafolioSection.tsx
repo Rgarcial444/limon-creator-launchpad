@@ -275,18 +275,6 @@ const PortafolioSection = () => {
         </div>
       </div>
 
-      {/* Section label */}
-      <div className="py-4 px-6 border-b border-border/50 bg-muted/30">
-        <div className="container mx-auto max-w-6xl flex items-center justify-between">
-          <p className="text-xs uppercase tracking-widest text-muted-foreground">
-            Portafolio — Proyectos & Clientes
-          </p>
-          <p className="text-xs text-muted-foreground hidden sm:block">
-            Pasa el cursor para pausar y explorar
-          </p>
-        </div>
-      </div>
-
       {/* Post Detail Modal */}
       {selectedPost && (
         <div
