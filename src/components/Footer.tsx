@@ -104,17 +104,17 @@ const Footer = () => {
           >
             <DockIcon className="bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors">
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <Facebook className="h-6 w-6 text-primary-foreground" />
+                <FacebookIcon className="h-6 w-6" />
               </a>
             </DockIcon>
             <DockIcon className="bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors">
               <a href="https://wa.me/527223145340" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                <MessageCircle className="h-6 w-6 text-primary-foreground" />
+                <WhatsAppIcon className="h-6 w-6" />
               </a>
             </DockIcon>
             <DockIcon className="bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors">
-              <a href="https://notion.so" target="_blank" rel="noopener noreferrer" aria-label="Notion">
-                <NotionIcon className="h-6 w-6 text-primary-foreground" />
+              <a href="https://linktr.ee" target="_blank" rel="noopener noreferrer" aria-label="Linktree">
+                <LinktreeIcon className="h-6 w-6" />
               </a>
             </DockIcon>
             <DockIcon className="bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors">
