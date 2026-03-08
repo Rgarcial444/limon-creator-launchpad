@@ -111,7 +111,7 @@ const services = [
     category: 'consulting',
     price: 'Desde $8,000 MXN/mes',
     features: ['Estrategia de crecimiento', 'Marketing digital', 'Análisis de datos', 'Optimización de conversión'],
-    image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=250&fit=crop',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop',
     rating: 5.0,
     duration: 'Contrato mensual',
     expandedContent: {
