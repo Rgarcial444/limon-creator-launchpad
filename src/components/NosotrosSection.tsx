@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,7 @@ import {
   Heart, 
   ArrowRight,
   MessageCircle,
+  ChevronDown,
   Target,
   MapPin,
   Mail,
@@ -190,34 +192,44 @@ const NosotrosSection = () => {
         </div>
       </WarpBackground>
 
-      {/* Journey Timeline Moderna */}
-      <div className="py-12 md:py-20 px-4 md:px-6 bg-white">
+      {/* Journey Timeline Compacta */}
+      <div className="py-12 md:py-16 px-4 md:px-6 bg-white">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-10 md:mb-16">
-            <Badge className="mb-4 bg-slate-100 text-slate-700 border-slate-200">
-              <Calendar className="mr-2 h-3 w-3" />
-              Mi Trayectoria
-            </Badge>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-4">
-              El Camino hacia la Excelencia
-            </h2>
-          </div>
+          <Collapsible>
+            <div className="text-center">
+              <Badge className="mb-4 bg-slate-100 text-slate-700 border-slate-200">
+                <Calendar className="mr-2 h-3 w-3" />
+                Mi Trayectoria
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-4">
+                El Camino hacia la Excelencia
+              </h2>
+              <CollapsibleTrigger asChild>
+                <Button variant="outline" size="sm" className="border-slate-300 text-slate-600 hover:bg-slate-50">
+                  <ChevronDown className="mr-2 h-4 w-4 transition-transform duration-200 [[data-state=open]_&]:rotate-180" />
+                  Ver más
+                </Button>
+              </CollapsibleTrigger>
+            </div>
 
-          <div className="space-y-6 md:space-y-8">
-            {founder.journey.map((milestone, index) => (
-              <div key={index} className="flex items-start space-x-4 md:space-x-6 group">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs md:text-sm font-semibold shadow-lg group-hover:scale-110 transition-transform">
-                    {milestone.year}
+            <CollapsibleContent className="mt-8 md:mt-12">
+              <div className="space-y-6 md:space-y-8">
+                {founder.journey.map((milestone, index) => (
+                  <div key={index} className="flex items-start space-x-4 md:space-x-6 group">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs md:text-sm font-semibold shadow-lg group-hover:scale-110 transition-transform">
+                        {milestone.year}
+                      </div>
+                    </div>
+                    <div className="flex-1 pb-6 md:pb-8">
+                      <h3 className="text-lg md:text-xl font-semibold text-slate-900 mb-2">{milestone.title}</h3>
+                      <p className="text-sm md:text-base text-slate-600 leading-relaxed">{milestone.description}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex-1 pb-6 md:pb-8">
-                  <h3 className="text-lg md:text-xl font-semibold text-slate-900 mb-2">{milestone.title}</h3>
-                  <p className="text-sm md:text-base text-slate-600 leading-relaxed">{milestone.description}</p>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </CollapsibleContent>
+          </Collapsible>
         </div>
       </div>
 
