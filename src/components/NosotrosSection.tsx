@@ -221,71 +221,8 @@ const NosotrosSection = () => {
         </div>
       </div>
 
-      {/* Valores Minimalistas */}
-      <div className="py-12 md:py-20 px-4 md:px-6 bg-slate-50">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-10 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-4">
-              Lo que nos Define
-            </h2>
-            <p className="text-base md:text-xl text-slate-600 font-light">
-              Principios que guían cada decisión y cada línea de código
-            </p>
-          </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
-            {companyValues.map((value, index) => {
-              const Icon = value.icon;
-              return (
-                <Card key={index} className="p-5 md:p-8 text-center bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                  <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
-                    <Icon className="h-6 w-6 md:h-8 md:w-8 text-white" />
-                  </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-slate-900 mb-2 md:mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-sm md:text-base text-slate-600 leading-relaxed mb-3 md:mb-4">
-                    {value.description}
-                  </p>
-                  <Badge className="bg-slate-100 text-slate-700 border-slate-200 text-xs md:text-sm">
-                    {value.metric}
-                  </Badge>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-      </div>
 
-      {/* Expertise Section */}
-      <div className="py-12 md:py-20 px-4 md:px-6 bg-white">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-10 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-4">
-              Áreas de Expertise
-            </h2>
-          </div>
-
-          <div className="space-y-4 md:space-y-6">
-            {founder.expertise.map((item, index) => (
-              <div key={index} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 md:p-6 bg-slate-50 rounded-lg gap-3">
-                <span className="text-base md:text-lg font-medium text-slate-900">{item.skill}</span>
-                <div className="flex items-center space-x-3 md:space-x-4">
-                  <div className="flex-1 sm:w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-slate-900 transition-all duration-1000"
-                      style={{ width: `${item.level}%` }}
-                    />
-                  </div>
-                  <span className="text-sm font-semibold text-slate-700 w-12 text-right">
-                    {item.level}%
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* CTA Final Minimalista */}
       <div className="py-12 md:py-20 px-4 md:px-6 bg-slate-900 text-white">
