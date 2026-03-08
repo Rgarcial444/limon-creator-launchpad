@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Globe, Smartphone, Code, Zap, Star, Filter, ChevronDown, ChevronUp, TrendingUp, Headphones } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
+import { ImageComparison, ImageComparisonImage, ImageComparisonSlider } from '@/components/ui/image-comparison';
 
 const services = [
   {
