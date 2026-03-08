@@ -4,7 +4,7 @@ import { Loader2, Calendar, ExternalLink, Clock, X, Globe, Code, Palette, Briefc
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ImagePlayer } from "@/components/ui/image-player";
-import sitio18Img from "@/assets/sitio-18.png";
+
 
 interface BlogPost {
   id: number;
@@ -70,34 +70,6 @@ const empresas: PortfolioItem[] = [
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
     url: "https://tecnolan.mx",
     tags: ["Web", "Tecnología", "B2B"],
-    isCompany: true,
-  },
-  {
-    title: "Menú Digital",
-    description: "Sistema de menú digital interactivo para restaurantes. Experiencia moderna para clientes con visualización de platillos y pedidos.",
-    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
-    tags: ["Web App", "Restaurantes", "Digital"],
-    isCompany: true,
-  },
-  {
-    title: "Chica Fresa",
-    description: "Plataforma de estilo y tendencias. Diseño fresco y vibrante orientado a moda, belleza y lifestyle.",
-    image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
-    tags: ["Web", "Lifestyle", "Moda"],
-    isCompany: true,
-  },
-  {
-    title: "Sitio +18",
-    description: "Plataforma de contenido exclusivo para adultos. Diseño discreto, seguro y con sistema de verificación de edad.",
-    image: sitio18Img,
-    tags: ["Web", "+18", "Plataforma"],
-    isCompany: true,
-  },
-  {
-    title: "Fashion Hall Narvarte Monteclaro",
-    description: "Sitio web para boutique de moda. Catálogo de productos, tendencias y experiencia de compra premium.",
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
-    tags: ["Web", "Moda", "E-commerce"],
     isCompany: true,
   },
 ];
