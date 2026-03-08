@@ -1,4 +1,4 @@
-import { Heart, Code, MessageCircle, Mail, MapPin, Globe, Facebook } from "lucide-react";
+import { Heart, Code, MessageCircle, Mail, MapPin, Globe } from "lucide-react";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import { Link } from "react-router-dom";
