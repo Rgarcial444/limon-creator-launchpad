@@ -174,7 +174,7 @@ const PortafolioSection = () => {
       >
         <ImagePlayer
           images={images}
-          interval={4500}
+          interval={2000}
           paused={paused}
           onIndexChange={setCurrentIndex}
           className="relative w-full h-full"
