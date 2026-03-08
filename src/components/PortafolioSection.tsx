@@ -267,10 +267,11 @@ const PortafolioSection = () => {
           onClick={() => setSelectedPost(null)}
         >
           <div
-            className="bg-background rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-primary/20"
+            className="bg-background rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col border border-primary/20"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-4 md:p-6 border-b flex items-center justify-between">
+            {/* Fixed header */}
+            <div className="p-4 md:p-6 border-b flex items-center justify-between shrink-0">
               <div className="flex flex-wrap gap-2">
                 {parseTags(selectedPost.etiquetas).map((tag, i) => (
                   <Badge key={i} variant="secondary">{tag}</Badge>
@@ -278,7 +279,11 @@ const PortafolioSection = () => {
               </div>
               <div className="flex items-center gap-2">
                 {selectedPost.url && (
-                  <Button variant="outline" size="sm" className="rounded-full" onClick={() => window.open(selectedPost.url!, "_blank", "noopener,noreferrer")}>
+                  <Button
+                    size="sm"
+                    className="rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:from-cyan-600 hover:to-blue-600 shadow-lg"
+                    onClick={() => window.open(selectedPost.url!, "_blank", "noopener,noreferrer")}
+                  >
                     Visitar <ExternalLink className="w-4 h-4 ml-2" />
                   </Button>
                 )}
@@ -288,28 +293,31 @@ const PortafolioSection = () => {
               </div>
             </div>
 
-            {selectedPost.imageUrl !== FALLBACK_IMG && (
-              <div className="h-56 md:h-80 overflow-hidden bg-muted flex items-center justify-center">
-                <img src={selectedPost.imageUrl} alt={selectedPost.title} className="w-full h-full object-contain" loading="lazy" />
-              </div>
-            )}
+            {/* Scrollable content */}
+            <div className="overflow-y-auto overscroll-contain flex-1">
+              {selectedPost.imageUrl !== FALLBACK_IMG && (
+                <div className="h-56 md:h-80 overflow-hidden bg-muted flex items-center justify-center">
+                  <img src={selectedPost.imageUrl} alt={selectedPost.title} className="w-full h-full object-contain" loading="lazy" />
+                </div>
+              )}
 
-            <div className="p-4 md:p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3">{selectedPost.title}</h2>
-              <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
-                <span className="inline-flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
-                  {formatMaybeDate(selectedPost.updated_at) || `Post #${selectedPost.id}`}
-                </span>
-                {selectedPost.content && (
+              <div className="p-4 md:p-6">
+                <h2 className="text-2xl md:text-3xl font-bold mb-3">{selectedPost.title}</h2>
+                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
                   <span className="inline-flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
-                    {getReadingTime(selectedPost.content)} min
+                    <Calendar className="w-4 h-4" />
+                    {formatMaybeDate(selectedPost.updated_at) || `Post #${selectedPost.id}`}
                   </span>
-                )}
-              </div>
-              <div className="prose prose-sm max-w-none text-foreground">
-                <p className="whitespace-pre-wrap">{selectedPost.content || selectedPost.description}</p>
+                  {selectedPost.content && (
+                    <span className="inline-flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      {getReadingTime(selectedPost.content)} min
+                    </span>
+                  )}
+                </div>
+                <div className="prose prose-sm max-w-none text-foreground">
+                  <p className="whitespace-pre-wrap">{selectedPost.content || selectedPost.description}</p>
+                </div>
               </div>
             </div>
           </div>
