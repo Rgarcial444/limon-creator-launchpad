@@ -25,12 +25,16 @@ export const ImagePlayer: React.FC<ImagePlayerProps> = ({
 
   const currentImage = React.useMemo(() => images[currentIndex], [images, currentIndex]);
 
-  React.useEffect(() => {
-    if (images.length <= 1 || paused) {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      return;
+  const clearTimer = React.useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
+  }, []);
 
+  const startTimer = React.useCallback(() => {
+    clearTimer();
+    if (images.length <= 1) return;
     intervalRef.current = setInterval(() => {
       setCurrentIndex(prev => {
         const next = prev + 1;
@@ -42,11 +46,17 @@ export const ImagePlayer: React.FC<ImagePlayerProps> = ({
         return next;
       });
     }, interval);
+  }, [images.length, interval, loop, onComplete, clearTimer]);
 
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [images.length, interval, loop, onComplete, paused]);
+  // Start/stop based on paused
+  React.useEffect(() => {
+    if (paused) {
+      clearTimer();
+    } else {
+      startTimer();
+    }
+    return clearTimer;
+  }, [paused, startTimer, clearTimer]);
 
   React.useEffect(() => {
     onIndexChange?.(currentIndex);
@@ -56,7 +66,9 @@ export const ImagePlayer: React.FC<ImagePlayerProps> = ({
     setCurrentIndex(0);
   }, [images]);
 
-  const goTo = React.useCallback((i: number) => setCurrentIndex(i), []);
+  const goTo = React.useCallback((i: number) => {
+    setCurrentIndex(i);
+  }, []);
 
   if (!images || images.length === 0) {
     return <p className="text-muted-foreground text-center py-10">No hay imágenes</p>;
@@ -67,9 +79,9 @@ export const ImagePlayer: React.FC<ImagePlayerProps> = ({
       {renderImage ? renderImage(currentImage, currentIndex) : (
         <img src={currentImage} alt={`Slide ${currentIndex}`} className="w-full h-full object-cover" />
       )}
-      {/* Dots */}
+      {/* Navigation dots */}
       {images.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-30">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-30 flex-wrap justify-center max-w-[80%]">
           {images.map((_, i) => (
             <button
               key={i}
