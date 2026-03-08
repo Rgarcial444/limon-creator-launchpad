@@ -67,7 +67,7 @@ const empresas: PortfolioItem[] = [
   {
     title: "Tecnolan",
     description: "Plataforma de soluciones tecnológicas empresariales. Networking, infraestructura y soporte técnico.",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80",
     url: "https://tecnolan.mx",
     tags: ["Web", "Tecnología", "B2B"],
     isCompany: true,
