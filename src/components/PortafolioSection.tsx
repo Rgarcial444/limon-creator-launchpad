@@ -72,6 +72,7 @@ const empresas: PortfolioItem[] = [
     tags: ["Web", "Tecnología", "B2B"],
     isCompany: true,
   },
+];
 
 const PortafolioSection = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
