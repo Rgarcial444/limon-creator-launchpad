@@ -6,6 +6,7 @@ import { Globe, Smartphone, Code, Zap, Star, Filter, ChevronDown, ChevronUp, Tre
 import Navigation from '@/components/Navigation';
 import { MarqueeAnimation } from '@/components/ui/marquee-effect';
 import { ImageComparison, ImageComparisonImage, ImageComparisonSlider } from '@/components/ui/image-comparison';
+import { Vortex as Particles } from '@/components/ui/vortex';
 
 const services = [
   {
