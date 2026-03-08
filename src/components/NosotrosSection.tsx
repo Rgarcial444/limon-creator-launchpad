@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { WarpBackground } from '@/components/ui/warp-background';
+import { RainbowButton } from '@/components/ui/rainbow-button';
 import { 
   Rocket, 
   Heart, 
@@ -205,10 +206,13 @@ const NosotrosSection = () => {
                 El Camino hacia la Excelencia
               </h2>
               <CollapsibleTrigger asChild>
-                <Button variant="outline" size="sm" className="border-slate-300 text-slate-600 hover:bg-slate-50">
+                <RainbowButton 
+                  size="default"
+                  className="!bg-gradient-to-r from-blue-600 to-cyan-600 !text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 px-6 py-3"
+                >
                   <ChevronDown className="mr-2 h-4 w-4 transition-transform duration-200 [[data-state=open]_&]:rotate-180" />
                   Ver más
-                </Button>
+                </RainbowButton>
               </CollapsibleTrigger>
             </div>
 
