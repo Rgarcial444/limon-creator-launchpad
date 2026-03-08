@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2, Calendar, ExternalLink, Clock, X, Globe, Code, Palette, Briefcase, Rocket, Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -126,7 +126,7 @@ const PortafolioSection = () => {
   useEffect(() => { fetchBlogPosts(); }, [fetchBlogPosts]);
 
   // Build combined items: empresas + blog posts
-  const allItems: PortfolioItem[] = [
+  const allItems: PortfolioItem[] = useMemo(() => [
     ...empresas,
     ...posts.map((p) => ({
       title: p.title,
@@ -137,9 +137,9 @@ const PortafolioSection = () => {
       url: p.url || undefined,
       tags: parseTags(p.etiquetas),
     })),
-  ];
+  ], [posts]);
 
-  const images = allItems.map((item) => item.image);
+  const images = useMemo(() => allItems.map((item) => item.image), [allItems]);
   const currentItem = allItems[currentIndex] || allItems[0];
 
   const handleViewMore = () => {
@@ -174,7 +174,7 @@ const PortafolioSection = () => {
       >
         <ImagePlayer
           images={images}
-          interval={4500}
+          interval={2000}
           paused={paused}
           onIndexChange={setCurrentIndex}
           className="relative w-full h-full"
