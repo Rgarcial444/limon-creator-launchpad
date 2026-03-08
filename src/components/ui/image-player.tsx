@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ImagePlayerProps extends React.HTMLAttributes<HTMLDivElement> {
   images: string[];
@@ -48,7 +49,6 @@ export const ImagePlayer: React.FC<ImagePlayerProps> = ({
     }, interval);
   }, [images.length, interval, loop, onComplete, clearTimer]);
 
-  // Start/stop based on paused
   React.useEffect(() => {
     if (paused) {
       clearTimer();
@@ -66,9 +66,13 @@ export const ImagePlayer: React.FC<ImagePlayerProps> = ({
     setCurrentIndex(0);
   }, [images]);
 
-  const goTo = React.useCallback((i: number) => {
-    setCurrentIndex(i);
-  }, []);
+  const goPrev = React.useCallback(() => {
+    setCurrentIndex(prev => (prev === 0 ? images.length - 1 : prev - 1));
+  }, [images.length]);
+
+  const goNext = React.useCallback(() => {
+    setCurrentIndex(prev => (prev >= images.length - 1 ? 0 : prev + 1));
+  }, [images.length]);
 
   if (!images || images.length === 0) {
     return <p className="text-muted-foreground text-center py-10">No hay imágenes</p>;
@@ -79,20 +83,24 @@ export const ImagePlayer: React.FC<ImagePlayerProps> = ({
       {renderImage ? renderImage(currentImage, currentIndex) : (
         <img src={currentImage} alt={`Slide ${currentIndex}`} className="w-full h-full object-cover" />
       )}
-      {/* Navigation dots */}
+      {/* Arrow navigation */}
       {images.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-30 flex-wrap justify-center max-w-[80%]">
-          {images.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                i === currentIndex ? 'bg-primary scale-125' : 'bg-white/50 hover:bg-white/80'
-              }`}
-              aria-label={`Ir a slide ${i + 1}`}
-            />
-          ))}
-        </div>
+        <>
+          <button
+            onClick={goPrev}
+            className="absolute left-0 top-0 h-full w-16 md:w-20 z-30 flex items-center justify-center bg-gradient-to-r from-black/30 to-transparent backdrop-blur-[2px] opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+            aria-label="Anterior"
+          >
+            <ChevronLeft className="h-8 w-8 text-white drop-shadow-lg" />
+          </button>
+          <button
+            onClick={goNext}
+            className="absolute right-0 top-0 h-full w-16 md:w-20 z-30 flex items-center justify-center bg-gradient-to-l from-black/30 to-transparent backdrop-blur-[2px] opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+            aria-label="Siguiente"
+          >
+            <ChevronRight className="h-8 w-8 text-white drop-shadow-lg" />
+          </button>
+        </>
       )}
     </div>
   );
