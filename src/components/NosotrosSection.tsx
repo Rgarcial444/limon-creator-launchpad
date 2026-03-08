@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { WarpBackground } from '@/components/ui/warp-background';
+import { RainbowButton } from '@/components/ui/rainbow-button';
 import { 
   Rocket, 
   Heart, 
