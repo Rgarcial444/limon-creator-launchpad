@@ -49,23 +49,33 @@ const Hero = () => {
               Diseño profesional, implementación rápida y soporte continuo.
             </motion.p>
             
+            {/* Más rápido que una agencia */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="grid grid-cols-3 gap-8 pt-8 border-t border-white/40 backdrop-blur-md bg-white/10 rounded-xl px-8 py-4"
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="backdrop-blur-md bg-white/10 rounded-2xl px-6 md:px-10 py-6 border border-white/20"
             >
-              <div className="text-center">
-                <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">10+</div>
-                <div className="text-sm text-white font-medium">Proyectos</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">100%</div>
-                <div className="text-sm text-white font-medium">Responsivo</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">24/7</div>
-                <div className="text-sm text-white font-medium">Soporte</div>
+              <p className="text-sm md:text-base text-white/80 font-medium mb-4 uppercase tracking-wider">
+                Más rápido que una agencia tradicional
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
+                <div className="flex items-start gap-2">
+                  <span className="text-xl">⚡</span>
+                  <span className="text-sm text-white font-medium">Desarrollo 50% más rápido</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-xl">🚀</span>
+                  <span className="text-sm text-white font-medium">Lanzamiento en semanas, no meses</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-xl">📈</span>
+                  <span className="text-sm text-white font-medium">Sitios optimizados para convertir</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-xl">🤖</span>
+                  <span className="text-sm text-white font-medium">Automatización con IA</span>
+                </div>
               </div>
             </motion.div>
           </motion.div>
