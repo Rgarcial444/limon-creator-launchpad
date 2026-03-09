@@ -40,7 +40,7 @@ const Footer = () => {
         href="https://limon.website" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 group transition-all duration-300 hover:scale-110"
+        className="fixed bottom-6 left-6 z-50 group transition-all duration-300 hover:scale-110"
         aria-label="Visita limon.website"
       >
         <div className="relative">
@@ -49,7 +49,7 @@ const Footer = () => {
             alt="Limon AI Mascot" 
             className="w-20 h-20 md:w-24 md:h-24 drop-shadow-lg animate-bounce-slow"
           />
-          <div className="absolute -top-2 -left-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md">
+          <div className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md">
             ¡Hola! 👋
           </div>
         </div>
