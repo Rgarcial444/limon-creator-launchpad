@@ -182,4 +182,17 @@ All colors MUST be HSL.
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
   }
+
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+  }
 }
