@@ -33,22 +33,20 @@ const Hero = () => {
             transition={{ duration: 0.6 }}
             className="z-50 flex flex-col justify-center items-center text-center px-6 relative"
           >
-            <motion.h1 className="font-bold text-4xl md:text-6xl lg:text-7xl text-center text-white py-4 leading-tight drop-shadow-2xl">
-              Desarrollo Web Profesional
-              <br />
-              <span className="text-xl md:text-3xl lg:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400">
-                Dale Vida a Tu Marca Digital
-              </span>
+            <motion.h1 className="font-bold text-2xl md:text-4xl lg:text-5xl text-center text-white py-4 leading-tight drop-shadow-2xl max-w-5xl">
+              Creamos sitios web, automatizaciones y agentes de IA que generan clientes para tu negocio.
             </motion.h1>
             
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl text-white font-semibold max-w-3xl mx-auto mb-8 leading-relaxed drop-shadow-xl"
+              className="text-base md:text-lg text-white font-semibold max-w-3xl mx-auto mb-8 leading-relaxed drop-shadow-xl"
               style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}
             >
-              Soluciones digitales modernas para hacer crecer tu negocio.
+              Desde landing pages de alto rendimiento hasta sistemas completos de ventas.
+              <br />
+              Diseño profesional, implementación rápida y soporte continuo.
             </motion.p>
             
             <motion.div 
