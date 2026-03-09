@@ -34,7 +34,27 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-primary text-primary-foreground relative">
+      {/* Floating Lemon Mascot */}
+      <a 
+        href="https://limon.website" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 group transition-all duration-300 hover:scale-110"
+        aria-label="Visita limon.website"
+      >
+        <div className="relative">
+          <img 
+            src={lemonMascot} 
+            alt="Limon AI Mascot" 
+            className="w-20 h-20 md:w-24 md:h-24 drop-shadow-lg animate-bounce-slow"
+          />
+          <div className="absolute -top-2 -left-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md">
+            ¡Hola! 👋
+          </div>
+        </div>
+      </a>
+
       <div className="container mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
@@ -132,7 +152,7 @@ const Footer = () => {
             © {currentYear} Todos los derechos reservados.
           </p>
           <p className="text-primary-foreground/60 text-sm flex items-center">
-            Hecho con <Heart className="h-4 w-4 mx-1 text-red-400" fill="currentColor" /> por Ricardo García
+            Hecho con <Heart className="h-4 w-4 mx-1 text-destructive" fill="currentColor" /> por Ricardo García
           </p>
         </div>
       </div>
