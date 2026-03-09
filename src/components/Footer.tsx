@@ -2,6 +2,7 @@ import { Heart, Code, MessageCircle, Mail, MapPin, Globe } from "lucide-react";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import { Link } from "react-router-dom";
+import lemonMascot from "@/assets/lemon-mascot.png";
 
 const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="#1877F2" {...props}>
